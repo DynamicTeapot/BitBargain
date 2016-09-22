@@ -5,11 +5,12 @@
   "main": "server/server.js",
   "private": true,
   "directories": {
-    "start": "nodemon server/server.js",
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "start": "nodemon server/server.js",
+    "dev": "./node_modules/.bin/webpack -d --watch"
   },
   "repository": {
     "type": "git",
