@@ -1,0 +1,23 @@
+{
+  "name": "bitbargain",
+  "version": "1.0.0",
+  "description": "Buy all of the bits!",
+  "main": "server/server.js",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DynamicTeapot/DynamicTeapot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RSiferd2/DynamicTeapot/issues"
+  },
+  "homepage": "https://github.com/RSiferd2/DynamicTeapot#readme"
+}
