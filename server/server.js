@@ -1,8 +1,20 @@
 var express = require('express');
-
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var router = require('./router/router.js');
 var app = express();
+
+app.use(morgan('dev'));
+
+
 var port = 9009 || process.env.PORT;
 
-app.listen(port, function(){
+app.use('/', router);
+
+// app.get('/', function(req, res){
+//   res.send('Hello world');
+// });
+
+app.listen(port, function() {
   console.log(`app is listening on ${port}`);
 });
