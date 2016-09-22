@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-let NavBar = (props) => {
+const NavBar = (props) => {
   return (
     <nav>
       <div className="nav-wrapper">
