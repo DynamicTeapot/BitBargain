@@ -1,0 +1,13 @@
+language: node_js
+
+version:
+  - "6"
+
+cache:
+  bundler: true
+  directories:
+    - node_modules
+
+before_script: 
+  - npm install -g gulp
+script: gulp jest
