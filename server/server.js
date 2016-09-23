@@ -11,9 +11,6 @@ var port = 9009 || process.env.PORT;
 
 app.use('/', router);
 
-// app.get('/', function(req, res){
-//   res.send('Hello world');
-// });
 
 app.listen(port, function() {
   console.log(`app is listening on ${port}`);
