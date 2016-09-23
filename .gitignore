@@ -38,3 +38,6 @@ jspm_packages
 
 # Remove the webpack bundles.
 client/public/*
+
+#config keys
+psqlconfig.js

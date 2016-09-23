@@ -4,6 +4,7 @@ RUN mkdir /public
 ADD . /
 WORKDIR /
 RUN npm install
+RUN npm install -g nodemon
 LABEL Description="File server for bitBargain" Version="0.1" 
 ENTRYPOINT ["npm", "start"]
 
