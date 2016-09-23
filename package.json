@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "mocha test",
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
+    "startdev": "nodemon server/server.js",
     "dev": "./node_modules/.bin/webpack -d --watch",
     "prestart": "./node_modules/.bin/webpack -d"
   },
