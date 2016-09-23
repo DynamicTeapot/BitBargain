@@ -39,7 +39,6 @@ module.exports = function gruntFun(grunt) {
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-run-node');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-jest');
 
