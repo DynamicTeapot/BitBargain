@@ -8,6 +8,8 @@ cache:
 
 notifications:
   slack: hr46:TNeBjKiVgpzQhnb7Mw1WAstf
+  on_success: change
+  on_failure: change
 
 before_script: 
   - npm install -g grunt-cli
