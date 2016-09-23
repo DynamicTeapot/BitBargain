@@ -1,8 +1,9 @@
 const rush = require('uber-rush');
+
 const rushClient = rush.createClient({
-    client_secret: process.env.rushSecret,
-    client_id: process.env.rushId,
-    sandbox: true //keep us in the test environment
+  client_secret: process.env.rushSecret,
+  client_id: process.env.rushId,
+  sandbox: true // keep us in the test environment
 });
 
 // Expects item = {title: STRING, quantity: NUM, is_fragile: BOOL}
@@ -11,18 +12,19 @@ const rushClient = rush.createClient({
 // contact = {first_name: STRING, last_name: STRING}
 // from/to = {address, contact}
 // Returns an array of RUSH quote objects
-function deliveryQuote (item, from, to){
-      let newDel = rushClient.createDelivery({item: item, pickup: {
-        location: fromAddress
-      },
-        dropOff: { 
-            contact: to.contact,
-            location: to.address
-        },
-          pickUp: {
-              contact: from.contact,
-              location: from.address
-          }
-      };
-      return newDel.quote();
+function deliveryQuote(item, from, to) {
+  const newDel = rushClient.createDelivery({
+    item,
+    dropOff: {
+      contact: to.contact,
+      location: to.address
+    },
+    pickUp: {
+      contact: from.contact,
+      location: from.address
+    }
+  });
+  return newDel.quote();
 }
+
+exports.deliveryQuote = deliveryQuote;
