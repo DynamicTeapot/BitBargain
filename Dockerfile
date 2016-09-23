@@ -1,11 +1,11 @@
 FROM node
 MAINTAINER DynamicTeapots
-RUN mkdir /public
-ADD . /
-WORKDIR /
+RUN mkdir /bitbargain
+ADD . /bitbargain
+WORKDIR /bitbargain
 RUN npm install
 RUN npm install -g nodemon
 LABEL Description="File server for bitBargain" Version="0.1" 
-ENTRYPOINT ["npm", "start"]
 
-EXPOSE 9009
+EXPOSE 80:80
+CMD ["npm", "start"]

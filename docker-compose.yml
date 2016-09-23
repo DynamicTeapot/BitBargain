@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  web:
+    image: dynamicteapot/bitbargain
+
+  loadbalancer:
+    image: dockercloud/haproxy
+    links: 
+      - web
+    ports: 
+      - 80:80
