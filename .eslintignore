@@ -1,3 +1,4 @@
 .eslint*
 **/node_modules
 **/*.min.js
+webpack.config.js
