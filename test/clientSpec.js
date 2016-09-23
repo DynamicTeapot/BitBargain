@@ -59,12 +59,4 @@ describe('Router', function(){
         .expect(200, done);
     });
   });
-
-  describe('DELETE /items/:id', function() {
-    it('deletes that item', function(done) {
-      request(testApp)
-        .delete('/items/hotcakes')
-        .expect(200, done);
-    });
-  });
 });
