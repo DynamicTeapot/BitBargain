@@ -7,6 +7,11 @@ module.exports = function gruntFun(grunt) {
       },
     },
 
+    jest: {
+      coverage: true,
+      testPathPattern: /.*.spec.js/
+    },
+
     mochaTest: {
       test: {
         options: {
@@ -36,6 +41,7 @@ module.exports = function gruntFun(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-run-node');
   grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-jest');
 
   grunt.registerTask('server-dev', () => {
     grunt.task.run(['nodemon']);
