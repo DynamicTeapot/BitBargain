@@ -11,7 +11,9 @@ class App extends React.Component {
     return (
       <div>
 	<NavBar />
-	<p> Hello React!</p>
+	{
+	  React.cloneElement(this.props.children)
+	}
       </div>
     );
   }

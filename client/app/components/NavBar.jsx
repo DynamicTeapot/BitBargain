@@ -5,7 +5,7 @@ const NavBar = (props) => {
   return (
     <nav>
       <div className="nav-wrapper">
-	Foo
+	BitBargain
       </div>
     </nav>
   );
