@@ -1,5 +1,5 @@
 FROM node
-Maintainer DynamicTeapots
+MAINTAINER DynamicTeapots
 RUN mkdir /public
 ADD . /public
 WORKDIR /public
