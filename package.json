@@ -1,5 +1,5 @@
 {
-  "name": "bitbargain",
+  "name": "BitBargain",
   "version": "1.0.0",
   "description": "Buy all of the bits!",
   "main": "server/server.js",
