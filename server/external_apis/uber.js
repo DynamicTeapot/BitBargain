@@ -27,4 +27,16 @@ function deliveryQuote(item, from, to) {
   return newDel.quote();
 }
 
+// Accepts a delivery object, subscribes to updates
+// and confirms the delivery
+function confirmDelivery(delivery, statusCb, locationCb) {
+  delivery.on('status', (status) => {
+    statusCb(status);
+  })
+  .on('location', (location) => {
+    locationCb(location);
+  });
+}
+
 exports.deliveryQuote = deliveryQuote;
+exports.confirmDelivery = confirmDelivery;
