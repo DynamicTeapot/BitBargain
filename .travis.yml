@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - node
+cache:
+  bundler: true
+  directories:
+    - node_modules
+
+notifications:
+  slack: hr46:TNeBjKiVgpzQhnb7Mw1WAstf
+
+before_script: 
+  - npm install -g grunt-cli
+script: grunt test
