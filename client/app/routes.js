@@ -58,8 +58,8 @@ render((
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
+        <Route path="login" component={Login} />
       </Route>
-      <Route path="login" component={Login} />
     </Router>
   </Provider>
   ), document.getElementById('app'));
