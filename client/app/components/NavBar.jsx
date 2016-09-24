@@ -36,7 +36,7 @@ const NavBar = (props) => {
           Sign In
         </button>
       </Link>
-      <Link to={'search'}>
+      <Link to={'product'}>
         <button>
           Search
         </button>

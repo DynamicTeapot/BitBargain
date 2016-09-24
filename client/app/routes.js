@@ -3,7 +3,8 @@ import {render} from 'react-dom';
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
 import SearchResults from './components/SearchResults.jsx';
-import {Login, loginReducer} from './components/Login.jsx';
+import { Login, loginReducer } from './components/Login.jsx';
+import { Product, productReducer } from './components/Product.jsx';
 import NotFound from './components/NotFound.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
@@ -11,7 +12,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { UserAuthWrapper} from 'redux-auth-wrapper';
 
-const reducers = combineReducers({login: loginReducer, routing:routerReducer});
+const reducers = combineReducers({login: loginReducer, product: productReducer, routing:routerReducer});
 const middleware = routerMiddleware(browserHistory);
 
 
@@ -34,6 +35,7 @@ render((
         <IndexRoute component={Index} />
         <Route path="login" component={Login} />
         <Route path="search" component={SearchResults} />
+        <Route path="product" component={Product} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
