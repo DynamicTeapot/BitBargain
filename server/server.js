@@ -10,12 +10,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static('client'));
+app.use('/', router);
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
 
-app.use('/', router);
 
 app.listen(port, () => {
   console.log(`app is listening on ${port}`);
