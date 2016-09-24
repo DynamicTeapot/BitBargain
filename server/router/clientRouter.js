@@ -2,6 +2,7 @@ var router = require('express').Router();
 var itemController = require('../controllers/itemController');
 var userController = require('../controllers/userController');
 
+
 router
   .get('/items/categories', itemController.getCategories)
   .get('/items/:id', itemController.getItem)

@@ -1,3 +1,5 @@
+//const dbController = require('./dbController');
+
 module.exports = {
   getCategories: function(req, res) {
     res.send('getCategories');

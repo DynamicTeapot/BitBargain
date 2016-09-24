@@ -38,7 +38,7 @@ describe('Router', function(){
     it('responds on sell with data for sell', function(done) {
       request(testApp)
         .post('/items/hotcakes/sell')
-        .expect(200, done)
+        .expect(200, done);
     })
   });
 

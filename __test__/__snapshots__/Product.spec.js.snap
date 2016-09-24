@@ -1,0 +1,21 @@
+exports[`test renders correctly 1`] = `
+<div>
+  <img
+    role="presentation"
+    src="http://www.google.com/" />
+  <h1>
+     
+    PRODUCTNAME
+  </h1>
+  <h2>
+     Sold by: 
+    USERNAME
+     
+  </h2>
+  <p>
+     
+    PRODUCTDESCRIPTION
+     
+  </p>
+</div>
+`;

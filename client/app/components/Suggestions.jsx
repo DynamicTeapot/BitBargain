@@ -3,11 +3,11 @@ import React from 'react';
 
 const Suggestions = (props) => {
   return (
-    <ul className="search-suggestions">
+    <ul className="collection">
     {props.suggestions.map((suggestion, index) => {
       return (
 	<li key={index}>
-	  <a href={`search?q=${props.searchTerm}${suggestion}`}>
+	  <a href={`search?q=${props.searchTerm}${suggestion}`} className="collection-item">
 	    <span>
 	      {props.searchTerm}
 	      <strong>{suggestion}</strong>
