@@ -1,11 +1,21 @@
 import React from 'react';
-import { OAuthSignInButton, EmailSignInForm } from 'redux-auth/material-ui-theme';
-import {Provider} from 'react-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'; 
 
+
+// const MapDispatchToProps = dispatch => {
+
+// }
+
+// const MapStateToProps = state => {
+//   return {user: state.user};
+// }
 
 const Login = (props) => {
   return (
-      <EmailSignInForm />
+    <div>
+    <p>form goes here</p>
+    </div>
     )
 }
 

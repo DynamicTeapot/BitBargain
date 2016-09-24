@@ -5,11 +5,10 @@ import Index from './components/Index.jsx';
 import Login from './components/Login.jsx';
 import NotFound from './components/NotFound.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { authStateReducer } from "redux-auth";
-
+import { UserAuthWrapper} from 'redux-auth-wrapper';
 
 const initial = {
   user: '',
@@ -19,8 +18,7 @@ const initial = {
   signedIn: false
 };
 
-const rootStore = function(state=initial, action) {
-  state = initial;
+const rootReducer = function(state=initial, action) {
   var dispatch = action.type;
   if (dispatch === 'signin') {
     state.user = action.username;
@@ -44,15 +42,21 @@ const rootStore = function(state=initial, action) {
   }
 }
 
-let reducers = [];
-reducers.push(rootStore);
-//Add destructuring below
-const store = createStore(combineReducers({root: rootStore, routing:routerReducer, auth: authStateReducer}));
+const reducers = combineReducers({root: rootReducer, routing:routerReducer});
+// const middleware = routerMiddleware(browserHistory);
 
+
+const store = createStore(reducers);
 //Creates a history that links to the store
 const history = syncHistoryWithStore(browserHistory, store);
 
-//Use on enter
+
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.user,
+  redirectAction: routerActions.replace,
+  wrapperDisplayName: UserIsAuthenticated
+});
+
 
 render((
   <Provider store={store}>
