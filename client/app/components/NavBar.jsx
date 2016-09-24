@@ -1,5 +1,20 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React, {PropTypes} from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.login.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeUser: () => {
+      dispatch({type: 'switchuser', user: String(Math.floor(Math.random()*10000))})
+    }
+  }
+};
 
 const NavBar = (props) => {
   return (
@@ -7,34 +22,41 @@ const NavBar = (props) => {
       <div className="nav-wrapper">
     	BitBargain
       <Link to={''}>
-      <button>
-      Home
-      </button>
+        <button>
+          Home
+        </button>
       </Link>
       <Link to={'login'}>
-      <button>
-      Login
-      </button>
+        <button>
+          Login
+        </button>
       </Link>
       <Link to={'signin'}>
-      <button>
-      Sign In
-      </button>
+        <button>
+          Sign In
+        </button>
       </Link>
       <Link to={'search'}>
-      <button>
-      Search
-      </button>
+        <button>
+          Search
+        </button>
       </Link>
       <Link to={'something'}>
-      <button>
-      Something
-      </button>
+        <button onClick={props.changeUser}>
+          Testing Button
+        </button>
       </Link>
+      <div className="chip">
+        {props.user}
+      </div>
       </div>
     </nav>
   );
 };
 
+NavBar.propTypes = {
+  user: PropTypes.string.isRequired
+};
 
-export default NavBar;
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
