@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
 import Login from './components/Login.jsx';
+import NotFound from './components/NotFound.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import { Provider } from 'react-redux';
@@ -59,6 +60,7 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
         <Route path="login" component={Login} />
+        <Route path="*" component={NotFound} />
       </Route>
     </Router>
   </Provider>
