@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha test",
     "start": "node server/server.js",
-    "startdev": "nodemon server/server.js",
+    "startdev": "nodemon server/server.js & npm run dev",
     "dev": "./node_modules/.bin/webpack -d --watch",
     "prestart": "./node_modules/.bin/webpack -d"
   },
@@ -36,14 +36,21 @@
     "grunt-mocha-test": "^0.13.2",
     "grunt-nodemon": "^0.4.2",
     "knex": "^0.12.1",
+    "material-ui": "^0.15.4",
     "morgan": "^1.7.0",
+    "nodemon": "^1.10.2",
     "pg": "^6.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "react-router-bootstrap": "^0.23.1",
+    "react-router-redux": "^4.0.6",
+    "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.6.0",
-    "uber-rush": "^0.1.8",
+    "redux-auth": "0.0.5-beta5",
     "sequelize": "^3.24.3",
+    "uber-rush": "^0.1.8",
     "webpack": "^2.1.0-beta.25"
   },
   "devDependencies": {
