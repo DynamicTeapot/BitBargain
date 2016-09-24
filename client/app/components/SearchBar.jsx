@@ -9,6 +9,7 @@ const keyCodes = {
   DOWN: 40
 };
 
+
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -28,20 +29,20 @@ class SearchBar extends React.Component {
   normalizeInput() {
     return this.state.value.toLowerCase().trim();
   }
-  /* autosuggest() {
-   *   const searchTerm = this.normalizeInput();
-   *   if (!searchTerm) return;
-   *   new Promise((resolve) => {
-   *     this.props.onChange(searchTerm, resolve);
-   *   }).then((suggestions) => {
-   *     if (!this.state.value) return;
-   *     this.setState({
-   *       highlightedItem: -1,
-   *       searchTerm,
-   *       suggestions
-   *     });
-   *   });
-   * }*/
+  autosuggest() {
+    const searchTerm = this.normalizeInput();
+    if (!searchTerm) return;
+    new Promise((resolve) => {
+      this.props.onChange(searchTerm, resolve);
+    }).then((suggestions) => {
+      if (!this.state.value) return;
+      this.setState({
+	highlightedItem: -1,
+	searchTerm,
+	suggestions
+      });
+    });
+  }
   scroll(key) {
     const {highlightedItem: item, suggestions} = this.state;
     const lastItem = suggestions.length - 1;
