@@ -4,30 +4,32 @@ import React from 'react';
 const Suggestions = (props) => {
   return (
     <ul className="search-suggestions">
-      {props.suggestions.map((suggestion, index) => {
+    {props.suggestions.map((suggestion, index) => {
+      return (
 	<li key={index}>
-	  <a href="!#" className="collection-item">
+	  <a href={`search?q=${props.searchTerm}${suggestion}`}>
 	    <span>
-	      props.searchTerm
-	      <strong>suggestion</strong>
+	      {props.searchTerm}
+	      <strong>{suggestion}</strong>
 	    </span>
 	  </a>
 	</li>
-       }
-      )}
+      )
+    }
+    )}
     </ul>
   );
 }
 
 
 Suggestions.propTypes = {
-  searchTerm: React.PropTypes.stirng,
+  searchTerm: React.PropTypes.string,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.string)
 };
 
 Suggestions.defaultProps = {
   searchTerm: 'F',
-  suggestions: ['Foo1', 'Foo2', 'Foo3']
+  suggestions: ['oo1', 'oo2', 'oo3']
 };
 
 
