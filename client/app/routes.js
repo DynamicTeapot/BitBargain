@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
+import SearchResults from './components/SearchResults.jsx';
 import Login from './components/Login.jsx';
 import NotFound from './components/NotFound.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
@@ -64,6 +65,7 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
         <Route path="login" component={Login} />
+        <Route path="search" component={SearchResults} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
