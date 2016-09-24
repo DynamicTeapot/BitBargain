@@ -1,7 +1,7 @@
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    socketPath: '/tmp/.s.PGSQL.5432',
+    socketPath: '/tmp/.s.PGSQL.5432', // testing out unix domain sockets
     database: 'postgres'
   },
   pool: {
@@ -20,8 +20,9 @@ knex.schema.hasTable('items').then((result) => {
       table.string('title');
       table.text('description');
       table.decimal('price');
+      table.boolean('sold').defaultTo(false);
       table.string('location');
-      table.json('images');
+      table.specificType('images', 'text[]').nullable();
       console.log('Table "items" created');
     });
   }
@@ -34,6 +35,7 @@ knex.schema.hasTable('users').then((result) => {
     return knex.schema.createTable('users', (table) => {
       table.increments();
       table.string('username').unique();
+      table.string('email').unique();
       console.log('Table "users" created');
     });
   }
@@ -47,11 +49,13 @@ knex.schema.hasTable('transactions').then((result) => {
       table.increments();
       table.timestamp('created_at', 'utc').defaultTo(knex.fn.now());
       table.integer('item_id');
-      table.string('buyer');
-      table.string('seller');
+      table.integer('buyer_id'); // TODO: index
+      table.integer('seller_id'); // TODO: index
       table.string('order_status').defaultTo('In progress');
       table.text('tracking');
       table.foreign('item_id').references('app.items.id');
+      table.foreign('buyer_id').references('users.id');
+      table.foreign('seller_id').references('users.id');
       console.log('Table "transactions" created');
     });
   }
