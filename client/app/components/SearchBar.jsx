@@ -9,7 +9,7 @@ const SearchBar = (props) => {
       	<div className="row">
           <div className="input-field col s10">
             <input id="icon_search" type="text" className="validate" />
-            <label htmlFor="icon_search">Telephone</label>
+            <label htmlFor="icon_search">Search?</label>
       	    <a href="search?q=dance">
       	      <i className="material-icons prefix">search</i>
       	    </a>
@@ -21,4 +21,4 @@ const SearchBar = (props) => {
 };
 
 
-export default SearchBar
+export default SearchBar;
