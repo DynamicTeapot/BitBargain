@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
+import { EmailSignInForm } from "redux-auth/material-ui-theme";
 
 const loginInit = {
   user: 'cool',
@@ -44,7 +45,7 @@ const loginReducer = (state=loginInit, action) => {
 const Login = (props) => {
   return (
     <div>
-    <p>form goes here</p>
+      <EmailSignInForm />
     </div>
     )
 }

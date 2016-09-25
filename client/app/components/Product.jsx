@@ -45,7 +45,7 @@ let Product = ({ product }) => {
       <div className="card large">
         <center>
           <div className="card-image waves-effect waves-block waves-light">
-            <img src={product.image.url} role="presentation" className="activator center" style={{width:40+'em'}}/>
+            <img src={product.image.url} role="presentation" className="activator center" style={{width:35+'em'}}/>
           </div>
           <h2> { product.title }</h2>
         </center>

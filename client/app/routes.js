@@ -2,23 +2,27 @@ import React from 'react';
 import {render} from 'react-dom';
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
-import SearchResults from './components/SearchResults.jsx';
+import { searchReducer } from './components/SearchBar.jsx';
 import { Login, loginReducer } from './components/Login.jsx';
 import { Product, productReducer } from './components/Product.jsx';
 import NotFound from './components/NotFound.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
+import { configure, authStateReducer } from 'redux-auth';
 import { createStore, combineReducers } from 'redux';
 import { UserAuthWrapper} from 'redux-auth-wrapper';
+import { AuthGlobals } from "redux-auth/default-theme";
 
-const reducers = combineReducers({login: loginReducer, product: productReducer, routing:routerReducer});
+
+const reducers = combineReducers({login: loginReducer, product: productReducer, search: searchReducer, auth: authStateReducer, routing:routerReducer});
 const middleware = routerMiddleware(browserHistory);
 
 
 
 const store = createStore(reducers);
 //Creates a history that links to the store
+console.log(store)
 const history = syncHistoryWithStore(browserHistory, store);
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -30,14 +34,13 @@ const UserIsAuthenticated = UserAuthWrapper({
 
 render((
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Index} />
-        <Route path="login" component={Login} />
-        <Route path="search" component={SearchResults} />
-        <Route path="product" component={Product} />
-        <Route path="*" component={NotFound} />
-      </Route>
-    </Router>
+      <Router history={history}>
+        <Route path="/" component={App}>
+          <IndexRoute component={Index} />
+          <Route path="login" component={Login} />
+          <Route path="product" component={Product} />
+          <Route path="*" component={NotFound} />
+        </Route>
+      </Router>
   </Provider>
   ), document.getElementById('app'));
