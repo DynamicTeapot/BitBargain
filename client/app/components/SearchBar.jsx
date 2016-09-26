@@ -1,5 +1,5 @@
 import React from 'react';
-import Suggestions from './Suggestions.jsx';
+import SearchResults from './SearchResults.jsx';
 import { connect, dispatch } from 'react-redux';
 
 
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => {
       dispatch({type: 'clearResults'});
     },
     updateResults: (data) => {
-      dispatch({type: 'updateResults', results: [{id: 1, title: 'test'}, {id: 2, title: 'cool'}, {id: 3, title: 'hella'}]});
+      dispatch({type: 'updateResults', results: data});
     }
   };
 };
@@ -54,10 +54,12 @@ class SearchBar extends React.Component {
       this.setState({loading: true});
       e.preventDefault();
       //AJAX CALL HERE
-      this.props.updateResults();
-      setTimeout(()=>{
+      fetch('/api/search/foo').then(res => {
+	return res.json();
+      }).then(res => {
+	this.props.updateResults(res.items);
         this.setState({loading: false});
-      }, 3000);
+      });
     });
     
   }
@@ -77,11 +79,7 @@ class SearchBar extends React.Component {
           </form>
           {this.state.loading ? <div className="progress"><div className="indeterminate"></div></div> : null}
         </div>
-        <ul className="collection">
-        {this.props.results.map((result)=>{
-          return (<li key={result.id} className='collection-item'>{result.title}</li>)
-        })}
-        </ul>
+	<SearchResults products={this.props.results}/>
       </div>
     );
   }
