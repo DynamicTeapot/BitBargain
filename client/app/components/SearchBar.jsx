@@ -26,8 +26,7 @@ class SearchBar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: false,
-      value: ''
+      loading: false
     };
   }
   componentDidMount() {
@@ -35,7 +34,7 @@ class SearchBar extends React.Component {
       this.setState({loading: true});
       e.preventDefault();
       //AJAX CALL HERE
-      fetch('/api/search/foo').then(res => {
+      fetch(`/api/search/${e.originalEvent.target[0].value}`).then(res => {
 	return res.json();
       }).then(res => {
 	this.props.updateResults(res.items);
@@ -52,7 +51,7 @@ class SearchBar extends React.Component {
           <form className="col s12" id='search'>
             <div className="row">
               <div className="input-field col s10">
-                <input id="icon_search" type="text" />
+                <input id="icon_search" type="text" value={this.state.value}/>
                 <label htmlFor="icon_search">Search?</label>
                 <i className="material-icons prefix">search</i>
               </div>
