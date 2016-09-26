@@ -27,13 +27,14 @@ knex.schema.hasTable('items').then((result) => {
       table.string('location');
       table.specificType('images', 'text[]').nullable();
       console.log('Table "items" created');
-      // populate table with test data
-      knex('items').insert(data.items, 'id')
-      .catch(err => console.log(`Error populating "items" table ${err}`));
     });
   }
   console.log('Table "items" already exists');
   return 0;
+}).then(() => {
+  // populate items table with test data
+  knex('items').insert(data.items, 'id')
+  .catch(err => console.log(`Error populating "items" table ${err}`));
 });
 
 knex.schema.hasTable('users').then((result) => {
