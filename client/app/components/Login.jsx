@@ -43,9 +43,23 @@ const loginReducer = (state=loginInit, action) => {
 
 const Login = (props) => {
   return (
-    <div>
-    <p>form goes here</p>
-    </div>
+      <form className="col s8" id='search' onSubmit={(e)=>{e.preventDefault(); console.log(e);/*ajax call here*/}}>
+            <div className="row">
+              <div className="input-field col s10">
+                <input id="Email" type="text" />
+                <label htmlFor="Email">Email</label>
+                <i className="material-icons prefix">email</i>
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s8">
+                <input id="Password" type="text" />
+                <label htmlFor="Password">Password</label>
+                <i className="material-icons prefix">vpn_key</i>
+              </div>
+            </div>
+              <a className="waves-effect waves-light btn right">Submit</a>
+          </form>
     )
 }
 
