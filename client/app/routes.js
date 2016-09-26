@@ -10,19 +10,27 @@ import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-ro
 import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { configure, authStateReducer } from 'redux-auth';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { UserAuthWrapper} from 'redux-auth-wrapper';
 import { AuthGlobals } from "redux-auth/default-theme";
+import { thunk } from 'redux-thunk';
 
 
 const reducers = combineReducers({login: loginReducer, product: productReducer, search: searchReducer, auth: authStateReducer, routing:routerReducer});
-const middleware = routerMiddleware(browserHistory);
+// const middleware = routerMiddleware(browserHistory);
 
 
 
 const store = createStore(reducers);
 //Creates a history that links to the store
-console.log(store)
+// store.dispatch(configure(
+//   {apiUrl: "http://localhost:9009/api/signin"},
+//   {serverSideRendering: false, cleanSession: true}
+// )).then(() => {
+// });
+
+
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 const UserIsAuthenticated = UserAuthWrapper({

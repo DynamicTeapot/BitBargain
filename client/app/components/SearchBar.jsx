@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => {
     clearResults: () => {
       dispatch({type: 'clearResults'});
     },
-    updateResults: () => {
+    updateResults: (data) => {
       dispatch({type: 'updateResults', results: [{id: 1, title: 'test'}, {id: 2, title: 'cool'}, {id: 3, title: 'hella'}]});
     }
   };

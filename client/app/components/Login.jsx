@@ -44,7 +44,7 @@ const loginReducer = (state=loginInit, action) => {
 
 const Login = (props) => {
   return (
-    <div>
+    <div className='container' style={{width: 800+'em'}}>
       <EmailSignInForm />
     </div>
     )
