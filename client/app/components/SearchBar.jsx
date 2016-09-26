@@ -3,30 +3,9 @@ import SearchResults from './SearchResults.jsx';
 import { connect, dispatch } from 'react-redux';
 
 
-const searchInit = {
-  parameters: [],
-  results: []
-};
-//Each result is a product and each parameter is parsed down to a category or thrown out
-
-const searchReducer = (state=searchInit, action) => {
-  let dispatch = action.type;
-  let newState = {}
-  if (dispatch === 'updateResults') {
-    newState.parameters = state.parameters
-    newState.results = action.results;
-    return newState;
-  } else if (dispatch === 'clearResults') {
-    newState = { parameters: [], results: []}
-    return newState;
-  } else {
-    return state;
-  }
-};
-
 const mapStateToProps = state => {
   return {
-    parameters: state.search.parameters,
+    query: state.search.paramters,
     results: state.search.results
   };
 };
@@ -42,17 +21,20 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+
 class SearchBar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      value: ''
     };
   }
   componentDidMount() {
     $('#search').on('submit', (e)=>{
       this.setState({loading: true});
       e.preventDefault();
+      debugger;
       //AJAX CALL HERE
       fetch('/api/search/foo').then(res => {
 	return res.json();
@@ -62,6 +44,9 @@ class SearchBar extends React.Component {
       });
     });
     
+  }
+  handleSearch(event) {
+    console.log(event);
   }
   //TODO: WRAP EACH LI INTO A LINK FOR the PRODUCT PAGE AND THEN CALL THE PRODUCT DOWN FROM DB
   render() {
@@ -88,4 +73,4 @@ class SearchBar extends React.Component {
 SearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
 
-export { SearchBar, searchReducer };
+export { SearchBar };
