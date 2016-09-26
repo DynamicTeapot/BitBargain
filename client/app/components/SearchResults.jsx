@@ -3,7 +3,6 @@ import SearchResult from './SearchResult.jsx';
 
 
 const SearchResults = (props) => {
-  console.log(props);
   return (
     <div className="collection"> {
       props.products.map((product, index) => {

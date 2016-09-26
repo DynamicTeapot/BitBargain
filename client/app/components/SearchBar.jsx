@@ -34,7 +34,7 @@ class SearchBar extends React.Component {
       this.setState({loading: true});
       e.preventDefault();
       //AJAX CALL HERE
-      fetch(`/api/search/${e.originalEvent.target[0].value}`).then(res => {
+      fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`).then(res => {
 	return res.json();
       }).then(res => {
 	this.props.updateResults(res.items);
