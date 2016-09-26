@@ -1,3 +1,5 @@
+set -ev
+
 language: node_js
 node_js:
   - node
@@ -15,3 +17,7 @@ notifications:
 before_script: 
   - npm install -g grunt-cli
 script: grunt test
+
+before_script: 
+  - npm install -g jest-cli
+script: jest
