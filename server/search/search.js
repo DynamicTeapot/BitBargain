@@ -9,9 +9,10 @@ var items = require('./dummyItems.js');
  * @return {undefined}
  */
 var search = function(req, res) {
-  console.log(`There was a query: '${req.params.q}'`);    // DEBUG
   if(!req.params || !req.params.q) {
     res.status(400).send('Must specify a search query.');
+  } else if (req.params.cat && req.params.cat.trim() !== '') {
+    res.json(items);
   } else {
     res.json(items);
   }

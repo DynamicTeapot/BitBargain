@@ -16,6 +16,6 @@ router
 //req.params.id
 
 router
-  .get('/api/search/:q', search);
+  .get('/api/search/:q/:cat?', search);
 
 module.exports = router;
