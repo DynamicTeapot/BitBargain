@@ -1,12 +1,15 @@
+const data = require('./test.json');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    socketPath: '/tmp/.s.PGSQL.5432', // testing out unix domain sockets
-    database: 'postgres'
+    host: 'localhost', // replace host if remote
+    user: '', // enter DB user/role
+    password: '', // enter password
+    database: 'postgres' // default DB is postgres
   },
   pool: {
     min: 1,
-    max: 1000
+    max: 500
   }
 });
 
@@ -19,7 +22,7 @@ knex.schema.hasTable('items').then((result) => {
       table.string('category');
       table.string('title');
       table.text('description');
-      table.decimal('price');
+      table.string('price');
       table.boolean('sold').defaultTo(false);
       table.string('location');
       table.specificType('images', 'text[]').nullable();
@@ -28,6 +31,10 @@ knex.schema.hasTable('items').then((result) => {
   }
   console.log('Table "items" already exists');
   return 0;
+}).then(() => {
+  // populate items table with test data
+  knex('items').insert(data.items, 'id')
+  .catch(err => console.log(`Error populating "items" table ${err}`));
 });
 
 knex.schema.hasTable('users').then((result) => {
@@ -53,7 +60,7 @@ knex.schema.hasTable('transactions').then((result) => {
       table.integer('seller_id'); // TODO: index
       table.string('order_status').defaultTo('In progress');
       table.text('tracking');
-      table.foreign('item_id').references('app.items.id');
+      table.foreign('item_id').references('items.id');
       table.foreign('buyer_id').references('users.id');
       table.foreign('seller_id').references('users.id');
       console.log('Table "transactions" created');
