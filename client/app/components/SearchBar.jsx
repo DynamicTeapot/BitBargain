@@ -39,6 +39,8 @@ class SearchBar extends React.Component {
       }).then(res => {
 	this.props.updateResults(res.items);
         this.setState({loading: false});
+      }).catch(err => {
+	console.error(err);
       });
     });
     
