@@ -28,4 +28,4 @@ var searchReducer = function(state=searchInit, action) {
 };
 
 
-export default searchReducer;
+module.exports.searchReducer = searchReducer;

@@ -5,7 +5,7 @@ import { connect, dispatch } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    query: state.search.paramters,
+    parameters: state.search.paramters,
     results: state.search.results
   };
 };
@@ -34,7 +34,6 @@ class SearchBar extends React.Component {
     $('#search').on('submit', (e)=>{
       this.setState({loading: true});
       e.preventDefault();
-      debugger;
       //AJAX CALL HERE
       fetch('/api/search/foo').then(res => {
 	return res.json();
@@ -44,9 +43,6 @@ class SearchBar extends React.Component {
       });
     });
     
-  }
-  handleSearch(event) {
-    console.log(event);
   }
   //TODO: WRAP EACH LI INTO A LINK FOR the PRODUCT PAGE AND THEN CALL THE PRODUCT DOWN FROM DB
   render() {
