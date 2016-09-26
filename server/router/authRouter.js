@@ -1,18 +1,28 @@
-var router = require('express').Router();
-var itemController = require('../controllers/itemController');
-var userController = require('../controllers/userController');
-var passport = require('passport');
+const router = require('express').Router();
+const authController = require('../controllers/authController');
+const passport = require('passport');
+const configPassport = require('../controllers/strategies');
+configPassport(passport);
+passport.serializeUser((user, done) => {
+  console.log('HAHA');
+  console.log(user);
+  done(null, user);
+});
+
+passport.deserializeUser((id, done) => {
+  console.log(id)
+  done(err, 'user');
+});
 
 
 router
-  .get('/items/categories', itemController.getCategories)
-  .get('/items/:id', itemController.getItem)
-  .post('/items/:id/buy', itemController.buyItem, userController.updateUser)
-  .post('/items/:id/sell', itemController.soldItem, userController.updateUser)
-  .get('/items/:id/shipped', itemController.shippedItem)
-  .put('/items/:id/update', itemController.updateItem)
-  .delete('/items/:id', itemController.deleteItem, userController.updateUser);
+  .use(passport.initialize())
+  .use(passport.session())
+  .get('/failedLogin', authController.fail)
+  .post('/login/local', passport.authenticate('local', { failureRedirect: '/auth/failedLogin' }), authController.local.login)
+  .post('/signup/local', authController.local.signup)
+  .post('/login/coinbase', passport.authenticate('coinbase'))
+  .get('/login/coinbase/callback', passport.authenticate('coinbase', { failureRedirect: '/login' }), authController.coinbase.login)
 
-//req.params.id
 
 module.exports = router;

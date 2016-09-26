@@ -4,12 +4,18 @@ const morgan = require('morgan');
 const path = require('path');
 const clientRouter = require('./router/clientRouter');
 const authRouter = require('./router/authRouter');
+const passport = require('passport');
 
 const port = 9009 || process.env.PORT;
 const app = express();
 
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+app.use('/auth', authRouter);
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(express.static('client'));
 app.use('/', clientRouter);
 app.get('*', (req, res) => {

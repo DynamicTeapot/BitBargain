@@ -40,21 +40,33 @@ const loginReducer = (state = loginInit, action) => {
 // const MapStateToProps = state => {
 //   return {user: state.user};
 // }
-const login = function(){
-  var email = $('#Email').val();
-  var password = $('#Password').val();
-  $.post('http://localhost:9009/auth/login', (err, res)=> {
-    console.log(err, res);
-  });
+const login = function(e) {
+  if (!e || e.which === 13) {
+    var email = $('#Email').val();
+    var password = $('#Password').val();
+    if (password && email) {
+      fetch('http://localhost:9009/auth/login/local', {
+        method: 'POST',
+        body: {
+          email: email,
+          password: password
+        }
+      }).then((err, res) => {
+        if(err.status === 401){
+          console.log('Incorrect Password or Username');
+        }
+      });
+    }
+  }
 };
 
 const Login = (props) => {
   return (
-      <form className="col s8" id="search" onSubmit={(e) => { e.preventDefault(); console.log(e);/* ajax call here*/ }}>
+      <form className="col s8" id='login' onKeyDown={login}>
             <div className="row">
               <div className="input-field col s10">
-                <input id="Email" type="text" />
-                <label htmlFor="Email">Email</label>
+                <input id="Email" type="email" className="validate" />
+                <label htmlFor="Email" data-error="Incorrect Format" data-success="O K">Email</label>
                 <i className="material-icons prefix">email</i>
               </div>
             </div>
