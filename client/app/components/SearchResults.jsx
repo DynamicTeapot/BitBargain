@@ -6,16 +6,16 @@ const SearchResults = (props) => {
   return (
     <div className="collection"> {
       props.products.map((product, index) => {
-	return (
-	  <SearchResult
-	      key={index}
-	      product={product}/>
-	);
+        return (
+          <SearchResult
+            key={index}
+            product={product}
+          />);
       })
       }
     </div>
   );
-}
+};
 
 
 SearchResults.propTypes = {
@@ -41,4 +41,4 @@ SearchResults.defaultProps = {
 };
 
 
-export default SearchResults
+export default SearchResults;

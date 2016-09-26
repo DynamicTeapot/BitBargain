@@ -10,7 +10,7 @@ const SearchResult = (props) => {
       {props.product.title}
     </Link>
   );
-}
+};
 
 
 SearchResult.propTypes = {
@@ -18,4 +18,4 @@ SearchResult.propTypes = {
 };
 
 
-export default SearchResult
+export default SearchResult;

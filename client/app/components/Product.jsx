@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'; 
-
+import {
+  mapStateToProps,
+  mapDispatchToProps,
+  productReducer } from '../reducers/product.reducer.js';
 
 // TODO: Get this to check current product first before loading.
 
@@ -24,17 +26,18 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-class Product extends React.Component {
+class productContainer extends React.Component {
   constructor(props) {
     super(props);
   }
+
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
       .then(res => {
-	return res.json();
+        return res.json();
       })
       .then(res => {
-	this.props.updateProduct(res);
+        this.props.updateProduct(res);
       })
       .catch(err => console.error(err));
   }
@@ -61,6 +64,10 @@ class Product extends React.Component {
 	    <div className="chip">
 	      {this.props.product.category}
 	    </div>
+            <small><p> Sold by: { this.props.product.seller } in { this.props.product.location }<br /> { this.props.product.postedAt.toString() } </p></small>
+            {this.props.product.category.map(cat => (
+              <div className="chip" key={cat}>{cat}</div>
+            ))}
           </div>
         </div>
       </div>
@@ -68,9 +75,12 @@ class Product extends React.Component {
   }
 }
 
-Product.propTypes = {
+productContainer.propTypes = {
   product: PropTypes.object.isRequired,
+  updateProduct: PropTypes.func.isRequired,
+  clearProduct: PropTypes.func.isRequired
 };
 
-Product = connect(mapStateToProps, mapDispatchToProps)(Product);
-export { Product };
+const Product = connect(mapStateToProps, mapDispatchToProps)(productContainer);
+
+export { Product, productReducer, productContainer };

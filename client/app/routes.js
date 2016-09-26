@@ -23,18 +23,17 @@ const reducers = combineReducers(
     routing:routerReducer
   }
 );
+
 // const middleware = routerMiddleware(browserHistory);
 
 
-
 const store = createStore(reducers);
-//Creates a history that links to the store
+// Creates a history that links to the store
 // store.dispatch(configure(
 //   {apiUrl: "http://localhost:9009/api/signin"},
 //   {serverSideRendering: false, cleanSession: true}
 // )).then(() => {
 // });
-
 
 
 const history = syncHistoryWithStore(browserHistory, store);

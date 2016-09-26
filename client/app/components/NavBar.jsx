@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -8,12 +8,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     changeUser: () => {
-      dispatch({type: 'switchuser', user: String(Math.floor(Math.random()*10000))})
+      dispatch({ type: 'switchuser', user: String(Math.floor(Math.random() * 10000)) });
     }
-  }
+  };
 };
 
 const NavBar = (props) => {
