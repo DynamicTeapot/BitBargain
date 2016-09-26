@@ -13,7 +13,14 @@ import { UserAuthWrapper} from 'redux-auth-wrapper';
 import { searchReducer } from './reducers/SearchReducer.js';
 
 
-const reducers = combineReducers({login: loginReducer, product: productReducer, search: searchReducer, routing:routerReducer});
+const reducers = combineReducers(
+  {
+    login: loginReducer,
+    product: productReducer,
+    search: searchReducer,
+    routing:routerReducer
+  }
+);
 // const middleware = routerMiddleware(browserHistory);
 
 
