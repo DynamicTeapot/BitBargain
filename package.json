@@ -64,7 +64,6 @@
     "eslint-plugin-react": "^6.3.0",
     "jest": "^15.1.1",
     "jest-cli": "^15.1.1",
-    "grunt-jest": "^0.3.0",
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2",
     "path": "^0.12.7",
