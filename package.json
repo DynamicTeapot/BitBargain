@@ -35,6 +35,7 @@
     "grunt-eslint": "^19.0.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-nodemon": "^0.4.2",
+    "jest": "^15.1.1",
     "knex": "^0.12.1",
     "material-ui": "^0.15.4",
     "morgan": "^1.7.0",
