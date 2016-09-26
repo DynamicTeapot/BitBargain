@@ -40,6 +40,13 @@ const loginReducer = (state = loginInit, action) => {
 // const MapStateToProps = state => {
 //   return {user: state.user};
 // }
+const login = function(){
+  var email = $('#Email').val();
+  var password = $('#Password').val();
+  $.post('http://localhost:9009/auth/login', (err, res)=> {
+    console.log(err, res);
+  });
+};
 
 const Login = (props) => {
   return (
@@ -53,12 +60,12 @@ const Login = (props) => {
             </div>
             <div className="row">
               <div className="input-field col s8">
-                <input id="Password" type="text" />
+                <input id="Password" type="password" />
                 <label htmlFor="Password">Password</label>
                 <i className="material-icons prefix">vpn_key</i>
               </div>
+              <a className="waves-effect waves-light btn right" onClick={()=>login()}>Submit</a>
             </div>
-              <a className="waves-effect waves-light btn right">Submit</a>
           </form>
     );
 };
