@@ -1,21 +1,19 @@
 language: node_js
 node_js:
-  - node
-
+- node
 cache:
   bundler: true
   directories:
-    - node_modules
-
+  - node_modules
 notifications:
-  slack: hr46:TNeBjKiVgpzQhnb7Mw1WAstf
-  on_success: change
-  on_failure: change
-
-before_script: 
-  - npm install -g grunt-cli
-script: grunt test
-
-before_script: 
-  - npm install -g jest-cli
-script: jest
+  slack:
+    rooms:
+      secure: CiAqO+e2ef/mvl40OIWfcHadHWE4f/x4ELPoN/7QKrgwOkqYPk8FCrPdTa2lyRwE92YH66ECZP8Tv4jlh2+D4+3YppPholVMqA6yFK3kmKiG0OpdlrI3lZ41eYLd5KqHr/h3tT6/1QkTyDla5tOIkRa49paHO3Lv9oxxdHxbzYhpuTZb3Zdr5mK2TecmD8+5jqGuKMlq1qqna6g/dbYqDxyVKgnwPviZykd2Anx9cq1qZlcOlMkM47XjTmRy1Mv96ySlXj7t0ODUOCdV2DOyG+wLVEYAgwvTWVIOf5WpAyx0RfYVXZ48Ort9rLviCcxK3qQlxNtae5evLVG318ibRLY4hVXII0hODdw+qDOU4Nja4lB2yN/kRrudJsTmburM44PXNxebJxYiCgTO/NuE5/191PUg8YcqWygw9B/RHGry7gFQiYyDaqdrrqKvF9mowdFMK7qYHsNUBzDgKROnhOzwVMoNRyWbyxddm2zRP5qUzi8caFHbKTGy1tIDcfbCcuF1qdhvN10aUcrxdIGYqw+TE//r+CEXuYL1cLag2lIqMjf656+WnR79embqrRbPOwjNp/8g19FAjj8aNkO1MGFbc3yTtbBlHdpu/mzSemhkVu+rDf/9DuD6ciAPHBnlnjKLL7+6S/+eArxVhd3fAIWntsfCtXn5FEMW2fHD1MY=
+    on_success: change
+    on_failure: change
+before_script:
+- npm install -g grunt-cli
+- npm install -g jest-cli
+script:
+- grunt test
+- jest
