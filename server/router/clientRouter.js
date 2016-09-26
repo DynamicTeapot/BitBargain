@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var itemController = require('../controllers/itemController');
 var userController = require('../controllers/userController');
+var search = require('../search/search.js');
 
 
 router
@@ -13,5 +14,8 @@ router
   .delete('/items/:id', itemController.deleteItem, userController.updateUser);
 
 //req.params.id
+
+router
+  .get('/api/search/:q', search);
 
 module.exports = router;
