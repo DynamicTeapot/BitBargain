@@ -57,9 +57,8 @@ const Login = (props) => {
                 <label htmlFor="Password">Password</label>
                 <i className="material-icons prefix">vpn_key</i>
               </div>
-              <a class="waves-effect waves-light btn">button</a>
-              <a class="waves-effect waves-light btn" onClick={console.log('yay')}>button</a>
             </div>
+              <a className="waves-effect waves-light btn right">Submit</a>
           </form>
     )
 }
