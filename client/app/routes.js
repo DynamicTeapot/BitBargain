@@ -9,14 +9,11 @@ import NotFound from './components/NotFound.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import { configure, authStateReducer } from 'redux-auth';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { UserAuthWrapper} from 'redux-auth-wrapper';
-import { AuthGlobals } from "redux-auth/default-theme";
-import { thunk } from 'redux-thunk';
 
 
-const reducers = combineReducers({login: loginReducer, product: productReducer, search: searchReducer, auth: authStateReducer, routing:routerReducer});
+const reducers = combineReducers({login: loginReducer, product: productReducer, search: searchReducer, routing:routerReducer});
 // const middleware = routerMiddleware(browserHistory);
 
 

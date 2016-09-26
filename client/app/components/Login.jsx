@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
-import { EmailSignInForm } from "redux-auth/material-ui-theme";
 
 const loginInit = {
   user: 'cool',
@@ -44,9 +43,24 @@ const loginReducer = (state=loginInit, action) => {
 
 const Login = (props) => {
   return (
-    <div className='container' style={{width: 800+'em'}}>
-      <EmailSignInForm />
-    </div>
+      <form className="col s8" id='search' onSubmit={(e)=>{e.preventDefault(); console.log(e);/*ajax call here*/}}>
+            <div className="row">
+              <div className="input-field col s10">
+                <input id="Email" type="text" />
+                <label htmlFor="Email">Email</label>
+                <i className="material-icons prefix">email</i>
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s8">
+                <input id="Password" type="text" />
+                <label htmlFor="Password">Password</label>
+                <i className="material-icons prefix">vpn_key</i>
+              </div>
+              <a class="waves-effect waves-light btn">button</a>
+              <a class="waves-effect waves-light btn" onClick={console.log('yay')}>button</a>
+            </div>
+          </form>
     )
 }
 
