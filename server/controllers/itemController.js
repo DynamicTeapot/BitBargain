@@ -1,4 +1,4 @@
-//const dbController = require('./dbController');
+const db = require('../db/model');
 
 module.exports = {
   getCategories: function(req, res) {
