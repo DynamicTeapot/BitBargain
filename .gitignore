@@ -41,3 +41,5 @@ client/public/*
 
 #config keys
 psqlconfig.js
+
+server/env.js
