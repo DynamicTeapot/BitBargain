@@ -26,8 +26,13 @@ module.exports = function gruntFun(grunt) {
       target: [
         '*.js',
         'client/*.js',
+        'client/app/*',
+        'client/app/*/*',
         'server/*.js',
       ],
+      options: {
+        fix: true
+      }
     },
   });
 

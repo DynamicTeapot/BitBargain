@@ -14,12 +14,12 @@ const Suggestions = (props) => {
 	    </span>
 	  </a>
 	</li>
-      )
+      );
     }
     )}
     </ul>
   );
-}
+};
 
 
 Suggestions.propTypes = {
@@ -33,4 +33,4 @@ Suggestions.defaultProps = {
 };
 
 
-export default Suggestions
+export default Suggestions;
