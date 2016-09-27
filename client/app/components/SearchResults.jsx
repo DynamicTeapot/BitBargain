@@ -5,10 +5,10 @@ import SearchResult from './SearchResult.jsx';
 const SearchResults = (props) => {
   return (
     <div className="collection"> {
-      props.products.map(product => {
+      props.products.map((product, index) => {
 	return (
 	  <SearchResult
-	      key={product.id}
+	      key={index}
 	      product={product}/>
 	);
       })

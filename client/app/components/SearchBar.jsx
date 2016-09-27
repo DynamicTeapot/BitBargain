@@ -1,28 +1,7 @@
 import React from 'react';
-import Suggestions from './Suggestions.jsx';
+import SearchResults from './SearchResults.jsx';
 import { connect, dispatch } from 'react-redux';
 
-
-const searchInit = {
-  parameters: [],
-  results: []
-};
-//Each result is a product and each parameter is parsed down to a category or thrown out
-
-const searchReducer = (state=searchInit, action) => {
-  let dispatch = action.type;
-  let newState = {}
-  if (dispatch === 'updateResults') {
-    newState.parameters = state.parameters
-    newState.results = action.results;
-    return newState;
-  } else if (dispatch === 'clearResults') {
-    newState = { parameters: [], results: []}
-    return newState;
-  } else {
-    return state;
-  }
-};
 
 const mapStateToProps = state => {
   return {
@@ -37,10 +16,11 @@ const mapDispatchToProps = dispatch => {
       dispatch({type: 'clearResults'});
     },
     updateResults: (data) => {
-      dispatch({type: 'updateResults', results: [{id: 1, title: 'test'}, {id: 2, title: 'cool'}, {id: 3, title: 'hella'}]});
+      dispatch({type: 'updateResults', results: data});
     }
   };
 };
+
 
 class SearchBar extends React.Component {
   constructor(props){
@@ -54,10 +34,14 @@ class SearchBar extends React.Component {
       this.setState({loading: true});
       e.preventDefault();
       //AJAX CALL HERE
-      this.props.updateResults();
-      setTimeout(()=>{
+      fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`).then(res => {
+	return res.json();
+      }).then(res => {
+	this.props.updateResults(res.items);
         this.setState({loading: false});
-      }, 3000);
+      }).catch(err => {
+	console.error(err);
+      });
     });
     
   }
@@ -69,7 +53,7 @@ class SearchBar extends React.Component {
           <form className="col s12" id='search'>
             <div className="row">
               <div className="input-field col s10">
-                <input id="icon_search" type="text" />
+                <input id="icon_search" type="text" value={this.state.value}/>
                 <label htmlFor="icon_search">Search?</label>
                 <i className="material-icons prefix">search</i>
               </div>
@@ -77,11 +61,7 @@ class SearchBar extends React.Component {
           </form>
           {this.state.loading ? <div className="progress"><div className="indeterminate"></div></div> : null}
         </div>
-        <ul className="collection">
-        {this.props.results.map((result)=>{
-          return (<li key={result.id} className='collection-item'>{result.title}</li>)
-        })}
-        </ul>
+	<SearchResults products={this.props.results}/>
       </div>
     );
   }
@@ -90,4 +70,4 @@ class SearchBar extends React.Component {
 SearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
 
-export { SearchBar, searchReducer };
+export { SearchBar };

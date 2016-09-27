@@ -1,19 +1,27 @@
 import React from 'react';
 import {render} from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
+import { UserAuthWrapper} from 'redux-auth-wrapper';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
-import { searchReducer } from './components/SearchBar.jsx';
 import { Login, loginReducer } from './components/Login.jsx';
 import { Product, productReducer } from './components/Product.jsx';
 import NotFound from './components/NotFound.jsx';
-import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { UserAuthWrapper} from 'redux-auth-wrapper';
+import { searchReducer } from './reducers/SearchReducer.js';
 
 
-const reducers = combineReducers({login: loginReducer, product: productReducer, search: searchReducer, routing:routerReducer});
+const reducers = combineReducers(
+  {
+    login: loginReducer,
+    product: productReducer,
+    search: searchReducer,
+    routing:routerReducer
+  }
+);
 // const middleware = routerMiddleware(browserHistory);
 
 
