@@ -46,6 +46,11 @@ const NavBar = (props) => {
           Testing Button
         </button>
       </Link>
+      <Link to='#'>
+        <button className="button-collapse">
+          SideNav
+        </button>
+      </Link>
       <div className="chip">
         {props.user}
       </div>
