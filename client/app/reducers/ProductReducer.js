@@ -1,8 +1,6 @@
 
 const productInit = {
-  image: {
-    url: 'http://25.media.tumblr.com/1ed3f564cd07a5df56d845a49cc46281/tumblr_mg8k8zCiAW1qd7h1xo1_500.gif'
-  },
+  images: ['http://25.media.tumblr.com/1ed3f564cd07a5df56d845a49cc46281/tumblr_mg8k8zCiAW1qd7h1xo1_500.gif'],
   title: 'This is the name of a product',
   seller: 'SELLER NAME',
   desc: 'This is a desc of a product',

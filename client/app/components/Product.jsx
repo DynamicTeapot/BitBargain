@@ -49,7 +49,7 @@ class Product extends React.Component {
         <div className="card large">
           <center>
             <div className="card-image waves-effect waves-block waves-light">
-              <img src={ this.props.product.image.url } role="presentation" className="activator center" style={{width:35+'em'}}/>
+              <img src={ this.props.product.images[0] } role="presentation" className="activator center" style={{width:35+'em'}}/>
             </div>
             <h2> { this.props.product.title }</h2>
           </center>
