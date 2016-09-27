@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 
 
+// TODO: Get this to check current product first before loading.
+
+
 const mapStateToProps = state => {
   return {
     product: state.product

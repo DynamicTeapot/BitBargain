@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-// TODO: Have the link send the product info to the product route.
-
-
 const SearchResult = (props) => {
   return (
     <Link
