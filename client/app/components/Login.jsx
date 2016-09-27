@@ -40,46 +40,52 @@ const loginReducer = (state = loginInit, action) => {
 // const MapStateToProps = state => {
 //   return {user: state.user};
 // }
-const login = function(e) {
+const localLogin = (e) => {
   if (!e || e.which === 13) {
     var email = $('#Email').val();
     var password = $('#Password').val();
     if (password && email) {
-      fetch('http://localhost:9009/auth/login/local', {
-        method: 'POST',
-        body: {
-          email: email,
-          password: password
+      fetch(`http://localhost:9009/auth/login/local?email=${email}&password=${password}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         }
-      }).then((err, res) => {
-        if(err.status === 401){
-          console.log('Incorrect Password or Username');
-        }
+      })
+      .then(response => response.json())
+      .then(responseData => {
+        console.log(responseData);  
       });
+    } else {
+      console.log('failed');
     }
   }
 };
 
+
 const Login = (props) => {
   return (
-      <form className="col s8" id='login' onKeyDown={login}>
-            <div className="row">
-              <div className="input-field col s10">
-                <input id="Email" type="email" className="validate" />
-                <label htmlFor="Email" data-error="Incorrect Format" data-success="O K">Email</label>
-                <i className="material-icons prefix">email</i>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s8">
-                <input id="Password" type="password" />
-                <label htmlFor="Password">Password</label>
-                <i className="material-icons prefix">vpn_key</i>
-              </div>
-              <a className="waves-effect waves-light btn right" onClick={()=>login()}>Submit</a>
-            </div>
-          </form>
-    );
-};
+    <div className="container">
+      <form className="col s8" id='login' onKeyDown={localLogin}>
+        <div className="row">
+          <div className="input-field col s10">
+            <input id="Email" type="email" className="validate" />
+            <label htmlFor="Email" data-error="Incorrect Format" data-success="O K">Email</label>
+            <i className="material-icons prefix">email</i>
+          </div>
+        </div>
+        <div className="row">
+          <div className="input-field col s8">
+            <input id="Password" type="password" />
+            <label htmlFor="Password">Password</label>
+            <i className="material-icons prefix">vpn_key</i>
+          </div>
+          <a className="waves-effect waves-light btn right" onClick={()=>{localLogin()}}>Submit</a>
+        </div>
+      </form>
+      <a className="waves-effect waves-light btn green" href='http://localhost:9009/auth/login/coinbase'>Coinbase</a>
+    </div>
+  )
+}
 
 export { Login, loginReducer };

@@ -1,23 +1,27 @@
 var secrets = require('../config/secrets');
-var LocalStrategy = require('passport-local');
-var CoinbaseStrategy = require('passport-coinbase');
+var LocalStrategy = require('passport-local').Strategy;
+var CoinbaseStrategy = require('passport-coinbase').Strategy;
 
-var configure = function(passport) {
+var configure = (passport) => {
   passport.use(new LocalStrategy(
-    function(username, password, done) {
-      return done(null, user);
+  {
+    usernameField: 'email'
+  },
+    (username, password, done) => {
+      return done(null, username);
     }
   ));
 
-//   passport.use(new CoinbaseStrategy.Strategy({
-//     clientID: secrets.coinbaseid,
-//     clientSecret: secrets.coinbasesecret,
-//     callbackURL: "http://127.0.0.1:9009/auth/login/local"
-//   },
-//   (accessToken, refreshToken, profile, done) => {
-
-//   }
-// ));
+  passport.use(new CoinbaseStrategy({
+    clientID: secrets.coinbaseClient,
+    clientSecret: secrets.coinbaseSecret,
+    callbackURL: "http://localhost:9009/auth/login/coinbase/callback"
+  },
+  (accessToken, refreshToken, profile, done) => {
+    console.log(accessToken, refreshToken, profile, done);
+    done(null, profile);
+  }
+));
 }
 
 module.exports = configure;

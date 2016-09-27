@@ -1,11 +1,11 @@
 var passport = require('passport');
+var jwt = require('jwt-simple');
 
 let strategies = {};
 
 strategies.local = {
   login: (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
+    res.send(JSON.stringify('O K'));
   },
   signup: (req, res) => {
     console.log(req.body);
@@ -15,8 +15,8 @@ strategies.local = {
 
 strategies.coinbase = {
   login: (req, res) => {
-    console.log(req);
-    res.send(req.body);
+    // console.log('test');
+    res.send(JSON.stringify('O K?'));
   }
   //Only has login because we assume they can't sign up through coinbase on our site
 }
