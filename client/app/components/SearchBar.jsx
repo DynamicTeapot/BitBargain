@@ -5,7 +5,7 @@ import { connect, dispatch } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    parameters: state.search.paramters,
+    parameters: state.search.parameters,
     results: state.search.results
   };
 };
