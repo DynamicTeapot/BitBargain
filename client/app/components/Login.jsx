@@ -54,6 +54,7 @@ const localLogin = (e) => {
       })
       .then(response => response.json())
       .then(responseData => {
+        alert('test');
         console.log(responseData);  
       });
     } else {
@@ -80,7 +81,7 @@ const Login = (props) => {
             <label htmlFor="Password">Password</label>
             <i className="material-icons prefix">vpn_key</i>
           </div>
-          <a className="waves-effect waves-light btn right" onClick={()=>{localLogin()}}>Submit</a>
+          <a className="waves-effect waves-light btn right" onClick={() => {localLogin()}}>Submit</a>
         </div>
       </form>
       <a className="waves-effect waves-light btn green" href='http://localhost:9009/auth/login/coinbase'>Coinbase</a>

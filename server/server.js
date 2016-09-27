@@ -12,7 +12,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use('/auth', authRouter);
+app.use('/', authRouter);
 app.use(express.static('client'));
 app.use('/', clientRouter);
 app.get('*', (req, res) => {

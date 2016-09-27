@@ -1,8 +1,9 @@
-var secrets = require('../config/secrets');
-var LocalStrategy = require('passport-local').Strategy;
-var CoinbaseStrategy = require('passport-coinbase').Strategy;
+const secrets = require('../config/secrets');
+const LocalStrategy = require('passport-local').Strategy;
+const CoinbaseStrategy = require('passport-coinbase').Strategy;
+const client = require('coinbase').Client;
 
-var configure = (passport) => {
+const configure = (passport) => {
   passport.use(new LocalStrategy(
   {
     usernameField: 'email'
@@ -15,10 +16,11 @@ var configure = (passport) => {
   passport.use(new CoinbaseStrategy({
     clientID: secrets.coinbaseClient,
     clientSecret: secrets.coinbaseSecret,
-    callbackURL: "http://localhost:9009/auth/login/coinbase/callback"
+    callbackURL: "http://localhost:9009/auth/login/coinbase/callback",
+    scope: ["user"]
   },
   (accessToken, refreshToken, profile, done) => {
-    console.log(accessToken, refreshToken, profile, done);
+    console.log(accessToken, refreshToken);
     done(null, profile);
   }
 ));

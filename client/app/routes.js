@@ -9,7 +9,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
 import { Login, loginReducer } from './components/Login.jsx';
-import { Product } from './components/Product.jsx';
+import { Signup } from './components/Signup.jsx';
 import NotFound from './components/NotFound.jsx';
 import { searchReducer } from './reducers/SearchReducer.js';
 import { productReducer } from './reducers/product.reducer.js';
@@ -51,7 +51,12 @@ render((
         <Route path="/" component={App}>
           <IndexRoute component={Index} />
           <Route path="login" component={Login} />
+<<<<<<< d4e6cf2bbc12eab362d52fdb525c83b421d0bc96
           <Route path="product/:id" component={Product} />
+=======
+          <Route path="signup" component={Signup} />
+          <Route path="product" component={Product} />
+>>>>>>> Created signup view and worked on oauth
           <Route path="*" component={NotFound} />
         </Route>
       </Router>

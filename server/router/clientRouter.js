@@ -2,7 +2,9 @@ const router = require('express').Router();
 const itemController = require('../controllers/itemController');
 const userController = require('../controllers/userController');
 const search = require('../search/search.js');
+const passport = require('passport');
 
+//General Routes for nothing specific
 
 router
   .get('/items/categories', itemController.getCategories)
@@ -13,9 +15,16 @@ router
   .put('/items/:id/update', itemController.updateItem)
   .delete('/items/:id', itemController.deleteItem, userController.updateUser);
 
-// req.params.id
+//Search routes
 
 router
   .get('/api/search/:q/:cat?', search);
+
+//Routes that need coinbase authentication
+
+router
+  .get('/sell', passport.authenticate('coinbase', {failureRedirect: '/login'}));
+
+
 
 module.exports = router;

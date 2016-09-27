@@ -15,8 +15,9 @@ strategies.local = {
 
 strategies.coinbase = {
   login: (req, res) => {
-    // console.log('test');
-    res.send(JSON.stringify('O K?'));
+    console.log(req.session);
+    res.session = req.session;
+    res.redirect('/login');
   }
   //Only has login because we assume they can't sign up through coinbase on our site
 }
