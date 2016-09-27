@@ -1,21 +1,21 @@
 exports[`test renders correctly 1`] = `
-<div>
-  <img
-    role="presentation"
-    src="http://www.google.com/" />
-  <h1>
-     
-    PRODUCTNAME
-  </h1>
-  <h2>
-     Sold by: 
-    USERNAME
-     
-  </h2>
-  <p>
-     
-    PRODUCTDESCRIPTION
-     
-  </p>
-</div>
+<productContainer
+  product={
+    Object {
+      "category": Array [
+        "cat1",
+        "cat2",
+        "cat3"
+      ],
+      "desc": "This is a desc of a product",
+      "image": Object {
+        "url": "http://25.media.tumblr.com/1ed3f564cd07a5df56d845a49cc46281/tumblr_mg8k8zCiAW1qd7h1xo1_500.gif"
+      },
+      "location": "San Franpyscho",
+      "post": "What",
+      "postedAt": "2016-09-27T02:36:02.020Z",
+      "seller": "SELLER NOME",
+      "title": "different Product"
+    }
+  } />
 `;
