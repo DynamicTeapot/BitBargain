@@ -35,7 +35,7 @@ knex.schema.hasTable('items').then((result) => {
 }).then(() => {
   // populate items table with test data
   // knex('items').insert(data.items, 'id')
-  //.catch(err => console.log(`Error populating "items" table ${err}`));
+  // .catch(err => console.log(`Error populating "items" table ${err}`));
 });
 
 knex.schema.hasTable('users').then((result) => {

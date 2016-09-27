@@ -5,21 +5,21 @@ const productInit = {
   seller: 'SELLER NAME',
   desc: 'This is a desc of a product',
   category: ['cat1', 'cat2', 'cat3'],
-  postedAt:  new Date,
+  postedAt: new Date(),
   location: 'San Franpyscho',
   post: 'What'
 };
 
 
-const productReducer = (state=productInit, action) => {
-  let dispatch = action.type;
+const productReducer = (state = productInit, action) => {
+  const dispatch = action.type;
   let newState = {};
   if (dispatch === 'changeProduct') {
-    //Should be used only for changing to a completely different product
+    // Should be used only for changing to a completely different product
     newState = action.product;
     return newState;
   } else if (dispatch === 'updateProduct') {
-    //Should only be used to change info on the current product
+    // Should only be used to change info on the current product
     newState = action.product;
     return newState;
   } else {

@@ -5,8 +5,9 @@ import { Link } from 'react-router';
 const SearchResult = (props) => {
   return (
     <Link
-	className="collection-item"
-	to={`/product/${props.product.id}`}>
+      className="collection-item"
+      to={`/product/${props.product.id}`}
+    >
       {props.product.title}
     </Link>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
-import { UserAuthWrapper} from 'redux-auth-wrapper';
+import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
@@ -20,7 +20,7 @@ const reducers = combineReducers(
     login: loginReducer,
     product: productReducer,
     search: searchReducer,
-    routing:routerReducer
+    routing: routerReducer
   }
 );
 
