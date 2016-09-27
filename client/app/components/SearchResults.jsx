@@ -1,43 +1,19 @@
 import React from 'react';
-import SearchResult from './SearchResult.jsx';
+import SearchResult from './SearchResult';
 
 
-const SearchResults = (props) => {
+function SearchResults(props) {
   return (
     <div className="collection"> {
-      props.products.map((product, index) => {
-        return (
-          <SearchResult
-            key={index}
-            product={product}
-          />);
-      })
+      props.products.map((product, index) => (<SearchResult key={index} product={product} />))
       }
     </div>
   );
-};
+}
 
 
 SearchResults.propTypes = {
   products: React.PropTypes.arrayOf(React.PropTypes.object)
-};
-
-// XXX
-SearchResults.defaultProps = {
-  products: [
-    {
-      id: 1,
-      name: 'Alvin1'
-    },
-    {
-      id: 2,
-      name: 'Alvin2'
-    },
-    {
-      id: 3,
-      name: 'Alvin3'
-    }
-  ]
 };
 
 

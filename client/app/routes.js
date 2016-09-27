@@ -12,7 +12,7 @@ import { Login, loginReducer } from './components/Login.jsx';
 import { Product } from './components/Product.jsx';
 import NotFound from './components/NotFound.jsx';
 import { searchReducer } from './reducers/SearchReducer.js';
-import { productReducer } from './reducers/ProductReducer.js';
+import { productReducer } from './reducers/product.reducer.js';
 
 
 const reducers = combineReducers(
