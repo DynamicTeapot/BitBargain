@@ -11,4 +11,4 @@ const item = React.PropTypes.shape({
   images: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
 });
 
-export default item; 
+export default item;
