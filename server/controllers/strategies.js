@@ -20,8 +20,7 @@ const configure = (passport) => {
     scope: ["user"]
   },
   (accessToken, refreshToken, profile, done) => {
-    console.log(accessToken, refreshToken);
-    done(null, profile);
+    return done(null, profile);
   }
 ));
 }

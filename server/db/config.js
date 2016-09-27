@@ -1,4 +1,4 @@
-require('../env');
+// require('../env');
 // const data = require('./data.json');
 const knex = require('knex')({
   client: 'pg',
