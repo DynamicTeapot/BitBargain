@@ -3,7 +3,6 @@ import SearchResults from './SearchResults.jsx';
 import { connect, dispatch } from 'react-redux';
 
 
-const mapStateToProps = state => {
 const searchInit = {
   parameters: [],
   results: []
@@ -82,7 +81,7 @@ class SearchBar extends React.Component {
           </form>
           {this.state.loading ? <div className="progress"><div className="indeterminate" /></div> : null}
         </div>
-	    <SearchResults products={this.props.results}/>
+	      <SearchResults products={this.props.results}/>
       </div>
     );
   }

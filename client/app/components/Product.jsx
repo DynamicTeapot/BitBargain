@@ -7,25 +7,6 @@ import {
 
 // TODO: Get this to check current product first before loading.
 
-
-const mapStateToProps = state => {
-  return {
-    product: state.product
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateProduct: (data) => {
-      dispatch({type: 'updateProduct', product: data});
-    },
-    clearProduct: ()=> {
-      dispatch({type: 'clearProduct'});
-    }
-  };
-};
-
-
 class productContainer extends React.Component {
   constructor(props) {
     super(props);
