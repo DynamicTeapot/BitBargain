@@ -14,10 +14,10 @@ class productContainer extends React.Component {
 
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
-      .then(res => {
+      .then((res) => {
         return res.json();
       })
-      .then(res => {
+      .then((res) => {
         this.props.updateProduct(res);
       })
       .catch(err => console.error(err));
@@ -30,8 +30,7 @@ class productContainer extends React.Component {
       <div className="container">
         <div className="card large">
           <center>
-            <div className="card-image waves-effect waves-block waves-light">
-            </div>
+            <div className="card-image waves-effect waves-block waves-light" />
             <h2> { this.props.product.title }</h2>
           </center>
           <div className="card-reveal">
@@ -40,7 +39,7 @@ class productContainer extends React.Component {
           </div>
           <div className="card-action">
             <small>
-	      <p>{ this.props.product.location }<br/> { this.props.product.created_at } </p>
+	      <p>{ this.props.product.location }<br /> { this.props.product.created_at } </p>
 	    </small>
 	    <div className="chip">
 	      {this.props.product.category}
