@@ -1,5 +1,5 @@
 require('../env');
-const data = require('./test.json');
+const data = require('./data.json');
 const knex = require('knex')({
   client: 'pg',
   connection: {
