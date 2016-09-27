@@ -47,7 +47,6 @@ class Product extends React.Component {
         <div className="card large">
           <center>
             <div className="card-image waves-effect waves-block waves-light">
-              <img src={ this.props.product.images[0] } role="presentation" className="activator center" style={{width:35+'em'}}/>
             </div>
             <h2> { this.props.product.title }</h2>
           </center>
@@ -56,10 +55,12 @@ class Product extends React.Component {
             <p> { this.props.product.desc } </p>
           </div>
           <div className="card-action">
-            <small><p> Sold by: { this.props.product.seller } in { this.props.product.location }<br/> { this.props.product.post.toString() } </p></small>
-            {this.props.product.category.map((cat)=>(
-              <div className="chip" key={cat.trim()}>{cat.trim()}</div>
-            ))}
+            <small>
+	      <p>{ this.props.product.location }<br/> { this.props.product.created_at } </p>
+	    </small>
+	    <div className="chip">
+	      {this.props.product.category}
+	    </div>
           </div>
         </div>
       </div>

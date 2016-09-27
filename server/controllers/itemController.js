@@ -6,11 +6,9 @@ module.exports = {
     .then(result => res.status(200).send(result));
   },
   getItem(req, res) {
-    console.log(req.params.id);
     db.items.getById(req.params.id)
       .then(result => {
-        console.log(result);
-        res.status(200).send(result);
+        res.json(result[0]);
     });
   },
   buyItem(req, res, next) {
