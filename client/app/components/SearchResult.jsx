@@ -1,9 +1,15 @@
 import React from 'react';
+import Link from 'react-router';
+
+
+// TODO: Make the anchor tag use router links. 
 
 
 const SearchResult = (props) => {
   return (
-    <a href="#!" className="collection-item">{props.product.title}</a>
+    <a href={`/product/${props.product.id}`} className="collection-item">
+      {props.product.title}
+    </a>
   );
 }
 

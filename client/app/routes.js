@@ -52,7 +52,7 @@ render((
         <Route path="/" component={App}>
           <IndexRoute component={Index} />
           <Route path="login" component={Login} />
-          <Route path="product" component={Product} />
+          <Route path="product/:id" component={Product} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>
