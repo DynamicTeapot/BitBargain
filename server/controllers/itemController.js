@@ -1,35 +1,40 @@
 const db = require('../db/model');
 
 module.exports = {
-  getCategories: function(req, res) {
-    res.send('getCategories');
+  getCategories(req, res) {
+    db.items.getCategories()
+    .then(result => res.status(200).send(result));
   },
-  getItem: function(req, res) {
+  getItem(req, res) {
     console.log(req.params.id);
-    res.send(req.params.id + " " + 'getItem');
+    db.items.getById(req.params.id)
+    .then(result => res.status(200).send(result));
+    // res.send(req.params.id + " " + 'getItem');
   },
-  buyItem: function(req, res, next) {
+  buyItem(req, res, next) {
     console.log('buyItem');
-    res.send('buyItem');
+    db.items.sold(req.params.id)
+    .then(() => res.send('buyItem'));
     next();
   },
-  soldItem: function(req, res, next) {
+  soldItem(req, res, next) {
     console.log(req.params.id);
-    res.send(req.params.id + " " + "soldItem");
+    db.items.sold(req.params.id)
+    .then(() => res.send(`${req.params.id} soldItem`));
     next(req, res);
   },
-  sellItem: function(req, res, next) {
+  sellItem(req, res, next) {
     res.send('sellItem');
     next(req, res);
   },
-  shippedItem: function(req, res) {
+  shippedItem(req, res) {
     res.send('shippedItem');
   },
-  updateItem: function(req, res) {
+  updateItem(req, res) {
     res.send('updateItem');
   },
-  deleteItem: function(req, res, next) {
+  deleteItem(req, res, next) {
     res.send('deleteItem');
     next();
   }
-}
+};

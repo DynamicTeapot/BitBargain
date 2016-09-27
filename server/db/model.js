@@ -9,6 +9,10 @@ module.exports = {
       return db.select().from('items')
       .catch(err => console.error(`Error fetching data from "items" table ${err}`));
     },
+    getCategories() {
+      return db('items').distinct('category').select('category')
+      .catch(err => console.error(`Error getting categories ${err}`));
+    },
     getByTitle(title) {
       return db('items').where('title', title)
       .catch(err => console.error(`Error getting item by title ${err}`));
