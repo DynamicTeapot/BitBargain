@@ -9,12 +9,12 @@ class App extends React.Component {
 
   render() {
     return (
-        <div>
-        	<NavBar />
-        	{
-        	  React.cloneElement(this.props.children)
-        	}
-        </div>
+      <div>
+        <NavBar />
+          {
+          React.cloneElement(this.props.children)
+          }
+      </div>
     );
   }
 }

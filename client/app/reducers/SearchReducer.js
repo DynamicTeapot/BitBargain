@@ -12,7 +12,7 @@ const searchInit = {
  * @param {object} action - An object representing an action.
  * @return {object}
  */
-const searchReducer = function (state = searchInit, action) {
+const searchReducer = (state = searchInit, action) => {
   const dispatch = action.type;
   let newState = {};
   if (dispatch === 'updateResults') {
@@ -22,9 +22,8 @@ const searchReducer = function (state = searchInit, action) {
   } else if (dispatch === 'clearResults') {
     newState = { parameters: [], results: [] };
     return newState;
-  } else {
-    return state;
   }
+  return state;
 };
 
 

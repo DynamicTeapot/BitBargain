@@ -1,6 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SearchResults from './SearchResults.jsx';
-import { connect, dispatch } from 'react-redux';
 
 
 const searchInit = {
@@ -19,9 +19,8 @@ const searchReducer = (state = searchInit, action) => {
   } else if (dispatch === 'clearResults') {
     newState = { parameters: [], results: [] };
     return newState;
-  } else {
-    return state;
   }
+  return state;
 };
 
 const mapStateToProps = (state) => {
