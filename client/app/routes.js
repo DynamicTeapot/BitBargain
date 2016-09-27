@@ -9,9 +9,10 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
 import { Login, loginReducer } from './components/Login.jsx';
-import { Product, productReducer } from './components/Product.jsx';
+import { Product } from './components/Product.jsx';
 import NotFound from './components/NotFound.jsx';
 import { searchReducer } from './reducers/SearchReducer.js';
+import { productReducer } from './reducers/ProductReducer.js';
 
 
 const reducers = combineReducers(
@@ -51,7 +52,7 @@ render((
         <Route path="/" component={App}>
           <IndexRoute component={Index} />
           <Route path="login" component={Login} />
-          <Route path="product" component={Product} />
+          <Route path="product/:id" component={Product} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>

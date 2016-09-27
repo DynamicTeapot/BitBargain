@@ -1,9 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 
 const SearchResult = (props) => {
   return (
-    <a href="#!" className="collection-item">{props.product.title}</a>
+    <Link
+	className="collection-item"
+	to={`/product/${props.product.id}`}>
+      {props.product.title}
+    </Link>
   );
 }
 

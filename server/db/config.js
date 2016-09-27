@@ -1,5 +1,5 @@
 require('../env');
-const data = require('./data.json');
+// const data = require('./data.json');
 const knex = require('knex')({
   client: 'pg',
   connection: {
@@ -34,8 +34,8 @@ knex.schema.hasTable('items').then((result) => {
   return 0;
 }).then(() => {
   // populate items table with test data
-  knex('items').insert(data.items, 'id')
-  .catch(err => console.log(`Error populating "items" table ${err}`));
+  // knex('items').insert(data.items, 'id')
+  //.catch(err => console.log(`Error populating "items" table ${err}`));
 });
 
 knex.schema.hasTable('users').then((result) => {
