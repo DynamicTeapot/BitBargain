@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+
 import BoughtItems from './BoughtItems';
 import SoldItems from './SoldItems';
 import RecentNotifications from './RecentNotifications';
@@ -16,8 +17,8 @@ function UserHome({ bought, sold, notifications }) {
 }
 
 UserHome.propTypes = {
-  bought: PropTypes.object.isRequired,
-  sold: PropTypes.object.isRequired,
+  bought: PropTypes.array.isRequired,
+  sold: PropTypes.array.isRequired,
   notifications: PropTypes.object
 };
 
