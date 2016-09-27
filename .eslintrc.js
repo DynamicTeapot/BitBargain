@@ -8,7 +8,8 @@ module.exports = {
     "env": {
       "browser": true,
       "node": true,
-      "mocha": true
+      "mocha": true,
+      "jquery": true
     },
     "rules": {
       "comma-dangle": [
@@ -33,6 +34,6 @@ module.exports = {
       "import/no-extraneous-dependencies": [
         2,
         {"devDependencies": true}
-      ]
+      ],
     }
 };
