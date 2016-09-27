@@ -26,13 +26,12 @@ class Product extends React.Component {
     super(props);
   }
   componentWillMount() {
-    console.log('should update the product with an ajax call here');
     fetch(`/items/${this.props.params.id}`)
       .then(res => {
 	return res.json();
       })
       .then(res => {
-	this.props.updateProduct(JSON.parse(res));
+	this.props.updateProduct(res);
       })
       .catch(err => console.error(err));
   }
@@ -54,9 +53,9 @@ class Product extends React.Component {
             <p> { this.props.product.desc } </p>
           </div>
           <div className="card-action">
-            <small><p> Sold by: { this.props.product.seller } in { this.props.product.location }<br/> { this.props.product.postedAt.toString() } </p></small>
+            <small><p> Sold by: { this.props.product.seller } in { this.props.product.location }<br/> { this.props.product.post.toString() } </p></small>
             {this.props.product.category.map((cat)=>(
-              <div className="chip" key={cat}>{cat}</div>
+              <div className="chip" key={cat.trim()}>{cat.trim()}</div>
             ))}
           </div>
         </div>
