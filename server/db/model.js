@@ -9,7 +9,7 @@ module.exports = {
       return db.select().from('items')
       .catch(err => console.error(`Error fetching data from "items" table ${err}`));
     },
-    getCategories() {
+    getAllCategories() {
       return db('items').distinct('category').select('category')
       .catch(err => console.error(`Error getting categories ${err}`));
     },
@@ -17,6 +17,7 @@ module.exports = {
       return db('items').where('title', title)
       .catch(err => console.error(`Error getting item by title ${err}`));
     },
+    // Experimental
     getByCategory(category) {
       return db('items').where('category', category)
       .catch(err => console.error(`Error getting item by category ${err}`));
