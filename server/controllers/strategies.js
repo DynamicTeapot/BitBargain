@@ -1,7 +1,7 @@
 const secrets = require('../config/secrets');
 const LocalStrategy = require('passport-local').Strategy;
 const CoinbaseStrategy = require('passport-coinbase').Strategy;
-const client = require('coinbase').Client;
+// const client = require('coinbase').Client;
 
 const configure = (passport) => {
   passport.use(new LocalStrategy(
@@ -20,7 +20,7 @@ const configure = (passport) => {
     scope: ['user']
   },
   (accessToken, refreshToken, profile, done) => {
-    return done(null, {profile: profile, accessToken: accessToken, refreshToken: refreshToken});
+    return done(null, { profile, accessToken, refreshToken });
   }
 ));
 };
