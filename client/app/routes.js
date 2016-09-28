@@ -10,12 +10,16 @@ import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 
 import App from './containers/App.jsx';
+
 import Index from './components/Index.jsx';
 import { Login, loginReducer } from './components/Login.jsx';
 import { Product } from './components/Product.jsx';
 import { Signup } from './components/Signup.jsx';
+import SellItem from './components/SellItem.jsx';
 import NotFound from './components/NotFound.jsx';
+
 import { searchReducer } from './reducers/SearchReducer.js';
+import { sellItemReducer } from './reducers/sellitem.reducer.js';
 import { productReducer } from './reducers/product.reducer.js';
 
 
@@ -24,7 +28,8 @@ const reducers = combineReducers(
     login: loginReducer,
     product: productReducer,
     search: searchReducer,
-    routing: routerReducer
+    routing: routerReducer,
+    sellitem: sellItemReducer
   }
 );
 
@@ -56,6 +61,7 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
         <Route path="login" component={Login} />
+        <Route path="sellitem" component={SellItem} />
         <Route path="product/:id" component={Product} />
         <Route path="signup" component={Signup} />
         <Route path="*" component={NotFound} />
