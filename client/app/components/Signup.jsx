@@ -5,7 +5,7 @@ const localSignup = (e) => {
     const email = $('#Email').val();
     const password = $('#Password').val();
     if (password && email) {
-      fetch(`/auth/signup/local`, {
+      fetch('/auth/signup/local', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -13,8 +13,8 @@ const localSignup = (e) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          password: password
+          email,
+          password
         })
       })
       .then(response => response.text())

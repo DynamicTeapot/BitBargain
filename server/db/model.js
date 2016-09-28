@@ -60,7 +60,7 @@ module.exports = {
       return db('users').insert(user, 'id');
     },
     updateUser(email, props) {
-     return db('users').where('email', email).update(props);
+      return db('users').where('email', email).update(props);
     }
   },
   transactions: {

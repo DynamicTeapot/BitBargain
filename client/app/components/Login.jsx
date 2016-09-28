@@ -1,35 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-const loginInit = {
-  user: 'cool',
-  loggedIn: false,
-  token: ''
-};
-
-const loginReducer = (state = loginInit, action) => {
-  const dispatch = action.type;
-  if (dispatch === 'signin') {
-    state.user = action.user;
-    state.token = action.token;
-    state.loggedIn = true;
-    return state;
-  } else if (dispatch === 'signout') {
-    state.user = '';
-    state.token = '';
-    state.loggedIn = false;
-    return state;
-  } else if (dispatch === 'signup') {
-    state.user = action.user;
-    state.token = action.token;
-    state.loggedIn = true;
-    return state;
-  } else if (dispatch === 'switchuser') {
-    state.user = action.user;
-    return state;
-  }
-  return state;
-};
 
 // const MapDispatchToProps = dispatch => {
 
@@ -43,7 +14,7 @@ const localLogin = (e) => {
     const email = $('#Email').val();
     const password = $('#Password').val();
     if (password && email) {
-      fetch(`/auth/login/local`, {
+      fetch('/auth/login/local', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -51,12 +22,12 @@ const localLogin = (e) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          password: password
+          email,
+          password
         })
       })
       .then(res => res.text())
-      .then(response => {
+      .then((response) => {
         console.log(response);
       });
     } else {
