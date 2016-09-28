@@ -1,5 +1,5 @@
-require('../env');
-// const data = require('./data.json');
+// require('../env');
+const data = require('./data.json');
 const knex = require('knex')({
   client: 'pg',
   connection: {
@@ -20,13 +20,13 @@ knex.schema.hasTable('items').then((result) => {
       table.increments();
       table.timestamp('created_at', 'utc').defaultTo(knex.fn.now());
       table.timestamp('updated_at', 'utc').defaultTo(knex.fn.now());
-      table.string('category');
       table.string('title');
       table.text('description');
+      table.string('category'); // change to json
       table.string('price');
       table.boolean('sold').defaultTo(false);
       table.string('location');
-      table.specificType('images', 'text[]').nullable();
+      table.json('images').nullable();
       console.log('Table "items" created');
     });
   }
@@ -44,6 +44,9 @@ knex.schema.hasTable('users').then((result) => {
       table.increments();
       table.string('username').unique();
       table.string('email').unique();
+      table.string('password').unique(); // add encryption
+      table.string('coinbase_id');
+      table.text('wallet_address');
       console.log('Table "users" created');
     });
   }
