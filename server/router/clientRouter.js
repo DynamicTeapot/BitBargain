@@ -1,7 +1,7 @@
-var router = require('express').Router();
-var itemController = require('../controllers/itemController');
-var userController = require('../controllers/userController');
-var search = require('../search/search.js');
+const router = require('express').Router();
+const itemController = require('../controllers/itemController');
+const userController = require('../controllers/userController');
+const search = require('../search/search.js');
 
 
 router
@@ -13,7 +13,7 @@ router
   .put('/items/:id/update', itemController.updateItem)
   .delete('/items/:id', itemController.deleteItem, userController.updateUser);
 
-//req.params.id
+// req.params.id
 
 router
   .get('/api/search/:q/:cat?', search);

@@ -7,9 +7,9 @@ module.exports = {
   },
   getItem(req, res) {
     db.items.getById(req.params.id)
-      .then(result => {
+      .then((result) => {
         res.json(result[0]);
-    });
+      });
   },
   buyItem(req, res, next) {
     console.log('buyItem');

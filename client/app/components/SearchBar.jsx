@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'clearResults' });
     },
     updateResults: (data) => {
-      dispatch({type: 'updateResults', results: data});
+      dispatch({ type: 'updateResults', results: data });
     }
   };
 };
@@ -54,14 +54,14 @@ class SearchBar extends React.Component {
     $('#search').on('submit', (e) => {
       this.setState({ loading: true });
       e.preventDefault();
-      //AJAX CALL HERE
-      fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`).then(res => {
-	return res.json();
-      }).then(res => {
-	this.props.updateResults(res.items);
-        this.setState({loading: false});
-      }).catch(err => {
-	console.error(err);
+      // AJAX CALL HERE
+      fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`).then((res) => {
+        return res.json();
+      }).then((res) => {
+        this.props.updateResults(res.items);
+        this.setState({ loading: false });
+      }).catch((err) => {
+        console.error(err);
       });
     });
   }
@@ -73,7 +73,7 @@ class SearchBar extends React.Component {
           <form className="col s12" id="search">
             <div className="row">
               <div className="input-field col s10">
-                <input id="icon_search" type="text" value={this.state.value}/>
+                <input id="icon_search" type="text" value={this.state.value} />
                 <label htmlFor="icon_search">Search?</label>
                 <i className="material-icons prefix">search</i>
               </div>
@@ -81,7 +81,7 @@ class SearchBar extends React.Component {
           </form>
           {this.state.loading ? <div className="progress"><div className="indeterminate" /></div> : null}
         </div>
-	      <SearchResults products={this.props.results}/>
+	      <SearchResults products={this.props.results} />
       </div>
     );
   }

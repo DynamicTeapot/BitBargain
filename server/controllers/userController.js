@@ -1,5 +1,5 @@
 module.exports = {
-  updateUser: function() {
+  updateUser() {
     console.log('updateUser');
   }
 };
