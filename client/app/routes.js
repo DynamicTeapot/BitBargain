@@ -4,7 +4,10 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerActions } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise';
+import createLogger from 'redux-logger';
 
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
@@ -28,7 +31,8 @@ const reducers = combineReducers(
 // const middleware = routerMiddleware(browserHistory);
 
 
-const store = createStore(reducers);
+const logger = createLogger();
+const store = createStore(reducers, applyMiddleware(thunk, promise, logger));
 // Creates a history that links to the store
 // store.dispatch(configure(
 //   {apiUrl: "http://localhost:9009/api/signin"},
