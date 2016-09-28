@@ -16,11 +16,19 @@ strategies.local = {
     });
   },
   signup: (req, res, next) => {
+<<<<<<< 7f6d0f5d2e6e8eb463e44838e63c6dd3d3fd8869
     bcrypt.hash(req.query.password, 5, (err, hash) => {
       db.users.create({ email: req.query.email, password: hash })
       .then((data) => {
         console.log(data);
         res.send(JSON.stringify('O K'));
+=======
+    bcrypt.hash(req.body.password, 5, (err, hash) =>{
+      db.users.create({email: req.body.email, password: hash})
+      .then(data => {
+          console.log(data);
+          next(req, res);
+>>>>>>> Made urls relative
       });
     });
   }

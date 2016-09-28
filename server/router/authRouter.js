@@ -24,7 +24,7 @@ router
   .use(passport.session())
   .get('/auth/failedLogin', authController.fail)
   .get('/auth/login/local', passport.authenticate('local', { failureRedirect: '/auth/failedLogin' }), authController.local.login)
-  .post('/auth/signup/local', authController.local.signup)
+  .post('/auth/signup/local', authController.local.signup, passport.authenticate('local'))
   .get('/auth/login/coinbase', passport.authenticate('coinbase'))
   .get('/auth/login/coinbase/callback', passport.authenticate('coinbase', { failureRedirect: '/login' }), authController.coinbase.login);
 

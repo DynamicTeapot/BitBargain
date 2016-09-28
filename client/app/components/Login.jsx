@@ -43,7 +43,7 @@ const localLogin = (e) => {
     const email = $('#Email').val();
     const password = $('#Password').val();
     if (password && email) {
-      fetch(`http://localhost:9009/auth/login/local?email=${email}&password=${password}`, {
+      fetch(`/auth/login/local?email=${email}&password=${password}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -77,7 +77,7 @@ const Login = () => {
           <a className="waves-effect waves-light btn right" onClick={() => { localLogin(); }}>Submit</a>
         </div>
       </form>
-      <a className="waves-effect waves-light btn green" href="http://localhost:9009/auth/login/coinbase">Coinbase</a>
+      <a className="waves-effect waves-light btn green" href="/auth/login/coinbase">Coinbase</a>
     </div>
   );
 };
