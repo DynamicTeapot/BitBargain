@@ -42,4 +42,8 @@ client/public/*
 #config keys
 psqlconfig.js
 
+# Environment variables
 server/env.js
+
+# Test data
+server/db/data.json
