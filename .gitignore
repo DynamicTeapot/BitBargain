@@ -47,3 +47,5 @@ server/env.js
 
 # Test data
 server/db/data.json
+server/env.js
+secrets.js

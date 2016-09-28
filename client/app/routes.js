@@ -1,15 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware } from 'react-router-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer, routerActions } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 import App from './containers/App.jsx';
 import Index from './components/Index.jsx';
 import { Login, loginReducer } from './components/Login.jsx';
 import { Product } from './components/Product.jsx';
+import { Signup } from './components/Signup.jsx';
 import NotFound from './components/NotFound.jsx';
 import { searchReducer } from './reducers/SearchReducer.js';
 import { productReducer } from './reducers/product.reducer.js';
@@ -38,22 +39,23 @@ const store = createStore(reducers);
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user,
-  redirectAction: routerActions.replace,
-  wrapperDisplayName: UserIsAuthenticated
-});
+// const UserIsAuthenticated = UserAuthWrapper({
+//   authSelector: state => state.user,
+//   redirectAction: routerActions.replace,
+//   wrapperDisplayName: UserIsAuthenticated
+// });
 
 
 render((
   <Provider store={store}>
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Index} />
-          <Route path="login" component={Login} />
-          <Route path="product/:id" component={Product} />
-          <Route path="*" component={NotFound} />
-        </Route>
-      </Router>
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Index} />
+        <Route path="login" component={Login} />
+        <Route path="product/:id" component={Product} />
+        <Route path="signup" component={Signup} />
+        <Route path="*" component={NotFound} />
+      </Route>
+    </Router>
   </Provider>
   ), document.getElementById('app'));
