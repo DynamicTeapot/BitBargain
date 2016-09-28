@@ -30,7 +30,6 @@ const test = () => {
   .then(resp => {console.log(resp)});
 }
 
-
 const NavBar = (props) => {
   return (
     <nav>
