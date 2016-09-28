@@ -2,11 +2,18 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
+// TODO: I can't get the default value for images working.
+
+
 function SearchResult(props) {
   return (
     <div className="card col s12 m4 l3 sticky-action">
       <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator" src="https://static.pexels.com/photos/131259/pexels-photo-131259-large.jpeg" />
+        <img
+          role="presentation"
+          className="activator"
+          src="https://static.pexels.com/photos/131259/pexels-photo-131259-large.jpeg"
+        />
       </div>
       <div className="card-content">
         <span className="card-title activator grey-text text-darken-4">
@@ -42,6 +49,7 @@ SearchResult.propTypes = {
     category: React.PropTypes.string,
     price: React.PropTypes.string,
     description: React.PropTypes.string
+    // images: React.PropTypes.arrayOf(React.PropTypes.string)
   })
 };
 
