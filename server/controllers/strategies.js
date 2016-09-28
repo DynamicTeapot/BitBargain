@@ -5,9 +5,9 @@ const client = require('coinbase').Client;
 
 const configure = (passport) => {
   passport.use(new LocalStrategy(
-  {
-    usernameField: 'email'
-  },
+    {
+      usernameField: 'email'
+    },
     (username, password, done) => {
       return done(null, username);
     }
@@ -16,13 +16,14 @@ const configure = (passport) => {
   passport.use(new CoinbaseStrategy({
     clientID: secrets.coinbaseClient,
     clientSecret: secrets.coinbaseSecret,
-    callbackURL: "http://localhost:9009/auth/login/coinbase/callback",
-    scope: ["user"]
+    callbackURL: 'http://localhost:9009/auth/login/coinbase/callback',
+    scope: ['user']
   },
   (accessToken, refreshToken, profile, done) => {
-    return done(null, profile);
+    console.log(accessToken, refreshToken, profile);
+    return done(null, {profile: profile, accessToken: accessToken});
   }
 ));
-}
+};
 
 module.exports = configure;

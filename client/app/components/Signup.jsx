@@ -7,6 +7,7 @@ const localSignup = (e) => {
     if (password && email) {
       fetch(`http://localhost:9009/auth/signup/local?email=${email}&password=${password}`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',

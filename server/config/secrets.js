@@ -1,6 +1,6 @@
-let secrets = {};
+const secrets = {};
 
-secrets.coinbaseClient = '1da24ce7c9c1729189e510f43bb20969a5948bda56f4f337fbb0b90bab373fe4';
-secrets.coinbaseSecret = '2b21cf72e99ce4aff9a221c43c8ca671a000cfec96a0d906f4f8c1b3b3a2fc4d';
+secrets.coinbaseClient = '4f818ab947bbe89746244ee101e7b2a242b68a0ea8e4c0bf040b84ad094e1d9a';
+secrets.coinbaseSecret = '79ae676be6f741112a8ea79cdcd8e17b9c3ddaacb3b6bad1ab489c3d1cfbdad5';
 
 module.exports = secrets;
