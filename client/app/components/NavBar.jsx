@@ -41,6 +41,11 @@ const NavBar = (props) => {
             Search
           </button>
         </Link>
+        <Link to={'sellitem'}>
+          <button>
+            Sell
+          </button>
+        </Link>
         <Link to={'something'}>
           <button onClick={props.changeUser}>
             Testing Button
