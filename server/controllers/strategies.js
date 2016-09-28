@@ -9,8 +9,7 @@ const configure = (passport) => {
       usernameField: 'email'
     },
     (username, password, done) => {
-      console.log('trying to use local Strategy');
-      console.log(username, password);
+      console.log('Local Sign Up');
       return done(null, username);
     }
   ));

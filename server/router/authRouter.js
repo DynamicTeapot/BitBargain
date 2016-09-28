@@ -3,20 +3,25 @@ const authController = require('../controllers/authController');
 const passport = require('passport');
 const configPassport = require('../controllers/strategies');
 const exSess = require('express-session');
+const db = require('../db/model.js');
 
 configPassport(passport);
 passport.serializeUser((user, done) => {
   // This should reference user email
   console.log('serializeUser');
-  console.log(user);
-  done(null, user);
+  if (user.profile  && user.profile.provider === 'coinbase') {
+    done(null, {email: user.profile.emails[0].value, accessToken: user.accessToken, refreshToken: user.refreshToken});
+  } else {
+    done(null, {email: user, accessToken: null, refreshToken: null});
+  }
 });
 
 passport.deserializeUser((obj, done) => {
-  // db.findbyId({where: {email: obj.email}})
-  console.log(deserializeUser);
-  console.log(obj);
-  done(null, obj);
+  console.log('deserializeUser');
+  db.users.getByEmail(obj.value || obj.email)
+  .then(user => {
+    done(null, {user: user[0], accessToken: obj.accessToken, refreshToken: obj.refreshToken});
+  });
 });
 
 
@@ -24,9 +29,10 @@ router
   .use(exSess({ secret: 'keyboard cat', name: 'bit.sid', resave: true, saveUninitialized: true }))
   .use(passport.initialize())
   .use(passport.session())
+  .get('/auth/test', (req, res) => {console.log(req.user); res.send(JSON.stringify(req.user))})
   .get('/auth/failedLogin', authController.fail)
-  .get('/auth/login/local', passport.authenticate('local', { failureRedirect: '/auth/failedLogin' }), authController.local.login)
-  .post('/auth/signup/local', authController.local.signup, passport.authenticate('local'))
+  .post('/auth/login/local', passport.authenticate('local', { failureRedirect: '/auth/failedLogin' }), authController.local.login)
+  .post('/auth/signup/local', authController.local.signup, passport.authenticate('local'), authController.success)
   .get('/auth/login/coinbase', passport.authenticate('coinbase'))
   .get('/auth/login/coinbase/callback', passport.authenticate('coinbase', { failureRedirect: '/login' }), authController.coinbase.login);
 

@@ -17,7 +17,7 @@ const localSignup = (e) => {
           password: password
         })
       })
-      .then(response => response.json())
+      .then(response => response.text())
       .then((responseData) => {
         console.log(responseData);
       });

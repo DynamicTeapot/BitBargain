@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
   };
 };
 
+
+//Save this because it can be used elsewhere
 const mapDispatchToProps = (dispatch) => {
   return {
     changeUser: () => {
@@ -15,6 +17,19 @@ const mapDispatchToProps = (dispatch) => {
     }
   };
 };
+
+const test = () => {
+  fetch(`/auth/test`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(data => data.json())
+  .then(resp => {console.log(resp)});
+}
+
 
 const NavBar = (props) => {
   return (
@@ -47,7 +62,7 @@ const NavBar = (props) => {
           </button>
         </Link>
         <Link to={'something'}>
-          <button onClick={props.changeUser}>
+          <button onClick={test}>
             Testing Button
           </button>
         </Link>

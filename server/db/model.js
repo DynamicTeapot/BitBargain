@@ -57,8 +57,10 @@ module.exports = {
     // can accept an array of objects
     // returns promise that resolves with id of first newly made user
     create(user) {
-      return db('users').insert(user, 'id')
-      .catch(err => console.error(`Error creating new user ${err}`));
+      return db('users').insert(user, 'id');
+    },
+    updateUser(email, props) {
+     return db('users').where('email', email).update(props);
     }
   },
   transactions: {

@@ -43,12 +43,16 @@ const localLogin = (e) => {
     const email = $('#Email').val();
     const password = $('#Password').val();
     if (password && email) {
-      fetch(`/auth/login/local?email=${email}&password=${password}`, {
-        method: 'GET',
+      fetch(`/auth/login/local`, {
+        method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
       });
     } else {
       console.log('failed');
