@@ -45,6 +45,7 @@ const localLogin = (e) => {
     if (password && email) {
       fetch(`/auth/login/local`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -53,9 +54,13 @@ const localLogin = (e) => {
           email: email,
           password: password
         })
+      })
+      .then(res => res.text())
+      .then(response => {
+        console.log(response);
       });
     } else {
-      console.log('failed');
+      console.log('No data supplied to login');
     }
   }
 };

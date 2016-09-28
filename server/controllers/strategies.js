@@ -9,7 +9,6 @@ const configure = (passport) => {
       usernameField: 'email'
     },
     (username, password, done) => {
-      console.log('Local Sign Up');
       return done(null, username);
     }
   ));
