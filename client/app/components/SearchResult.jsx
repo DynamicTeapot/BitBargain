@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import item from '../schema';
 
 
 // TODO: I can't get the default value for images working.
@@ -26,7 +27,7 @@ function SearchResult(props) {
           Go To Product!
         </Link>
         <div className="chip">
-          {`${props.product.category.split('-')[0].trim()} - ${props.product.price}`}
+          {`${props.product.category[0].split('-')[0].trim()} - ${props.product.price}`}
         </div>
       </div>
       <div className="card-reveal">
@@ -43,14 +44,7 @@ function SearchResult(props) {
 
 
 SearchResult.propTypes = {
-  product: React.PropTypes.shape({
-    title: React.PropTypes.isRequired,
-    id: React.PropTypes.any.isRequired,
-    category: React.PropTypes.string,
-    price: React.PropTypes.string,
-    description: React.PropTypes.string
-    // images: React.PropTypes.arrayOf(React.PropTypes.string)
-  })
+  product: item
 };
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchResult from './SearchResult.jsx';
+import item from '../schema';
 
 
 function SearchResults(props) {
@@ -13,7 +14,7 @@ function SearchResults(props) {
 
 
 SearchResults.propTypes = {
-  products: React.PropTypes.arrayOf(React.PropTypes.object)
+  products: React.PropTypes.arrayOf(item)
 };
 
 

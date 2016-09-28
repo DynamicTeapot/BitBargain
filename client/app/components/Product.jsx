@@ -4,6 +4,7 @@ import {
   mapStateToProps,
   mapDispatchToProps,
   productReducer } from '../reducers/product.reducer';
+import item from '../schema';
 
 // TODO: Get this to check current product first before loading.
 // TODO: This should redirect in the event of an error.
@@ -34,7 +35,12 @@ class productContainer extends React.Component {
           </div>
           <div className="card-action">
             <small>
-              <p>{ this.props.product.location }<br /> { this.props.product.created_at } </p>
+              <p>{ this.props.product.location }<br />
+                { this.props.product.created_at } <br />
+                { this.props.product.price } <br />
+                { this.props.product.updated_at } <br />
+                { this.props.product.posted_at } <br />
+              </p>
             </small>
             <div className="chip">
               {this.props.product.category}
@@ -47,14 +53,7 @@ class productContainer extends React.Component {
 }
 
 productContainer.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired
-  }),
+  product: item,
   params: PropTypes.shape({
     id: PropTypes.any
   }),
