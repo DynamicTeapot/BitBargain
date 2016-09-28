@@ -52,7 +52,7 @@ module.exports = {
     getByEmail(email) {
       return db('users').where('email', email)
       .catch(err => console.error(`Error getting user by email ${err}`));
-    }
+    },
     // takes an object -> {username: '', email: ''} and creates a new user
     // can accept an array of objects
     // returns promise that resolves with id of first newly made user

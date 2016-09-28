@@ -6,10 +6,19 @@ const strategies = {};
 
 strategies.local = {
   login: (req, res) => {
-    res.send(JSON.stringify('O K'));
+    console.log(req.body);
+    db.users.getByEmail(req.body.email)
+    .then((err, data) => {
+      console.log(err, data);
+      res.send(JSON.stringify('O K'));
+    });
   },
   signup: (req, res) => {
-    res.send(req.body);
+    db.users.create()
+    .then((err, data) => {
+      console.log(err, data);
+      res.send(req.body);
+    });
   }
 };
 
