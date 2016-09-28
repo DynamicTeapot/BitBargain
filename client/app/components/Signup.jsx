@@ -11,11 +11,11 @@ const localSignup = (e) => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-        }
-        body: {
+        },
+        body: JSON.stringify({
           email: email,
           password: password
-        }
+        })
       })
       .then(response => response.json())
       .then((responseData) => {

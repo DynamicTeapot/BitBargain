@@ -25,10 +25,16 @@ strategies.local = {
 =======
     bcrypt.hash(req.body.password, 5, (err, hash) =>{
       db.users.create({email: req.body.email, password: hash})
+<<<<<<< ea0beb77b20c7292f2c3eb5f866a3fcc5a716753
       .then(data => {
           console.log(data);
           next(req, res);
 >>>>>>> Made urls relative
+=======
+      .then((data, err) => {
+          console.log(data, err);
+          next();
+>>>>>>> Added auth to when you signup
       });
     });
   }

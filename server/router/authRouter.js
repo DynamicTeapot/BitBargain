@@ -7,12 +7,14 @@ const exSess = require('express-session');
 configPassport(passport);
 passport.serializeUser((user, done) => {
   // This should reference user email
+  console.log('serializeUser');
   console.log(user);
   done(null, user);
 });
 
 passport.deserializeUser((obj, done) => {
   // db.findbyId({where: {email: obj.email}})
+  console.log(deserializeUser);
   console.log(obj);
   done(null, obj);
 });
