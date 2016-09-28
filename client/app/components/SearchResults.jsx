@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchResult from './SearchResult';
+import SearchResult from './SearchResult.jsx';
 
 
 function SearchResults(props) {
   return (
-    <div className="collection"> {
+    <div className="row"> {
       props.products.map((product, index) => (<SearchResult key={index} product={product} />))
       }
     </div>
