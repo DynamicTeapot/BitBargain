@@ -122,7 +122,7 @@ class ElSearch {
       id: itemId
     });
   }
-
 }
+
 
 module.exports = new ElSearch();
