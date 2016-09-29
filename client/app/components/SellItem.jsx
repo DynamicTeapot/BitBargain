@@ -20,8 +20,8 @@ class sellItemContainer extends React.Component {
       <form>
         <input type="Text" id="title" />
         <label className="active" htmlFor="title">Title</label>
-        <input type="Text" id="description" />
-        <label className="active" htmlFor="description">Description</label>
+        <textarea className="materialize-textarea" id="description" />
+        <label className="active" htmlFor="description" >Description</label>
         <input type="email" id="email" className="validate" />
         <label className="active" htmlFor="email">Description</label>
         <button />
