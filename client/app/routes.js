@@ -21,6 +21,7 @@ import NotFound from './components/NotFound.jsx';
 import { searchReducer } from './reducers/SearchReducer.js';
 import { sellItemReducer } from './reducers/sellitem.reducer.js';
 import { productReducer } from './reducers/product.reducer.js';
+import { Dispute, disputeReducer } from './components/Dispute.jsx';
 
 
 const reducers = combineReducers(
@@ -29,7 +30,8 @@ const reducers = combineReducers(
     product: productReducer,
     search: searchReducer,
     routing: routerReducer,
-    sellitem: sellItemReducer
+    sellitem: sellItemReducer,
+    dispute: disputeReducer
   }
 );
 
@@ -63,6 +65,7 @@ render((
         <Route path="login" component={Login} />
         <Route path="sellitem" component={SellItem} />
         <Route path="product/:id" component={Product} />
+        <Route path="dispute" component={Dispute} />
         <Route path="signup" component={Signup} />
         <Route path="*" component={NotFound} />
       </Route>

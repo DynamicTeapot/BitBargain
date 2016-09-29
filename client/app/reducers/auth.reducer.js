@@ -3,7 +3,7 @@ const loginInit = {
   loggedIn: false
 };
 
-export function loginReducer(state = loginInit, action) => {
+export function loginReducer(state = loginInit, action) {
   const dispatch = action.type;
   if (dispatch === 'signin') {
     state.user = action.user;

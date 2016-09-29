@@ -58,6 +58,11 @@ const NavBar = (props) => {
         <Link to={'sellitem'}>
           <button>
             Sell
+            </button>
+        </Link>
+        <Link to={'dispute'}>
+          <button>
+            Dispute
           </button>
         </Link>
         <Link to={'something'}>

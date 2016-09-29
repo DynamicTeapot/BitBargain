@@ -68,12 +68,21 @@ module.exports = {
       return db.select().from('transactions')
       .catch(err => console.error(`Error getting all transactions ${err}`));
     },
+    getById(id) {
+      return db('transactions').where('item_id', id);
+    },
+    getAllDisputes() {
+      return db('transactions').where('order_status', 'In progress');
+    },
     // data = {item_id: item id(num), buyer_id: user id(num), seller_id: user id(num)}
     // can take an array of data objects -> [{...}, {...}, ...]
     // resolves promise by returning the id of the first newly created record
     create(data) {
       return db('transactions').insert(data, 'id')
       .catch(err => console.error(`Error inserting into transactions table ${err}`));
+    },
+    updateTransaction(id, props) {
+      return db('transactions').where('id', id).update(props);
     }
   }
 };

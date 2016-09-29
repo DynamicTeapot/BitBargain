@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+import { mapDispatchToProps, loginReducer } from '../reducers/auth.reducer.js';
 
 // const MapDispatchToProps = dispatch => {
 
@@ -37,7 +37,7 @@ const localLogin = (e) => {
 };
 
 
-const Login = () => {
+const loginContainer = () => {
   return (
     <div className="container">
       <form className="col s8" id="login" onKeyDown={localLogin}>
@@ -62,4 +62,6 @@ const Login = () => {
   );
 };
 
-export { Login, loginReducer };
+const Login = connect(null, mapDispatchToProps)(loginContainer);
+
+export { Login, loginReducer, loginContainer };
