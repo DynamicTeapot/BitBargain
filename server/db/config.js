@@ -1,10 +1,10 @@
-const data = require('./test.json');
+const data = require('./data.json');
 const knex = require('knex')({
   client: 'pg',
   connection: {
     host: 'localhost', // replace host if remote
-    user: '', // enter DB user/role
-    password: '', // enter password
+    user: 'app', // enter DB user/role
+    password: 'dynamicteapot', // enter password
     database: 'postgres' // default DB is postgres
   },
   pool: {
