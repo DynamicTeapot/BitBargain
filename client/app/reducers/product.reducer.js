@@ -9,16 +9,17 @@ const productInit = {
   id: 123
 };
 
-export function productReducer(state = productInit, action) {
+export function productReducer(state = {}, action) {
   const dispatch = action.type;
-  let newState = {};
+  if (!state.product) state.product = productInit;
+  const newState = state;
   if (dispatch === 'changeProduct') {
     // Should be used only for changing to a completely different product
-    newState = action.product;
+    newState.product = action.product;
     return newState;
   } else if (dispatch === 'updateProduct') {
     // Should only be used to change info on the current product
-    newState = action.product;
+    newState.product = action.product;
     return newState;
   }
   return state;

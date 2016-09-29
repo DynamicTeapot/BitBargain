@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 
-function SoldItem({ item }) {
+function SoldItem({ product }) {
   return (
-    <li> {item.title} : { item.soldTime} </li>
+    <li> {product.title} : ##PLACEHOLDER##FIXME## </li>
   );
 }
 
 SoldItem.propTypes = {
-  item: PropTypes.object.isRequired
+  item
 };
