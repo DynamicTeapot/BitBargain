@@ -9,7 +9,7 @@ import { mapDispatchToProps, loginReducer } from '../reducers/auth.reducer.js';
 // const MapStateToProps = state => {
 //   return {user: state.user};
 // }
-const localLogin = (e) => {
+const localLogin = (e, props) => {
   if (!e || e.which === 13) {
     const email = $('#Email').val();
     const password = $('#Password').val();
@@ -29,6 +29,11 @@ const localLogin = (e) => {
       .then(res => res.text())
       .then((response) => {
         console.log(response);
+        if (response) {
+          props.loginSuccess();
+        } else {
+          console.log('Login Failed');
+        }
       });
     } else {
       console.log('No data supplied to login');
@@ -37,10 +42,10 @@ const localLogin = (e) => {
 };
 
 
-const loginContainer = () => {
+const loginContainer = (props) => {
   return (
     <div className="container">
-      <form className="col s8" id="login" onKeyDown={localLogin}>
+      <form className="col s8" id="login" onKeyDown={(e)=>localLogin(e, props)}>
         <div className="row">
           <div className="input-field col s10">
             <input id="Email" type="email" className="validate" />
@@ -54,7 +59,7 @@ const loginContainer = () => {
             <label htmlFor="Password">Password</label>
             <i className="material-icons prefix">vpn_key</i>
           </div>
-          <a className="waves-effect waves-light btn right" onClick={() => { localLogin(); }}>Submit</a>
+          <a className="waves-effect waves-light btn right" onClick={() => { localLogin(null, props); }}>Submit</a>
         </div>
       </form>
       <a className="waves-effect waves-light btn green" href="/auth/login/coinbase">Coinbase</a>

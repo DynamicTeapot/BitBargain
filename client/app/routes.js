@@ -17,10 +17,9 @@ import { Product } from './components/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
 import NotFound from './components/NotFound.jsx';
-
-import { searchReducer } from './reducers/SearchReducer.js';
-import { sellItemReducer } from './reducers/sellitem.reducer.js';
-import { productReducer } from './reducers/product.reducer.js';
+import { sellItemReducer } from './reducers/sellitem.reducer';
+import { searchReducer } from './reducers/search.reducer';
+import { productReducer } from './reducers/product.reducer';
 import { Dispute, disputeReducer } from './components/Dispute.jsx';
 
 

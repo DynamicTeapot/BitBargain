@@ -64,7 +64,8 @@ module.exports = {
     });
   },
   resolveDisputes(req, res) {
-
+    req.body.polarity; //This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
+    db.transactions.updateTransaction(req.body.id, {});
   }
 };
 

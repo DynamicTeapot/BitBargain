@@ -1,15 +1,4 @@
-const reducerInit = {
-  title: 'Dispute',
-  seller: 'Dispute',
-  description: 'This is a desc of a product',
-  category: 'chicken',
-  created_at: new Date().toString(),
-  location: 'San Franpyscho',
-  post: 'What',
-  id: 123
-};
-
-export function disputeReducer(state = reducerInit, action) {
+export function disputeReducer(state = {}, action) {
   const dispatch = action.type;
   let newState = {};
   if (dispatch === 'newDispute') {
@@ -27,19 +16,19 @@ export function disputeReducer(state = reducerInit, action) {
       return newState;
     });
   } else if (dispatch === 'resolveDispute') {
-    console.log(state.id);
     fetch('/disputes', {
       method: 'POST',
       credentials: 'include',
       headers: {
-        Accept: 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         id: state.id,
         polarity: action.data
       })
-    })
-    //Should then get a new dispute
+    });
+    return state;
   } 
   return state;
 }
