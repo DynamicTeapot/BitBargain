@@ -49,4 +49,3 @@ server/env.js
 server/db/data.json
 server/env.js
 secrets.js
-elasticSearch.js~
