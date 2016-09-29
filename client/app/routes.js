@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer, routerActions } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware, push } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -23,6 +23,7 @@ import { productReducer } from './reducers/product.reducer';
 import { Dispute, disputeReducer } from './components/Dispute.jsx';
 
 
+
 const reducers = combineReducers(
   {
     login: loginReducer,
@@ -36,9 +37,9 @@ const reducers = combineReducers(
 
 // const middleware = routerMiddleware(browserHistory);
 
-
+const middleware = routerMiddleware(browserHistory)
 const logger = createLogger();
-const store = createStore(reducers, applyMiddleware(thunk, promise, logger));
+const store = createStore(reducers, applyMiddleware(thunk, promise, logger, middleware));
 // Creates a history that links to the store
 // store.dispatch(configure(
 //   {apiUrl: "http://localhost:9009/api/signin"},

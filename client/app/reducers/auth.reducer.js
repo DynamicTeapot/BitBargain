@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux';
+
 const loginInit = {
   user: 'No Logged In User',
   loggedIn: false
@@ -25,6 +27,7 @@ export function loginReducer(state = loginInit, action) {
 export function mapDispatchToProps(dispatch) {
   return {
     loginSuccess: (data) => {
+      dispatch({ type: 'signin', user: data})
       dispatch(push('/'));
     }
   };

@@ -28,9 +28,8 @@ const localLogin = (e, props) => {
       })
       .then(res => res.text())
       .then((response) => {
-        console.log(response);
         if (response) {
-          props.loginSuccess();
+          props.loginSuccess(email);
         } else {
           console.log('Login Failed');
         }
