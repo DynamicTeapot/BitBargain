@@ -27,7 +27,7 @@ class ElSearch {
    *   it should only be ran once for a given elastic search instance ever.
    */
   _init() {
-    this.client.indices.create({  
+    this.client.indices.create({
       index: this.index
     })
       .then(res => console.log(res))
@@ -47,7 +47,7 @@ class ElSearch {
    * @return {Promise<boolean>} Returns a promise that resolves to 'true' if a response was
    *   received, otherwise returns false.
    */
-  ping(ms=3000) {
+  ping(ms = 3000) {
     return this.client.ping({
       requestTimeout: ms,
       hello: 'chicken'
@@ -61,8 +61,8 @@ class ElSearch {
    * @return {Promise<JSON>} There is no defined return type.
    */
   insertItem(item) {
-    var itemType;
-    
+    let itemType;
+
     if (item.category === undefined) {
       itemType = 'ALL';
     } else if (item.category === []) {
@@ -72,7 +72,7 @@ class ElSearch {
     } else {
       itemType = item.category;
     }
-    
+
     return this.client.index({
       index: this.index,
       id: item.id,
@@ -98,10 +98,13 @@ class ElSearch {
    *   representing specific categories to search for.
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
-  searchItems(q, categories) {
+  searchItems(searchQ, categories) {
+    const cat = categories || 'ALL';
+
     return this.client.search({
       index: this.index,
-      q: q
+      type: cat,
+      q: searchQ
     });
   }
 
@@ -112,11 +115,11 @@ class ElSearch {
    * @param {string} type - A string representing an object id.
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
-  deleteItem(id, type) {
+  deleteItem(itemId, itemType) {
     return this.client.delete({
       index: this.index,
-      type: type,
-      id: id
+      type: itemType,
+      id: itemId
     });
   }
 
