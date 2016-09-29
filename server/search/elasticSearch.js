@@ -99,7 +99,6 @@ class ElSearch {
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
   searchItems(q, categories) {
-    console.log(q, categories);
     return this.client.search({
       index: this.index,
       q: q
@@ -110,11 +109,13 @@ class ElSearch {
    * Given a string id representing an item id number, delete the given object from the
    *   elastic search store.
    * @param {string} id - A string representing an object id.
+   * @param {string} type - A string representing an object id.
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
-  deleteItem(id) {
+  deleteItem(id, type) {
     return this.client.delete({
       index: this.index,
+      type: type,
       id: id
     });
   }
