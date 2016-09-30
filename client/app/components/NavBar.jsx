@@ -26,7 +26,7 @@ const test = () => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     }
-  }).then(data => data.json())
+  }).then(data => data.text())
   .then((resp) => { console.log(resp); });
 };
 

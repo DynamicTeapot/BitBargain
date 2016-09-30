@@ -12,7 +12,7 @@ import createLogger from 'redux-logger';
 import App from './containers/App.jsx';
 
 import Index from './components/Index.jsx';
-import { Login, loginReducer } from './components/Login.jsx';
+import { Login } from './components/Login.jsx';
 import { Product } from './components/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
@@ -20,7 +20,9 @@ import NotFound from './components/NotFound.jsx';
 import { sellItemReducer } from './reducers/sellitem.reducer';
 import { searchReducer } from './reducers/search.reducer';
 import { productReducer } from './reducers/product.reducer';
-import { Dispute, disputeReducer } from './components/Dispute.jsx';
+import { loginReducer } from './reducers/auth.reducer';
+import { disputeReducer } from './reducers/dispute.reducer';
+import { Dispute } from './components/Dispute.jsx';
 
 
 const reducers = combineReducers(

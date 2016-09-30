@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { mapDispatchToProps, loginReducer } from '../reducers/auth.reducer';
+import { mapDispatchToProps } from '../reducers/auth.reducer';
 
 // const MapDispatchToProps = dispatch => {
 
@@ -68,4 +68,4 @@ const loginContainer = (props) => {
 
 const Login = connect(null, mapDispatchToProps)(loginContainer);
 
-export { Login, loginReducer, loginContainer };
+export { Login, loginContainer };
