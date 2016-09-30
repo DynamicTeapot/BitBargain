@@ -13,7 +13,6 @@ module.exports = {
       });
   },
   buyItem(req, res) {
-    db.items.sold(req.params.id);
     db.items.getById(req.params.id)
     .then((product) => {
       console.log(product);
@@ -21,7 +20,22 @@ module.exports = {
       res.json(product[0]);
       db.transactions.updateTransaction(product[0].id, { buyer_id: req.user.id })
       .then(() => {
-        console.log('transaction successful');
+        db.items.sold(req.params.id);
+        console.log('transaction successful, transferring money');
+        const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
+        client.getBuyPrice({'currencyPair': 'BTC-USD'}, function(err, obj) {
+          console.log('total amount: ' + obj.data.amount);
+          var args = {
+            "to": "Escrow Wallet",
+            "amount": (Number(product[0].price) * obj.data.amount),
+            "currency": "BTC",
+            "description": "Purchasing: " + product[0].title
+          };
+          //Need to find the user's accounts first, and then transfer money from them
+          // account.requestMoney(args, function(err, txn) {
+          //   console.log('my txn id is: ' + txn.id);
+          // });
+        });
       });
     });
   },
@@ -47,7 +61,7 @@ module.exports = {
     res.send('deleteItem');
   },
   sell(req, res) {
-    const client = new coinbase.Client({ apiKey: req.user.accessToken, refreshToken: req.user.refreshToken });
+    const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
     client.getAccounts({}, (err, accounts) => {
       console.log(accounts);
     });

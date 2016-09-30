@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
 const loginInit = {
-  user: 'No Logged In User',
+  user: 'Anonymous',
   loggedIn: false
 };
 
