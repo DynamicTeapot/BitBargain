@@ -1,4 +1,5 @@
 const elasticsearch = require('elasticsearch');
+const yup = require('yup');
 
 
 /**
@@ -18,6 +19,17 @@ class ElSearch {
       host: 'localhost:9200'
     });
     this.index = 'items';
+
+    this.schema = yup.object().shape({
+      title:       yup.string().isRequired,
+      description: yup.string().isRequired,
+      price:       yup.string(),
+      location:    yup.string().isRequired,
+      posted_at:   yup.string(),
+      updated_at:  yup.string(),
+      category:    yup.array().of(yup.string()).isRequired,
+      images:      yup.array().of(yup.string())
+    });
   }
 
   /**
@@ -58,7 +70,7 @@ class ElSearch {
    * @name insertItem
    * @desc Given an object item, insert the given item into elastic search.
    * @param {object} item - An object that has certain properties to insert.
-   * @return {Promise<JSON>} There is no defined return type.
+   * @return {Promise<object>} Returns false if the object does not meet criteria.
    */
   insertItem(item) {
     let itemType;
@@ -73,12 +85,19 @@ class ElSearch {
       itemType = item.category;
     }
 
-    return this.client.index({
-      index: this.index,
-      id: item.id,
-      type: itemType,
-      body: item
-    });
+    return this.schema(item)
+      .then(valid => {
+        if (valid) {
+          return this.client.index({
+            index: this.index,
+            id: item.id,
+            type: 'ALL',
+            body: item
+          });
+        } else {
+          return false;
+        }
+      });
   }
 
   /**
@@ -99,12 +118,12 @@ class ElSearch {
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
   searchItems(searchQ, categories) {
-    const cat = categories || 'ALL';
+    // const cat = categories || 'ALL';
 
     return this.client.search({
       index: this.index,
-      type: cat,
-      q: searchQ
+      type: 'ALL',
+      q: `description:${searchQ}`
     });
   }
 
@@ -118,7 +137,7 @@ class ElSearch {
   deleteItem(itemId, itemType) {
     return this.client.delete({
       index: this.index,
-      type: itemType,
+      type: 'ALL',
       id: itemId
     });
   }
