@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { mapDispatchToProps} from '../reducers/auth.reducer';
 import { connect } from 'react-redux';
 
-const localSignup = (e) => {
+const localSignup = (e, props) => {
   if (!e || e.which === 13) {
     const email = $('#Email').val();
     const password = $('#Password').val();
@@ -33,7 +33,7 @@ const localSignup = (e) => {
 const SignupContainer = (props) => {
   return (
     <div className="container">
-      <form className="col s8" id="signup" onKeyDown={localSignup}>
+      <form className="col s8" id="signup" onKeyDown={(e) => {localSignup(e, props)}}>
         <div className="row">
           <div className="input-field col s10">
             <input id="Email" type="email" className="validate" />
@@ -48,7 +48,7 @@ const SignupContainer = (props) => {
             <i className="material-icons prefix">vpn_key</i>
           </div>
           <div className="col s6 offset-s6">
-            <a className="waves-effect waves-light btn" onClick={() => { localSignup(); }}>Signup</a>
+            <a className="waves-effect waves-light btn" onClick={() => { localSignup(null, props); }}>Signup</a>
           </div>
         </div>
       </form>
