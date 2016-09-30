@@ -55,8 +55,12 @@ module.exports = {
   getDisputes(req, res) {
     db.transactions.getAllDisputes()
     .then(data => {
-      res.send(data[Math.floor(Math.random()*data.length)]);
-      console.log(data);
+      let rtg = data[Math.floor(Math.random()*data.length)];
+      if(rtg){
+        res.json(rtg);
+      } else {
+        res.json({});
+      }
     })
     .catch(err => {
       console.log(err);

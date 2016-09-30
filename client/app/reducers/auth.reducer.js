@@ -29,6 +29,10 @@ export function mapDispatchToProps(dispatch) {
     loginSuccess: (data) => {
       dispatch({ type: 'signin', user: data });
       dispatch(push('/'));
+    },
+    signupSuccess: (data) => {
+      dispatch({ type: 'signup', user: data });
+      dispatch(push('/'));
     }
   };
 }

@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import { mapDispatchToProps} from '../reducers/auth.reducer';
+import { connect } from 'react-redux';
 
 const localSignup = (e) => {
   if (!e || e.which === 13) {
@@ -19,7 +21,7 @@ const localSignup = (e) => {
       })
       .then(response => response.text())
       .then((responseData) => {
-        console.log(responseData);
+        props.loginSuccess(email);
       });
     } else {
       console.log('failed');
@@ -28,7 +30,7 @@ const localSignup = (e) => {
 };
 
 
-const Signup = () => {
+const SignupContainer = (props) => {
   return (
     <div className="container">
       <form className="col s8" id="signup" onKeyDown={localSignup}>
@@ -54,4 +56,6 @@ const Signup = () => {
   );
 };
 
-export { Signup };
+const Signup = connect(null, mapDispatchToProps)(SignupContainer);
+
+export { Signup, SignupContainer };
