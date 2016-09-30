@@ -1,9 +1,7 @@
-
 const searchInit = {
   parameters: [],
   results: []
 };
-
 
 /**
  * @name searchReducer
@@ -12,19 +10,27 @@ const searchInit = {
  * @param {object} action - An object representing an action.
  * @return {object}
  */
-const searchReducer = (state = searchInit, action) => {
+export const searchReducer = (state = searchInit, action) => {
   const dispatch = action.type;
-  let newState = {};
+
   if (dispatch === 'updateResults') {
-    newState.parameters = state.parameters;
-    newState.results = action.results;
-    return newState;
+    return Object.assign({}, state, { results: action.results });
   } else if (dispatch === 'clearResults') {
-    newState = { parameters: [], results: [] };
-    return newState;
+    return Object.assign({}, searchInit);
   }
   return state;
 };
 
+export const mapStateToProps = state => ({
+  parameters: state.search.parameters,
+  results: state.search.results
+});
 
-module.exports.searchReducer = searchReducer;
+export const mapDispatchToProps = dispatch => ({
+  clearResults: () => {
+    dispatch({ type: 'clearResults' });
+  },
+  updateResults: (data) => {
+    dispatch({ type: 'updateResults', results: data });
+  }
+});
