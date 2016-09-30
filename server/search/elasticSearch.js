@@ -21,14 +21,14 @@ class ElSearch {
     this.index = 'items';
 
     this.schema = yup.object().shape({
-      title:       yup.string().required(),
+      title: yup.string().required(),
       description: yup.string().required(),
-      price:       yup.string(),
-      location:    yup.string().required(),
-      posted_at:   yup.string(),
-      updated_at:  yup.string(),
-      category:    yup.array().of(yup.string()).required(),
-      images:      yup.array().of(yup.string())
+      price: yup.string(),
+      location: yup.string().required(),
+      posted_at: yup.string(),
+      updated_at: yup.string(),
+      category: yup.array().of(yup.string()).required(),
+      images: yup.array().of(yup.string())
     });
   }
 
@@ -73,20 +73,8 @@ class ElSearch {
    * @return {Promise<object>} Returns false if the object does not meet criteria.
    */
   insertItem(item) {
-    let itemType;
-
-    if (item.category === undefined) {
-      itemType = 'ALL';
-    } else if (item.category === []) {
-      itemType = 'ALL';
-    } else if (Array.isArray(item.category)) {
-      itemType = item.category[0];
-    } else {
-      itemType = item.category;
-    }
-
     return this.schema.isValid(item)
-      .then(valid => {
+      .then((valid) => {
         if (valid) {
           return this.client.index({
             index: this.index,
@@ -94,9 +82,8 @@ class ElSearch {
             type: 'ALL',
             body: item
           });
-        } else {
-          return false;
         }
+        return false;
       });
   }
 
@@ -117,7 +104,7 @@ class ElSearch {
    *   representing specific categories to search for.
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
-  searchItems(searchQ, categories) {
+  searchItems(searchQ) {
     // const cat = categories || 'ALL';
 
     return this.client.search({
@@ -125,9 +112,7 @@ class ElSearch {
       type: 'ALL',
       fields: ['description', 'title'],
       q: `description:${searchQ}`
-    }).then(res => {
-      return res.hits.hits;
-    });
+    }).then(res => res.hits.hits);
   }
 
   /**
@@ -137,7 +122,7 @@ class ElSearch {
    * @param {string} type - A string representing an object id.
    * @return {Promise<JSON>} Returns a JSON object as a result.
    */
-  deleteItem(itemId, itemType) {
+  deleteItem(itemId) {
     return this.client.delete({
       index: this.index,
       type: 'ALL',

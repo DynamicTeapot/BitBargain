@@ -9,52 +9,41 @@ const es = require('./elasticSearch');
  * @param {Result} res - A Result object.
  * @return {undefined}
  */
-const search = function (req, res) {
+function search(req, res) {
   if (!req.params || !req.params.q) {
     res.status(400).send('Must specify a search query.');
   } else if (req.params.cat && req.params.cat.trim() !== '') {
     es.searchItems(req.params.q)
-      .then(r => {
-        let final = [];
+      .then((r) => {
+        const final = [];
 
-        r.forEach(item => {
+        r.forEach((item) => {
           final.push(item.fields);
         });
 
         res.json(final);
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e);
         res.status(400).send('Could not complete request.');
       });
   } else {
     es.searchItems(req.params.q)
-      .then(r => {
-        let final = [];
+      .then((r) => {
+        const final = [];
 
-        r.forEach(item => {
+        r.forEach((item) => {
           final.push(item.fields);
         });
 
         res.json(final);
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e);
         res.status(400).send('Could not complete request.');
       });
   }
-};
+}
 
 
 module.exports = search;
-
-
-
-
-
-
-
-
-
-
-
