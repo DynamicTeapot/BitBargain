@@ -2,15 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import item from '../schema';
-import {
-  mapStateToProps,
-  mapDispatchToProps } from '../reducers/sellitem.reducer';
+import { mapDispatchToProps } from '../reducers/sellitem.reducer';
 
 class sellItemContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = this.props.sellProduct;
-  }
   handleForm() {
     // /items/sell endpoint
     const toSell = $('#sell-item-form').value;
@@ -69,10 +63,9 @@ class sellItemContainer extends React.Component {
 }
 
 sellItemContainer.propTypes = {
-  sellProduct: item.isRequired,
   submitSell: PropTypes.func.isRequired
 };
 
-const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);
+const SellItem = connect(mapDispatchToProps)(sellItemContainer);
 
 export default SellItem;

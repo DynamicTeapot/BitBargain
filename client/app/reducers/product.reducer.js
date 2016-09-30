@@ -32,10 +32,7 @@ export function mapStateToProps(state) {
 export function mapDispatchToProps(dispatch) {
   return {
     updateProduct: (data) => {
-      dispatch({ type: 'updateProduct', product: data });
-    },
-    clearProduct: () => {
-      dispatch({ type: 'clearProduct' });
+      dispatch({ type: 'SELL_POST', product: data });
     }
   };
 }
