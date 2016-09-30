@@ -9,7 +9,6 @@ const configure = (passport) => {
       usernameField: 'email'
     },
     (username, password, done) => {
-      console.log(username, password);
       return done(null, username);
     }
   ));
