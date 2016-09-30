@@ -1,57 +1,24 @@
-const sellItemInit = {
-  title: 'Enter a title',
-  // get seller from the logged in user of state
-  //
-  seller: 'SELLER NAME',
-  description: 'Enter a description',
-  price: 'Many dollars',
-  category: ['Enter a category'],
-  created_at: new Date().toString(),
-  updated_at: new Date().toString(),
-  location: 'San Francisco',
-  post: 'What',
-  images: [],
-};
+import { sellPost, SELL_SUCCESS, SELL_POST } from '../actions/sellitem.action';
 
-export function sellItemReducer(state = {}, action) {
+export function sellItemReducer(state = { status: 'idle' }, action) {
   const dispatch = action.type;
-  const newState = state;
-  if (!newState.sellItem) newState.sellItem = sellItemInit;
-  if (dispatch === 'updateSellItem') {
-    newState.sellItem.update_at = new Date().toString();
-    newState.sellItem.title = action.title;
-    return newState;
-  } else if (dispatch === 'updateSellImage') {
-    newState.sellItem.update_at = new Date().toString();
-    if (newState.sellItem.images.length < 4) {
-      newState.sellItem.images.concat(action.image);
-    } else {
-      console.log('Error too many images entered already.');
-    }
-  } else if (dispatch === 'updateSellPrice') {
-    newState.sellItem.update_at = new Date().toString();
-    // Should only be used to change info on the current product
-    newState.sellItem.price = action.price;
-    return newState;
+  if (dispatch === SELL_SUCCESS) {
+    return { status: 'success' };
+  } else if (dispatch === SELL_POST) {
+    return { status: 'loading' };
   }
-  return newState;
+
+  return state;
 }
 
 export function mapStateToProps(state) {
-  return state.sellItem ? { sellProduct: state.sellItem } :
-    { sellProduct: sellItemInit };
+  return { status: state.sellitem.status };
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
-    updateSellTitle: (data) => {
-      dispatch({ type: 'updateSellTitle', title: data });
-    },
-    addSellImage: (data) => {
-      dispatch({ type: 'addSellImage', image: data });
-    },
-    updateSellPrice: (data) => {
-      dispatch({ type: 'updateSellPrice', price: data });
+    submitSell: (data) => {
+      dispatch(sellPost(data));
     }
   };
 }
