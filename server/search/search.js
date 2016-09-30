@@ -1,4 +1,5 @@
-const items = require('./dummyItems.js');
+// const items = require('./dummyItems.js');
+const es = require('./elasticSearch');
 
 
 /**
@@ -12,12 +13,48 @@ const search = function (req, res) {
   if (!req.params || !req.params.q) {
     res.status(400).send('Must specify a search query.');
   } else if (req.params.cat && req.params.cat.trim() !== '') {
-    res.json(items);
+    es.searchItems(req.params.q)
+      .then(r => {
+        let final = [];
+
+        r.forEach(item => {
+          final.push(item.fields);
+        });
+
+        res.json(final);
+      })
+      .catch(e => {
+        console.error(e);
+        res.status(400).send('Could not complete request.');
+      });
   } else {
-    res.json(items);
+    es.searchItems(req.params.q)
+      .then(r => {
+        let final = [];
+
+        r.forEach(item => {
+          final.push(item.fields);
+        });
+
+        res.json(final);
+      })
+      .catch(e => {
+        console.error(e);
+        res.status(400).send('Could not complete request.');
+      });
   }
 };
 
 
 module.exports = search;
+
+
+
+
+
+
+
+
+
+
 
