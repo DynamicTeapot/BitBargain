@@ -15,7 +15,8 @@ router
   .put('/items/:id/update', itemController.updateItem)
   .delete('/items/:id', itemController.deleteItem)
   .get('/disputes', itemController.getDisputes)
-  .post('/disputes', itemController.resolveDisputes);
+  .post('/disputes', itemController.resolveDisputes)
+  .post('/disputes/:id', itemController.startDispute);
 
 // Search routes
 

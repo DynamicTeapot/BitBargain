@@ -72,7 +72,7 @@ module.exports = {
       return db('transactions').where('item_id', id);
     },
     getAllDisputes() {
-      return db('transactions').where('order_status', 'In progress');
+      return db('transactions').where('order_status', 'disputed');
     },
     // data = {item_id: item id(num), buyer_id: user id(num), seller_id: user id(num)}
     // can take an array of data objects -> [{...}, {...}, ...]
