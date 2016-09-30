@@ -13,28 +13,14 @@ const sellItemInit = {
   images: [],
 };
 
-export function sellItemReducer(state = {}, action) {
+export function sellItemReducer(state = sellItemInit, action) {
   const dispatch = action.type;
   const newState = state;
-  if (!newState.sellItem) newState.sellItem = sellItemInit;
   if (dispatch === 'updateSellItem') {
-    newState.sellItem.update_at = new Date().toString();
-    newState.sellItem.title = action.title;
-    return newState;
-  } else if (dispatch === 'updateSellImage') {
-    newState.sellItem.update_at = new Date().toString();
-    if (newState.sellItem.images.length < 4) {
-      newState.sellItem.images.concat(action.image);
-    } else {
-      console.log('Error too many images entered already.');
-    }
-  } else if (dispatch === 'updateSellPrice') {
-    newState.sellItem.update_at = new Date().toString();
-    // Should only be used to change info on the current product
-    newState.sellItem.price = action.price;
+    newState.status = action.status;
     return newState;
   }
-  return newState;
+  return state;
 }
 
 export function mapStateToProps(state) {
