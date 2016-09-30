@@ -7,14 +7,37 @@ import item from '../schema';
 
 
 function SearchResult(props) {
+  $('.carousel.carousel-slider').carousel({full_width: true});
+  $(`.left${props.product.id}`).on('click', (e) => {
+    $(`.carousel${props.product.id}`).carousel('prev');
+  });
+  $(`.right${props.product.id}`).on('click', (e) => {
+    $(`.carousel${props.product.id}`).carousel('next');
+  });
+  
   return (
     <div className="card col s12 m4 l3 sticky-action">
       <div className="card-image waves-effect waves-block waves-light">
-        <img
-          role="presentation"
-          className="activator"
-          src="https://static.pexels.com/photos/131259/pexels-photo-131259-large.jpeg"
-        />
+        <div className={`carousel carousel-slider carousel${props.product.id}`} data-indicators='true'>
+          <div className="carousel-fixed-item center">
+            <a className={`left${props.product.id}`}><i className="material-icons left">keyboard_arrow_left</i></a>
+            <a className={`right${props.product.id}`}><i className="material-icons right">keyboard_arrow_right</i></a>
+          </div>
+          <a className="carousel-item" style={{pointerEvents: 'none'}}>
+          <img
+            role="presentation"
+            className="activator"
+            src="https://static.pexels.com/photos/131259/pexels-photo-131259-large.jpeg"
+          />
+          </a>
+          <a className="carousel-item" style={{pointerEvents: 'none'}}>
+          <img
+            role="presentation"
+            className="activator"
+            src="https://media3.giphy.com/media/mDEWYG76hRNV6/200_s.gif"
+          />
+          </a>
+        </div>
       </div>
       <div className="card-content">
         <span className="card-title activator grey-text text-darken-4">
