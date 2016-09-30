@@ -11,8 +11,8 @@ export function disputeReducer(state = {}, action) {
       }
     })
     .then(dataStream => dataStream.json())
-    .then(resp => {
-      newState = resp[Math.floor(Math.random()*resp.length)];
+    .then((resp) => {
+      newState = resp;
       return newState;
     });
   } else if (dispatch === 'resolveDispute') {
@@ -29,7 +29,7 @@ export function disputeReducer(state = {}, action) {
       })
     });
     return state;
-  } 
+  }
   return state;
 }
 
@@ -45,7 +45,7 @@ export function mapDispatchToProps(dispatch) {
       dispatch({ type: 'newDispute' });
     },
     resolveDispute: (bool) => {
-      dispatch({ type: 'resolveDispute', data: bool});
+      dispatch({ type: 'resolveDispute', data: bool });
     }
   };
 }

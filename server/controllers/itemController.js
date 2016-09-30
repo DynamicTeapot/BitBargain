@@ -2,20 +2,20 @@ const db = require('../db/model');
 const coinbase = require('coinbase');
 
 module.exports = {
-  getCategories (req, res) {
+  getCategories(req, res) {
     db.items.getAllCategories()
     .then(result => res.status(200).send(result));
   },
-  getItem (req, res) {
+  getItem(req, res) {
     db.items.getById(req.params.id)
       .then((result) => {
         res.json(result[0]);
       });
   },
-  buyItem (req, res) {
+  buyItem(req, res) {
     db.items.sold(req.params.id);
     db.items.getById(req.params.id)
-    .then(product => {
+    .then((product) => {
       console.log(product);
       // Product might be an array probably, so need to [0] need to test it out.
       res.json(product[0]);
@@ -25,7 +25,7 @@ module.exports = {
       });
     });
   },
-  sellItem (req, res) {
+  sellItem(req, res) {
     console.log(req.body);
     console.log('this was called');
     db.items.create(req.body)
@@ -37,25 +37,25 @@ module.exports = {
       });
     });
   },
-  shippedItem (req, res) {
+  shippedItem(req, res) {
     res.send('shippedItem');
   },
-  updateItem (req, res) {
+  updateItem(req, res) {
     res.send('updateItem');
   },
-  deleteItem (req, res) {
+  deleteItem(req, res) {
     res.send('deleteItem');
   },
-  sell (req, res) {
+  sell(req, res) {
     const client = new coinbase.Client({ apiKey: req.user.accessToken, refreshToken: req.user.refreshToken });
     client.getAccounts({}, (err, accounts) => {
       console.log(accounts);
     });
   },
-  getDisputes (req, res) {
+  getDisputes(req, res) {
     db.transactions.getAllDisputes()
     .then(data => {
-      res.send(data);
+      res.send(data[Math.floor(Math.random()*data.length)]);
       console.log(data);
     })
     .catch(err => {
@@ -63,23 +63,14 @@ module.exports = {
       res.sendStatus(500);
     });
   },
-  startDispute (req, res) {
-    db.transactions.updateTransaction(req.body.id, {'order_status': 'disputed'})
+  startDispute(req, res) {
+    db.transactions.updateTransaction(req.body.id, { order_status: 'disputed' })
     .then(result => res.send(result));
   },
   resolveDisputes(req, res) {
-    req.body.polarity; //This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
-    //We should do something with it
+    req.body.polarity; // This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
+    // We should do something with it
     db.transactions.updateTransaction(req.body.id, {});
   }
 };
-
-
-
-
-
-
-
-
-
 

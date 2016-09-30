@@ -21,13 +21,13 @@ export function loginReducer(state = loginInit, action) {
     return state;
   }
   return state;
-};
+}
 
 
 export function mapDispatchToProps(dispatch) {
   return {
     loginSuccess: (data) => {
-      dispatch({ type: 'signin', user: data})
+      dispatch({ type: 'signin', user: data });
       dispatch(push('/'));
     }
   };

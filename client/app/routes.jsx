@@ -23,7 +23,6 @@ import { productReducer } from './reducers/product.reducer';
 import { Dispute, disputeReducer } from './components/Dispute.jsx';
 
 
-
 const reducers = combineReducers(
   {
     login: loginReducer,
@@ -37,7 +36,7 @@ const reducers = combineReducers(
 
 // const middleware = routerMiddleware(browserHistory);
 
-const middleware = routerMiddleware(browserHistory)
+const middleware = routerMiddleware(browserHistory);
 const logger = createLogger();
 const store = createStore(reducers, applyMiddleware(thunk, promise, logger, middleware));
 // Creates a history that links to the store

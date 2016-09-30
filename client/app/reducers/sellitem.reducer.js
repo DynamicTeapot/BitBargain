@@ -15,7 +15,7 @@ const sellItemInit = {
 
 export function sellItemReducer(state = {}, action) {
   const dispatch = action.type;
-  let newState = state;
+  const newState = state;
   if (!newState.sellItem) newState.sellItem = sellItemInit;
   if (dispatch === 'updateSellItem') {
     newState.sellItem.update_at = new Date().toString();
@@ -38,8 +38,8 @@ export function sellItemReducer(state = {}, action) {
 }
 
 export function mapStateToProps(state) {
-  return state.sellItem ? { sellProduct: state.sellItem } : 
-    { sellProduct: sellItemInit }; 
+  return state.sellItem ? { sellProduct: state.sellItem } :
+    { sellProduct: sellItemInit };
 }
 
 export function mapDispatchToProps(dispatch) {
@@ -48,7 +48,7 @@ export function mapDispatchToProps(dispatch) {
       dispatch({ type: 'updateSellTitle', title: data });
     },
     addSellImage: (data) => {
-      dispatch({ type: 'addSellImage', image: data});
+      dispatch({ type: 'addSellImage', image: data });
     },
     updateSellPrice: (data) => {
       dispatch({ type: 'updateSellPrice', price: data });

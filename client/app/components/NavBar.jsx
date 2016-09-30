@@ -32,49 +32,49 @@ const test = () => {
 
 const NavBar = (props) => {
   return (
-    <nav>
-      <div className="nav-wrapper">
-    	BitBargain
-        <Link to={''}>
-          <button>
-            Home
-          </button>
-        </Link>
-        <Link to={'login'}>
-          <button>
-            Login
-          </button>
-        </Link>
-        <Link to={'signup'}>
-          <button>
-            Sign Up
-          </button>
-        </Link>
-        <Link to={'product'}>
-          <button>
-            Search
-          </button>
-        </Link>
-        <Link to={'sellitem'}>
-          <button>
-            Sell
-            </button>
-        </Link>
-        <Link to={'dispute'}>
-          <button>
-            Dispute
-          </button>
-        </Link>
-        <Link to={'something'}>
-          <button onClick={test}>
-            Testing Button
-          </button>
-        </Link>
-        <div className="chip">
-          {props.user}
-        </div>
-      </div>
-    </nav>
+<nav>
+  <div className="nav-wrapper">
+    BitBargain
+    <Link to={''}>
+      <button>
+        Home
+      </button>
+    </Link>
+    <Link to={'login'}>
+      <button>
+        Login
+      </button>
+    </Link>
+    <Link to={'signup'}>
+      <button>
+        Sign Up
+      </button>
+    </Link>
+    <Link to={'product'}>
+      <button>
+        Search
+      </button>
+    </Link>
+    <Link to={'sellitem'}>
+      <button>
+        Sell
+      </button>
+    </Link>
+    <Link to={'dispute'}>
+      <button>
+        Dispute
+      </button>
+    </Link>
+    <Link to={'something'}>
+      <button onClick={test}>
+        Testing Button
+      </button>
+    </Link>
+    <div className="chip">
+      {props.user}
+    </div>
+  </div>
+</nav>
   );
 };
 
