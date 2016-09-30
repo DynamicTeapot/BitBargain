@@ -21,13 +21,13 @@ class ElSearch {
     this.index = 'items';
 
     this.schema = yup.object().shape({
-      title:       yup.string().isRequired,
-      description: yup.string().isRequired,
+      title:       yup.string().required(),
+      description: yup.string().required(),
       price:       yup.string(),
-      location:    yup.string().isRequired,
+      location:    yup.string().required(),
       posted_at:   yup.string(),
       updated_at:  yup.string(),
-      category:    yup.array().of(yup.string()).isRequired,
+      category:    yup.array().of(yup.string()).required(),
       images:      yup.array().of(yup.string())
     });
   }
@@ -85,7 +85,7 @@ class ElSearch {
       itemType = item.category;
     }
 
-    return this.schema(item)
+    return this.schema.isValid(item)
       .then(valid => {
         if (valid) {
           return this.client.index({
@@ -123,7 +123,10 @@ class ElSearch {
     return this.client.search({
       index: this.index,
       type: 'ALL',
+      fields: ['description', 'title'],
       q: `description:${searchQ}`
+    }).then(res => {
+      return res.hits.hits;
     });
   }
 
