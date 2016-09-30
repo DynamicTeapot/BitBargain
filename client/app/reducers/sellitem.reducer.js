@@ -44,14 +44,8 @@ export function mapStateToProps(state) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    updateSellTitle: (data) => {
-      dispatch({ type: 'updateSellTitle', title: data });
-    },
-    addSellImage: (data) => {
-      dispatch({ type: 'addSellImage', image: data });
-    },
-    updateSellPrice: (data) => {
-      dispatch({ type: 'updateSellPrice', price: data });
+    submitSell: (data) => {
+      dispatch({ type: 'submitSell', item: data });
     }
   };
 }

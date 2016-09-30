@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { mapDispatchToProps} from '../reducers/auth.reducer';
+import { mapDispatchToProps } from '../reducers/auth.reducer';
 import { connect } from 'react-redux';
 
 const localSignup = (e, props) => {
@@ -33,7 +33,7 @@ const localSignup = (e, props) => {
 const SignupContainer = (props) => {
   return (
     <div className="container">
-      <form className="col s8" id="signup" onKeyDown={(e) => {localSignup(e, props)}}>
+      <form className="col s8" id="signup" onKeyDown={(e) => { localSignup(e, props); }}>
         <div className="row">
           <div className="input-field col s10">
             <input id="Email" type="email" className="validate" />

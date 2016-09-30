@@ -11,13 +11,20 @@ class sellItemContainer extends React.Component {
     super(props);
     this.state = this.props.sellProduct;
   }
-  handleChange(event) {
-    this.props.updateSellTitle(event.target.value);
+  handleForm() {
+    // /items/sell endpoint
+    const toSell = $('#sell-item-form').value;
+
+    console.log('toSell item , ', toSell);
+
+    this.props.submitSell(toSell);
   }
   render() {
+    const submitFun = () => this.handleForm();
+
     return ((
       <div className="row">
-        <form className="col s12">
+        <form onSubmit={submitFun} className="sell-item-form col s12">
 
           <div className="file-field input-field">
             <div className="btn">
@@ -63,7 +70,7 @@ class sellItemContainer extends React.Component {
 
 sellItemContainer.propTypes = {
   sellProduct: item.isRequired,
-  updateSellTitle: PropTypes.func.isRequired
+  submitSell: PropTypes.func.isRequired
 };
 
 const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);
