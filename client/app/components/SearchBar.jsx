@@ -1,48 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchResults from './SearchResults.jsx';
+import {
+  mapStateToProps,
+  mapDispatchToProps
+} from '../reducers/search.reducer';
 
-
-const searchInit = {
-  parameters: [],
-  results: []
-};
-// Each result is a product and each parameter is parsed down to a category or thrown out
-
-const searchReducer = (state = searchInit, action) => {
-  const dispatch = action.type;
-  let newState = {};
-  if (dispatch === 'updateResults') {
-    newState.parameters = state.parameters;
-    newState.results = action.results;
-    return newState;
-  } else if (dispatch === 'clearResults') {
-    newState = { parameters: [], results: [] };
-    return newState;
-  }
-  return state;
-};
-
-const mapStateToProps = (state) => {
-  return {
-    parameters: state.search.parameters,
-    results: state.search.results
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    clearResults: () => {
-      dispatch({ type: 'clearResults' });
-    },
-    updateResults: (data) => {
-      dispatch({ type: 'updateResults', results: data });
-    }
-  };
-};
-
-
-class SearchBar extends React.Component {
+class SearchBarContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,13 +44,12 @@ class SearchBar extends React.Component {
           </form>
           {this.state.loading ? <div className="progress"><div className="indeterminate" /></div> : null}
         </div>
-	      <SearchResults products={this.props.results} />
+        <SearchResults products={this.props.results} />
       </div>
     );
   }
 }
 
-SearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+const SearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBarContainer);
 
-
-export { SearchBar };
+export default SearchBar;

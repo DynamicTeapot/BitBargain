@@ -17,15 +17,14 @@ import { Product } from './components/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
 import NotFound from './components/NotFound.jsx';
+import { Dispute } from './components/Dispute.jsx';
 import { sellItemReducer } from './reducers/sellitem.reducer';
 import { searchReducer } from './reducers/search.reducer';
 import { productReducer } from './reducers/product.reducer';
 import { loginReducer } from './reducers/auth.reducer';
 import { disputeReducer } from './reducers/dispute.reducer';
-import { Dispute } from './components/Dispute.jsx';
 
-
-const reducers = combineReducers(
+const rootReducer = combineReducers(
   {
     login: loginReducer,
     product: productReducer,
@@ -40,7 +39,8 @@ const reducers = combineReducers(
 
 const middleware = routerMiddleware(browserHistory);
 const logger = createLogger();
-const store = createStore(reducers, applyMiddleware(thunk, promise, logger, middleware));
+const store = createStore(rootReducer, applyMiddleware(thunk, promise, logger, middleware));
+
 // Creates a history that links to the store
 // store.dispatch(configure(
 //   {apiUrl: "http://localhost:9009/api/signin"},

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchBar } from './SearchBar.jsx';
+import SearchBar from './SearchBar.jsx';
 
 
 // TODO: Add geo-location selector.
@@ -7,13 +7,11 @@ import { SearchBar } from './SearchBar.jsx';
 // TODO: Get categories.
 
 
-const Index = (props) => {
-  return (
-    <div>
-      <SearchBar />
-    </div>
-  );
-};
+const Index = () => (
+  <div>
+    <SearchBar />
+  </div>
+ );
 
 
 export default Index;
