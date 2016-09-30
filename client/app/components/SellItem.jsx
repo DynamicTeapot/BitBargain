@@ -2,23 +2,34 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import item from '../schema';
-import { mapDispatchToProps } from '../reducers/sellitem.reducer';
+import { mapStateToProps, mapDispatchToProps } from '../reducers/sellitem.reducer';
 
 class sellItemContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+      price: ''
+    };
+  }
   handleForm() {
     // /items/sell endpoint
-    const toSell = $('#sell-item-form').value;
-
-    console.log('toSell item , ', toSell);
-
-    this.props.submitSell(toSell);
+    const newItem = this.state;
+    newItem.created_at = new Date();
+    newItem.updated_at = new Date();
+    console.log('newItem is,', newItem);
+    this.props.submitSell(newItem);
   }
   render() {
-    const submitFun = () => this.handleForm();
+    const submitFun = (e) => { e.preventDefault(); this.handleForm(); return false; };
+    const priceFun = e => this.setState({ price: e.target.value });
+    const descFun = e => this.setState({ description: e.target.value });
+    const titleFun = e => this.setState({ title: e.target.value });
 
     return ((
       <div className="row">
-        <form onSubmit={submitFun} className="sell-item-form col s12">
+        <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
 
           <div className="file-field input-field">
             <div className="btn">
@@ -33,12 +44,12 @@ class sellItemContainer extends React.Component {
           <div className="row">
 
             <div className="input-field col s6">
-              <input className="active" type="Text" id="title" />
+              <input onChange={titleFun} className="active" type="Text" id="title" placeholder="Enter the name of the product" />
               <label htmlFor="title">Title</label>
             </div>
 
             <div className="input-field col s6">
-              <input className="active" type="Text" id="price" />
+              <input className="active" onChange={priceFun} type="Text" id="price" />
               <label htmlFor="price">Price</label>
             </div>
           </div>
@@ -46,7 +57,7 @@ class sellItemContainer extends React.Component {
 
           <div className="row">
             <div className="input-field col s12">
-              <textarea className="materialize-textarea" id="description" />
+              <textarea className="materialize-textarea" onChange={descFun} id="description" />
               <label className="active" htmlFor="description" >Description</label>
             </div>
           </div>
@@ -63,9 +74,10 @@ class sellItemContainer extends React.Component {
 }
 
 sellItemContainer.propTypes = {
+  status: PropTypes.string.isRequired,
   submitSell: PropTypes.func.isRequired
 };
 
-const SellItem = connect(mapDispatchToProps)(sellItemContainer);
+const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);
 
 export default SellItem;
