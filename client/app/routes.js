@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer, routerActions } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer, routerActions, routerMiddleware, push } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -12,15 +12,17 @@ import createLogger from 'redux-logger';
 import App from './containers/App.jsx';
 
 import Index from './components/Index.jsx';
-import { Login, loginReducer } from './components/Login.jsx';
+import { Login } from './components/Login.jsx';
 import { Product } from './components/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
 import NotFound from './components/NotFound.jsx';
-
-import { searchReducer } from './reducers/SearchReducer.js';
-import { sellItemReducer } from './reducers/sellitem.reducer.js';
-import { productReducer } from './reducers/product.reducer.js';
+import { sellItemReducer } from './reducers/sellitem.reducer';
+import { searchReducer } from './reducers/search.reducer';
+import { productReducer } from './reducers/product.reducer';
+import { loginReducer } from './reducers/auth.reducer';
+import { disputeReducer } from './reducers/dispute.reducer';
+import { Dispute } from './components/Dispute.jsx';
 
 
 const reducers = combineReducers(
@@ -29,15 +31,16 @@ const reducers = combineReducers(
     product: productReducer,
     search: searchReducer,
     routing: routerReducer,
-    sellitem: sellItemReducer
+    sellitem: sellItemReducer,
+    dispute: disputeReducer
   }
 );
 
 // const middleware = routerMiddleware(browserHistory);
 
-
+const middleware = routerMiddleware(browserHistory);
 const logger = createLogger();
-const store = createStore(reducers, applyMiddleware(thunk, promise, logger));
+const store = createStore(reducers, applyMiddleware(thunk, promise, logger, middleware));
 // Creates a history that links to the store
 // store.dispatch(configure(
 //   {apiUrl: "http://localhost:9009/api/signin"},
@@ -63,6 +66,7 @@ render((
         <Route path="login" component={Login} />
         <Route path="sellitem" component={SellItem} />
         <Route path="product/:id" component={Product} />
+        <Route path="dispute" component={Dispute} />
         <Route path="signup" component={Signup} />
         <Route path="*" component={NotFound} />
       </Route>

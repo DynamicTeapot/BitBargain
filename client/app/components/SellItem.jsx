@@ -19,11 +19,11 @@ class sellItemContainer extends React.Component {
     return ((
       <form>
         <input type="Text" id="title" />
-        <label class="active" for="title">Title</label>
-        <input type="Text" id='description' />
-        <label class="active" for="description">Description</label>
-        <input type="email" id='email' class="validate" />
-        <label class="active" for="email">Description</label>
+        <label className="active" htmlFor="title">Title</label>
+        <input type="Text" id="description" />
+        <label className="active" htmlFor="description">Description</label>
+        <input type="email" id="email" className="validate" />
+        <label className="active" htmlFor="email">Description</label>
         <button />
       </form>
     ));

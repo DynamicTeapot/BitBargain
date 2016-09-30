@@ -62,7 +62,7 @@ knex.schema.hasTable('transactions').then((result) => {
       table.integer('item_id');
       table.integer('buyer_id'); // TODO: index
       table.integer('seller_id'); // TODO: index
-      table.string('order_status').defaultTo('In progress');
+      table.string('order_status').defaultTo('in progress');
       table.text('tracking');
       table.foreign('item_id').references('items.id');
       table.foreign('buyer_id').references('users.id');
