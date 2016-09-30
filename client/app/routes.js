@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 
-import App from './containers/App.jsx';
+import { App } from './containers/App.jsx';
 
 import Index from './components/Index.jsx';
 import { Login } from './components/Login.jsx';

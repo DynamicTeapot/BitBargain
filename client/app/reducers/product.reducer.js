@@ -24,7 +24,8 @@ export function productReducer(state = { product: productInit }, action) {
 
 export function mapStateToProps(state) {
   return {
-    product: state.product.product
+    product: state.product.product,
+    loggedIn: state.login.loggedIn
   };
 }
 

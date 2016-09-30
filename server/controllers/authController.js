@@ -73,5 +73,13 @@ strategies.success = (req, res) => {
   res.json(true);
 };
 
+strategies.persist = (req, res) => {
+  if (req.user) {
+    res.json(req.user.user.email);
+  } else {
+    res.send('');
+  }
+};
+
 
 module.exports = strategies;
