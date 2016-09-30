@@ -1,4 +1,5 @@
 const db = require('../db/model');
+const es = require('../search/elasticSearch');
 
 module.exports = {
   getCategories(req, res) {
@@ -35,6 +36,7 @@ module.exports = {
   },
   deleteItem(req, res, next) {
     res.send('deleteItem');
+    es.deleteItem(req.params.id).catch(e => console.error(e));
     next();
   }
 };
