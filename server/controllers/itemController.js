@@ -44,7 +44,12 @@ module.exports = {
     console.log('this was called');
     db.items.create(req.body)
     .then((product) => {
-      res.json(product);
+      db.items.getById(product[0])
+      .then((result) => {
+        console.log('Product is ', result[0]);
+        res.json(result[0]);
+      });
+
       db.transactions.create({ item_id: product.id, buyer_id: null, seller_id: req.user.id })
       .then((trans) => {
         console.log(trans);
