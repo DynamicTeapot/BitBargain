@@ -40,27 +40,27 @@ const NavBar = (props) => {
         Home
       </button>
     </Link>
-    <Link to={'login'}>
+    <Link to={'/login'}>
       <button>
         Login
       </button>
     </Link>
-    <Link to={'signup'}>
+    <Link to={'/signup'}>
       <button>
         Sign Up
       </button>
     </Link>
-    <Link to={'product'}>
+    <Link to={'/product'}>
       <button>
         Search
       </button>
     </Link>
-    <Link to={'sellitem'}>
+    <Link to={'/sellitem'}>
       <button>
         Sell
       </button>
     </Link>
-    <Link to={'dispute'}>
+    <Link to={'/dispute'}>
       <button>
         Dispute
       </button>
