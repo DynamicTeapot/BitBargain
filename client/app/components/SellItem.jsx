@@ -14,20 +14,7 @@ class sellItemContainer extends React.Component {
       price: ''
     };
   }
-  handleFile(e) {
-    const reader = new FileReader();
-    const file = e.target.files[0];
 
-    reader.onload = upload => {
-      this.props.submitImage({
-        data_uri: upload.target.result,
-        filename: file.name,
-        filetype: file.type
-      });
-    };
-
-    reader.readAsDataURL(file);
-  }
   handleForm() {
     // /items/sell endpoint
     const newItem = this.state;
@@ -38,13 +25,13 @@ class sellItemContainer extends React.Component {
     console.log('newItem is,', newItem);
     this.props.submitSell(newItem);
   }
+
   render() {
     const submitFun = (e) => { e.preventDefault(); this.handleForm(); return false; };
     const priceFun = e => this.setState({ price: e.target.value });
     const descFun = e => this.setState({ description: e.target.value });
     const titleFun = e => this.setState({ title: e.target.value });
-    const imageFun = e => console.log(e.target.value);
-    // TODO## render images returned
+
     return ((
       <div className="row">
         <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
@@ -85,8 +72,7 @@ class sellItemContainer extends React.Component {
 sellItemContainer.propTypes = {
   status: PropTypes.string.isRequired,
   submitSell: PropTypes.func.isRequired,
-  submitImage: PropTypes.func.isRequired,
-  images: PropTypes.arr.isRequired
+  images: PropTypes.array.isRequired
 };
 
 const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);

@@ -1,6 +1,6 @@
 import { imagePost, IMAGE_POST, IMAGE_SUCCESS } from '../actions/sellitem.action';
 
-export function imageUploadReducer(state = { imageStatus: 'ready' }, action) {
+export function imageUploadReducer(state = { imageStatus: 'ready', images: [] }, action) {
   const dispatch = action.type;
   const newState = state;
   if (dispatch === IMAGE_POST) {
@@ -14,15 +14,15 @@ export function imageUploadReducer(state = { imageStatus: 'ready' }, action) {
   return state;
 }
 
-export function mapUploadStateToProps(state) {
+export function UpStateToProps(state) {
   return {
-    imageStatus: state.imageStatus,
+    imageStatus: state.image.imageStatus,
   };
 }
 
-export function mapUploadDispatchToProps(dispatch) {
+export function UpDispatchToProps(dispatch) {
   return {
-    imageFun: image => {
+    submitImage: image => {
       dispatch(imagePost(image));
     }
   };
@@ -39,13 +39,13 @@ export function imagePreviewReducer(state = { images: 'ready' }, action) {
   return state;
 }
 
-export function mapPreviewStateToProps(state) {
+export function PreStateToProps(state) {
   return {
-    images: state.images
+    images: state.image.images
   };
 }
 
-export function mapPreviewDispatchToProps(dispatch) {
+export function PreDispatchToProps(dispatch) {
   return {};
 }
 
