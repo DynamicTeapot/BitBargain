@@ -41,6 +41,9 @@ const DefaultProduct = props => (
               <div className="chip">
                 {props.product.category}
               </div>
+              <div className="right-align">
+                <a className="waves-effect waves-light btn-large">BUY</a>
+              </div>
             </div>
           </div>
         </div>
