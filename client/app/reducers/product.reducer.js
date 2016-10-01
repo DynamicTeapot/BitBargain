@@ -24,7 +24,7 @@ export function productReducer(state = productInit, action) {
 
 export function mapStateToProps(state) {
   return {
-    product: state.product.product,
+    product: state.product,
     loggedIn: state.login.loggedIn,
     user: state.login.user
   };
@@ -33,7 +33,7 @@ export function mapStateToProps(state) {
 export function mapDispatchToProps(dispatch) {
   return {
     updateProduct: (data) => {
-      dispatch({ type: 'SELL_POST', product: data });
+      dispatch({ type: 'updateProduct', product: data });
     }
   };
 }
