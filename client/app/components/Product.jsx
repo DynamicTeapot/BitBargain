@@ -23,6 +23,7 @@ class productContainer extends React.Component {
       .catch(err => console.error(err));
   }
   componentWillUnmount() {
+    console.log(this.props);
     this.props.clearProduct();
   }
   buy() {

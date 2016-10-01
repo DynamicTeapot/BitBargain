@@ -31,11 +31,11 @@ const localLogin = (e, props) => {
         if (response) {
           props.loginSuccess(email);
         } else {
-          console.log('Login Failed');
+          Materialize.toast('Login Failed: Incorrect username or password', 5000);
         }
       });
     } else {
-      console.log('No data supplied to login');
+      Materialize.toast('Please fill out all forms', 1000);
     }
   }
 };
@@ -47,14 +47,14 @@ const loginContainer = (props) => {
       <form className="col s8" id="login" onKeyDown={e => localLogin(e, props)}>
         <div className="row">
           <div className="input-field col s10">
-            <input id="Email" type="email" className="validate" />
+            <input id="Email" type="email" className="validate" required />
             <label htmlFor="Email" data-error="Incorrect Format" data-success="O K">Email</label>
             <i className="material-icons prefix">email</i>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s8">
-            <input id="Password" type="password" />
+            <input id="Password" type="password" required />
             <label htmlFor="Password">Password</label>
             <i className="material-icons prefix">vpn_key</i>
           </div>

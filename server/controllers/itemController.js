@@ -1,5 +1,6 @@
 const db = require('../db/model');
 const coinbase = require('coinbase');
+var s3 = require('s3');
 
 module.exports = {
   getCategories(req, res) {
@@ -90,10 +91,20 @@ module.exports = {
     db.transactions.updateTransaction(req.body.id, { order_status: 'disputed' })
     .then(result => res.send(result));
   },
-  resolveDisputes(req, res) {
+  resolveDisputes (req, res) {
     req.body.polarity; // This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
     // We should do something with it
     db.transactions.updateTransaction(req.body.id, {});
+  },
+  postImage(req, res) {
+    //Req.body contains image
+    //Send res back the url of the posted image
   }
 };
+
+
+
+
+
+
 

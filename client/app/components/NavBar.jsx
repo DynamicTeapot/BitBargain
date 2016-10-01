@@ -32,7 +32,7 @@ const NavBar = (props) => {
   $(".button-collapse").sideNav();
   return (
     <nav>
-      <div className="nav-wrapper">
+      <div className="nav-wrapper light-blue lighten-2">
         <a data-activates="mobile" className="button-collapse"><i className="material-icons">menu</i></a>
         <a className="brand-logo center">Bit Bargain</a>
         <ul className="left hide-on-med-and-down">

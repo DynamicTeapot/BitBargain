@@ -16,7 +16,8 @@ router
   .delete('/items/:id', itemController.deleteItem)
   .get('/disputes', itemController.getDisputes)
   .post('/disputes', itemController.resolveDisputes)
-  .post('/disputes/:id', itemController.startDispute);
+  .post('/disputes/:id', itemController.startDispute)
+  .post('/imgUp');
 
 // Search routes
 

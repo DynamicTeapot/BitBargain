@@ -31,7 +31,7 @@ class uploadContainer extends React.Component {
     if (this.props.imageStatus === 'ready') {
       return (
         <div className="file-field input-field">
-          <div className="btn">
+          <div className="waves-effect waves-light btn">
             <span>Images</span>
             <input type="file" onChange={imageFun} multiple />
           </div>
