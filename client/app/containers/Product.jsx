@@ -31,13 +31,13 @@ class productContainer extends React.Component {
       full_width: true,
       indicators: true
     });
-    $carousel.on('click', () => (this).carousel('next'));
+    $carousel.on('click', () => $carousel.carousel('next'));
   }
   // componentWillUnmount() {
   //   this.props.clearProduct();
   // }
   render() {
-    if (this.props.user === 'buyer') {
+    if (this.props.loggedIn && this.props.user === 'buyer_id') {
       return (
         <Buyer
           updateProduct={this.props.updateProduct}
@@ -45,7 +45,7 @@ class productContainer extends React.Component {
         />
       );
     }
-    if (this.props.user === 'seller') {
+    if (this.props.loggedIn && this.props.user === 'seller_id') {
       return (
         <Seller
           updateProduct={this.props.updateProduct}
