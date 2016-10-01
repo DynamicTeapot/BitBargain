@@ -14,6 +14,7 @@ module.exports = {
       });
   },
   buyItem(req, res) {
+    console.log('here');
     db.items.getById(req.params.id)
     .then((product) => {
       console.log(product);
@@ -95,10 +96,6 @@ module.exports = {
     req.body.polarity; // This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
     // We should do something with it
     db.transactions.updateTransaction(req.body.id, {});
-  },
-  postImage(req, res) {
-    //Req.body contains image
-    //Send res back the url of the posted image
   }
 };
 

@@ -43,27 +43,28 @@ class sellItemContainer extends React.Component {
               <label htmlFor="title">Product Name</label>
             </div>
 
-            <div className="input-field col s6">
-              <input onChange={priceFun} type="number" className="validate" id="price" />
-              <label htmlFor="price">Price($)</label>
+              <div className="input-field col s6">
+                <input onChange={priceFun} type="number" className="validate" id="price" />
+                <label htmlFor="price">Price($)</label>
+              </div>
             </div>
-          </div>
 
 
-          <div className="row">
-            <div className="input-field col s12">
-              <textarea className="materialize-textarea" onChange={descFun} id="description"/>
-              <label className="active" htmlFor="description" >Description</label>
+            <div className="row">
+              <div className="input-field col s12">
+                <textarea className="materialize-textarea" onChange={descFun} id="description"/>
+                <label className="active" htmlFor="description" >Description</label>
+              </div>
             </div>
-          </div>
 
 
-          <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i className="material-icons right">send</i>
-          </button>
+            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i className="material-icons right">send</i>
+            </button>
 
-        </form>
-      </div>
+          </form>
+        </div>
+
   ));
   }
 }

@@ -30,11 +30,13 @@ const tabMap =
 
 const NavBar = (props) => {
   $(".button-collapse").sideNav();
+  console.log(props.user);
   return (
     <nav>
       <div className="nav-wrapper light-blue lighten-2">
         <a data-activates="mobile" className="button-collapse"><i className="material-icons">menu</i></a>
         <a className="brand-logo center">Bit Bargain</a>
+        <a className="brand-logo right">{props.user}</a>
         <ul className="left hide-on-med-and-down">
           {tabMap.map((tab, index) => {
             console.log(tab.link);

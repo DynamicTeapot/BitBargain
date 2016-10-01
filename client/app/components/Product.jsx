@@ -23,17 +23,16 @@ class productContainer extends React.Component {
       .catch(err => console.error(err));
   }
   componentWillUnmount() {
-    console.log(this.props);
     this.props.clearProduct();
   }
   buy() {
     if (this.state.canBuy && this.props.loggedIn) {
       fetch(`/items/${this.props.product.id}/buy`, {
-        type: 'POST',
+        method: 'POST',
         credentials: 'include'
       });
       Materialize.toast(`Bought: ${this.props.product.title}`, 5000)
-      this.setState({canBuy: false});
+      this.setState({canBuy: true});
     }
   }
   render() {
