@@ -20,6 +20,39 @@ export function sellError(error) {
   return { type: SELL_ERROR, error };
 }
 
+export const IMAGE_SUCCESS = 'IMAGE_SUCCESS';
+
+export function imageSuccess(res) {
+  return dispatch => {
+    dispatch({ type: IMAGE_SUCCESS, image: { thumb: res.thumbnail, url: res.url } });
+  };
+}
+
+export const IMAGE_POST = 'IMAGE_POST';
+
+export function postImage(image) {
+  return dispatch => {
+    const url = '/image';
+    dispatch({ type: IMAGE_POST });
+    const options = {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(image)
+    };
+
+    fetch(url, options)
+      .then(res => res.json().then(r => dispatch(imageSuccess(r))))
+      .catch((e) => {
+        console.error(url, status, e.toString());
+        console.log('Posted image, ', image);
+      });
+  };
+}
+
 export const SELL_POST = 'SELL_POST';
 
 export function sellPost(product) {

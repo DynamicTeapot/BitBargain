@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import ImageUploader from 'react-image-uploader';
 
+import { ImageUpload, ImagePreview } from './ImageUpload.jsx';
 import item from '../schema';
 import { mapStateToProps, mapDispatchToProps } from '../reducers/sellitem.reducer';
 
@@ -18,8 +18,8 @@ class sellItemContainer extends React.Component {
     const reader = new FileReader();
     const file = e.target.files[0];
 
-    reader.onload = (upload) => {
-      this.setState({
+    reader.onload = upload => {
+      this.props.submitImage({
         data_uri: upload.target.result,
         filename: file.name,
         filetype: file.type
@@ -33,6 +33,8 @@ class sellItemContainer extends React.Component {
     const newItem = this.state;
     newItem.created_at = new Date();
     newItem.updated_at = new Date();
+    // join local state w/ redux images
+    newItem.images = this.props.images.map(i => i.url);
     console.log('newItem is,', newItem);
     this.props.submitSell(newItem);
   }
@@ -42,21 +44,12 @@ class sellItemContainer extends React.Component {
     const descFun = e => this.setState({ description: e.target.value });
     const titleFun = e => this.setState({ title: e.target.value });
     const imageFun = e => console.log(e.target.value);
-
+    // TODO## render images returned
     return ((
       <div className="row">
         <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
-
-          <div className="file-field input-field">
-            <div className="btn">
-              <span>Images</span>
-              <input type="file" onChange={imageFun} multiple />
-            </div>
-            <div className="file-path-wrapper">
-              <input className="file-path validate" type="text" placeholder="Upload one or more files" />
-            </div>
-          </div>
-
+          <ImageUpload />
+          <ImagePreview />
           <div className="row">
 
             <div className="input-field col s6">
@@ -91,7 +84,9 @@ class sellItemContainer extends React.Component {
 
 sellItemContainer.propTypes = {
   status: PropTypes.string.isRequired,
-  submitSell: PropTypes.func.isRequired
+  submitSell: PropTypes.func.isRequired,
+  submitImage: PropTypes.func.isRequired,
+  images: PropTypes.arr.isRequired
 };
 
 const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);
