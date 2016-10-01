@@ -9,15 +9,15 @@ const productInit = {
   id: 123
 };
 
-export function productReducer(state = { product: productInit }, action) {
+export function productReducer(state = productInit, action) {
   const dispatch = action.type;
 
   if (dispatch === 'changeProduct') {
     // Should be used only for changing to a completely different product
-    return Object.assign({}, state, { product: action.product });
+    return Object.assign({}, action.product);
   } else if (dispatch === 'updateProduct') {
     // Should only be used to change info on the current product
-    return Object.assign({}, state, { product: action.product });
+    return Object.assign({}, action.product);
   }
   return state;
 }
@@ -25,7 +25,8 @@ export function productReducer(state = { product: productInit }, action) {
 export function mapStateToProps(state) {
   return {
     product: state.product.product,
-    loggedIn: state.login.loggedIn
+    loggedIn: state.login.loggedIn,
+    user: state.login.user
   };
 }
 
