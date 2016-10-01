@@ -23,6 +23,7 @@ import { searchReducer } from './reducers/search.reducer';
 import { productReducer } from './reducers/product.reducer';
 import { loginReducer } from './reducers/auth.reducer';
 import { disputeReducer } from './reducers/dispute.reducer';
+import { imageUploadReducer } from './reducers/images.reducer.js';
 
 const rootReducer = combineReducers(
   {
@@ -31,7 +32,8 @@ const rootReducer = combineReducers(
     search: searchReducer,
     routing: routerReducer,
     sellitem: sellItemReducer,
-    dispute: disputeReducer
+    dispute: disputeReducer,
+    image: imageUploadReducer,
   }
 );
 

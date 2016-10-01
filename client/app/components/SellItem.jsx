@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { ImageUpload, ImagePreview } from './ImageUpload.jsx';
 import item from '../schema';
 import { mapStateToProps, mapDispatchToProps } from '../reducers/sellitem.reducer';
 
@@ -13,14 +14,18 @@ class sellItemContainer extends React.Component {
       price: ''
     };
   }
+
   handleForm() {
     // /items/sell endpoint
     const newItem = this.state;
     newItem.created_at = new Date();
     newItem.updated_at = new Date();
+    // join local state w/ redux images
+    newItem.images = this.props.images.map(i => i.url);
     console.log('newItem is,', newItem);
     this.props.submitSell(newItem);
   }
+
   render() {
     const submitFun = (e) => { e.preventDefault(); this.handleForm(); return false; };
     const priceFun = e => this.setState({ price: e.target.value });
@@ -30,17 +35,8 @@ class sellItemContainer extends React.Component {
     return ((
       <div className="row">
         <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
-
-          <div className="file-field input-field">
-            <div className="btn">
-              <span>Images</span>
-              <input type="file" multiple />
-            </div>
-            <div className="file-path-wrapper">
-              <input className="file-path validate" type="text" placeholder="Upload one or more files" />
-            </div>
-          </div>
-
+          <ImageUpload />
+          <ImagePreview />
           <div className="row">
 
             <div className="input-field col s6">
@@ -75,7 +71,8 @@ class sellItemContainer extends React.Component {
 
 sellItemContainer.propTypes = {
   status: PropTypes.string.isRequired,
-  submitSell: PropTypes.func.isRequired
+  submitSell: PropTypes.func.isRequired,
+  images: PropTypes.array.isRequired
 };
 
 const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);

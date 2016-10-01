@@ -23,15 +23,15 @@ module.exports = {
         db.items.sold(req.params.id);
         console.log('transaction successful, transferring money');
         const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
-        client.getBuyPrice({'currencyPair': 'BTC-USD'}, function(err, obj) {
-          console.log('total amount: ' + obj.data.amount);
-          var args = {
-            "to": "Escrow Wallet",
-            "amount": (Number(product[0].price) * obj.data.amount),
-            "currency": "BTC",
-            "description": "Purchasing: " + product[0].title
+        client.getBuyPrice({ currencyPair: 'BTC-USD' }, (err, obj) => {
+          console.log(`total amount: ${obj.data.amount}`);
+          const args = {
+            to: 'Escrow Wallet',
+            amount: (Number(product[0].price) * obj.data.amount),
+            currency: 'BTC',
+            description: `Purchasing: ${product[0].title}`
           };
-          //Need to find the user's accounts first, and then transfer money from them
+          // Need to find the user's accounts first, and then transfer money from them
           // account.requestMoney(args, function(err, txn) {
           //   console.log('my txn id is: ' + txn.id);
           // });

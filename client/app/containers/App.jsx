@@ -9,16 +9,16 @@ class AppContainer extends React.Component {
   }
   componentWillMount() {
     fetch('/auth/persist', {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }
     })
     .then(data => data.text())
-    .then(resp => { 
-      if(resp !== "") {
+    .then((resp) => {
+      if (resp !== '') {
         try {
           this.props.loginSuccess(JSON.parse(resp));
         }
