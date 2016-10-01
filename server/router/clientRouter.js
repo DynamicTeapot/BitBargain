@@ -4,6 +4,17 @@ const itemController = require('../controllers/itemController');
 const search = require('../search/search.js');
 const passport = require('passport');
 const images = require('../controllers/imageController');
+const multer = require('multer');
+
+
+// Multer is middlewhere that makes file upload easy.
+const upload = multer({
+  dest: `${__dirname}/../../client/public/`,
+  limits: {
+    fileSize: 1000000,
+    files: 10
+  }
+});
 
 // General Routes for nothing specific
 
@@ -20,8 +31,9 @@ router
   .post('/disputes/:id', itemController.startDispute)
 
   // Images Routes
-  .post('/images/:id', images.addImage)
+  .post('/images/:id', upload.single('item'), images.addImage)
   .get('images/:id/:number', images.getImage);
+
 
 // Search routes
 

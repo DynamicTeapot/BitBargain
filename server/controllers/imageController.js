@@ -10,9 +10,8 @@ const db = require('../db/model');
  * @param {Result} res - An express Result object.
  */
 function addImage(req, res) {
-  console.log('request');
-  console.log(req);
-  res.send('Hi');
+  console.log(req.file);
+  res.status(201).send('Picture successfully uploaded.');
 }
 
 
