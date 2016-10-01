@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-// import * as Default from '../components/DefaultProduct.jsx';
-// import * as Buyer from '../components/BuyerProduct.jsx';
-// import * as Seller from '../componentsSellerProduct.jsx';
 import { connect } from 'react-redux';
+import Default from '../components/DefaultProduct.jsx';
+// import Buyer from '../components/BuyerProduct.jsx';
+// import Seller from '../componentsSellerProduct.jsx';
 import {
   mapStateToProps,
   mapDispatchToProps,
@@ -13,15 +13,29 @@ import item from '../schema';
 // TODO: This should redirect in the event of an error.
 
 class productContainer extends React.Component {
+
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
       .then(res => res.json())
+      .then(res => {
+        // test image - remove later
+        res.image = 'http://lorempixel.com/output/nature-q-c-640-480-10.jpg';
+        return res;
+      })
       .then(res => this.props.updateProduct(res))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err));  
   }
-  componentWillUnmount() {
-    this.props.clearProduct();
+  componentDidMount() {
+    const $carousel = $('.carousel.carousel-slider');
+    $carousel.carousel({
+      full_width: true,
+      indicators: true
+    });
+    $carousel.on('click', () => (this).carousel('next'));
   }
+  // componentWillUnmount() {
+  //   this.props.clearProduct();
+  // }
   render() {
     if (this.props.user === 'buyer') {
       return (
@@ -30,21 +44,21 @@ class productContainer extends React.Component {
           product={this.props.product}
         />
       );
-    } else if (this.props.user === 'seller') {
+    }
+    if (this.props.user === 'seller') {
       return (
         <Seller
           updateProduct={this.props.updateProduct}
           product={this.props.product}
         />
       );
-    } else {
-      return (
-        <Default
-          updateProduct={this.props.updateProduct}
-          product={this.props.product}
-        />
-      );
     }
+    return (
+      <Default
+        updateProduct={this.props.updateProduct}
+        product={this.props.product}
+      />
+    );
   }
 }
 
@@ -53,6 +67,7 @@ productContainer.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.any
   }),
+  user: PropTypes.object.isRequired,
   updateProduct: PropTypes.func.isRequired,
   clearProduct: PropTypes.func.isRequired
 };
