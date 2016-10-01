@@ -31,6 +31,7 @@ router
   .post('/disputes/:id', itemController.startDispute)
 
   // Images Routes
+  .post('/image', upload.any(), images.addImage)
   .post('/images/:id', upload.single('item'), images.addImage)
   .get('images/:id/:number', images.getImage);
 
