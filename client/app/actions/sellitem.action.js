@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router } from 'react-router';
+import { browserHistory } from 'react-router';
 
 export const SELL_SUCCESS = 'SELL_SUCESS';
 
@@ -7,11 +7,12 @@ export function sellSuccess(resp) {
   // do something with the success response from the server
   return dispatch => {
     console.log('Sell success with action : ', resp);
-    let product = resp.json();
-    product = product.data;
+    let product = resp;
+    // product = product.data;
 
-    dispatch({ type: SELL_SUCCESS, product });
-    // Router.transitionTo(`/product/${product.id}`);
+    dispatch({ type: SELL_SUCCESS });
+    dispatch({ type: 'updateProduct', product });
+    browserHistory.push(`/product/${product.id}`);
   };
 }
 
@@ -45,7 +46,7 @@ export function sellPost(product) {
     };
 
     fetch(url, options)
-    .then(res => dispatch(sellSuccess(res)))
+    .then(res => res.json().then(r => dispatch(sellSuccess(r))))
     .catch(e => {
       console.error(url, status, e.toString());
       console.log('Posted product, ', product);
