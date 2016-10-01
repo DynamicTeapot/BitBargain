@@ -13,11 +13,12 @@ const configure = (passport) => {
     }
   ));
 
+  //scope options: https://developers.coinbase.com/docs/wallet/permissions
   passport.use(new CoinbaseStrategy({
     clientID: secrets.coinbaseClient,
     clientSecret: secrets.coinbaseSecret,
     callbackURL: 'http://localhost:9009/auth/login/coinbase/callback',
-    scope: ['user']
+    scope: ['user', 'wallet:transactions:transfer', 'wallet:accounts:read']
   },
   (accessToken, refreshToken, profile, done) => {
     return done(null, { profile, accessToken, refreshToken });

@@ -21,16 +21,15 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const tabMap = 
-[{title: 'Home', link: ''},
- {title: 'Login', link: '/login'},
- {title: 'Sign Up', link: '/signup'},
- {title: 'Sell', link: '/sellitem'},
- {title: 'Dispute', link: '/dispute'},
+[{title: 'Home', link: '', align: 'left'},
+ {title: 'Sell', link: '/sellitem', align: 'left'},
+ {title: 'Dispute', link: '/dispute', align: 'left'},
+ {title: 'Sign Up', link: '/signup', align: 'right'},
+ {title: 'Login', link: '/login', align: 'right'},
  ]
 
 const NavBar = (props) => {
   $(".button-collapse").sideNav();
-  console.log(props.user);
   return (
     <nav>
       <div className="nav-wrapper light-blue lighten-2">
@@ -39,13 +38,12 @@ const NavBar = (props) => {
         <a className="brand-logo right">{props.user}</a>
         <ul className="left hide-on-med-and-down">
           {tabMap.map((tab, index) => {
-            console.log(tab.link);
-              return (<li key={index}><Link to={tab.link}>{tab.title}</Link></li>);
+              return (<li key={index}  className={`${tab.align}`}><Link to={tab.link}>{tab.title}</Link></li>);
           })}
+          <li key='coinbase' className='right'><a href="/auth/login/coinbase"><i className="material-icons">monetization_on</i></a></li>
         </ul>
         <ul className="side-nav" id="mobile">
           {tabMap.map((tab, index) => {
-            console.log(tab.link);
               return (<li key={index}><Link to={tab.link}>{tab.title}</Link></li>);
           })}
         </ul>

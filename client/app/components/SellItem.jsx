@@ -44,7 +44,7 @@ class sellItemContainer extends React.Component {
             </div>
 
               <div className="input-field col s6">
-                <input onChange={priceFun} type="number" className="validate" id="price" />
+                <input onChange={priceFun} type="number" className="validate" id="price" min="0.00"/>
                 <label htmlFor="price">Price($)</label>
               </div>
             </div>

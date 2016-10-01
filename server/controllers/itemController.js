@@ -15,31 +15,34 @@ module.exports = {
   },
   buyItem(req, res) {
     console.log('here');
+    console.log(req.params.id);
     db.items.getById(req.params.id)
     .then((product) => {
-      console.log(product);
       // Product might be an array probably, so need to [0] need to test it out.
-      res.json(product[0]);
-      db.transactions.updateTransaction(product[0].id, { buyer_id: req.user.id })
+      db.transactions.updateTransaction(product[0].id, { buyer_id: req.user.user.id })
       .then(() => {
-        db.items.sold(req.params.id);
+        db.items.sold(Number(req.params.id));
         console.log('transaction successful, transferring money');
         const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
-        client.getBuyPrice({ currencyPair: 'BTC-USD' }, (err, obj) => {
-          console.log(`total amount: ${obj.data.amount}`);
-          const args = {
-            to: 'Escrow Wallet',
-            amount: (Number(product[0].price) * obj.data.amount),
-            currency: 'BTC',
-            description: `Purchasing: ${product[0].title}`
-          };
+        var args = {
+          "to": "julianknodt@gmail.com",
+          "amount": /*(Number(product[0].price))*/ 0,
+          "currency": "USD",
+          "description": "Purchasing: " + product[0].title
+        };
+        console.log(Object.getOwnPropertyNames(client));
+        client.getAccounts({}, (err, data) => {
+          data[0].transferMoney(args, function(err, txn) {
+            console.log(err, txn);
+          });
+        });
           // Need to find the user's accounts first, and then transfer money from them
           // account.requestMoney(args, function(err, txn) {
           //   console.log('my txn id is: ' + txn.id);
           // });
-        });
+
       });
-    });
+    })
   },
   sellItem(req, res) {
     console.log(req.body);

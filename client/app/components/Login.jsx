@@ -60,7 +60,7 @@ const loginContainer = (props) => {
           </div>
         </div>
       </form>
-      <a className="waves-effect waves-light btn right" onClick={() => { localLogin(null, props); }}>Submit</a>
+      <a className="waves-effect waves-light btn right blue lighten-3" onClick={() => { localLogin(null, props); }}>Submit</a>
       <a className="waves-effect waves-light btn green" href="/auth/login/coinbase">Coinbase</a>
     </div>
   );

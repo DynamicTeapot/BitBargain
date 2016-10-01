@@ -29,6 +29,7 @@ class productContainer extends React.Component {
     if (this.state.canBuy && this.props.loggedIn) {
       fetch(`/items/${this.props.product.id}/buy`, {
         method: 'POST',
+        mode: 'no-cors',
         credentials: 'include'
       });
       Materialize.toast(`Bought: ${this.props.product.title}`, 5000)
