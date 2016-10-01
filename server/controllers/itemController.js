@@ -1,6 +1,6 @@
 const db = require('../db/model');
 const coinbase = require('coinbase');
-var s3 = require('s3');
+const sendEmail = require('./send-email');
 
 module.exports = {
   getCategories(req, res) {
@@ -34,7 +34,7 @@ module.exports = {
           "currency": "USD",
           "type": "order",
           "style": "custom_small",
-          "success_url": `http://localhost:9009/` + req.params.id + `/confirm`,
+          "success_url": `http://localhost:9009/items/` + req.params.id + `/confirm`,
           "cancel_url": 'http://localhost:9009/product/' + req.params.id,
           "customer_defined_amount": false,
           "collect_shipping_address": false,
@@ -48,19 +48,12 @@ module.exports = {
     })
   },
   sellItem(req, res) {
-    console.log(req.body);
-    console.log('this was called');
     db.items.create(req.body)
-    .then((product) => {
+    .then(product => {
       db.items.getById(product[0])
-      .then((result) => {
-        console.log('Product is ', result[0]);
+      .then(result => {
         res.json(result[0]);
-      });
-
-      db.transactions.create({ item_id: product.id, buyer_id: null, seller_id: req.user.id })
-      .then((trans) => {
-        console.log(trans);
+        db.transactions.create({ item_id: result[0]['id'], buyer_id: null, seller_id: req.user.user.id });
       });
     });
   },
@@ -74,7 +67,14 @@ module.exports = {
     res.send('deleteItem');
   },
   boughtConfirmation(req, res) {
-    console.log(req.user);
+    db.transactions.getById(req.params.id)
+    .then(tx => {
+      db.users.getById(tx[0]['seller_id'])
+      .then(seller => {
+        //The email of the seller is seller[0]['email'];
+        sendEmail(seller[0]['email']);
+      });
+    });
     res.redirect('/');
   },
   sell(req, res) {
