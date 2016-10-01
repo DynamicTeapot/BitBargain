@@ -16,8 +16,8 @@ export function productReducer(state = productInit, action) {
     // Should be used only for changing to a completely different product
     return Object.assign({}, action.product);
   } else if (dispatch === 'updateProduct') {
-    // Should only be used to change info on the current product
-    return Object.assign({}, state, { product: action.product });
+    // Should only be used to change info on the current products
+    return Object.assign({}, action.product);
   } else if (dispatch === 'CLEAR') {
     return {};
   }

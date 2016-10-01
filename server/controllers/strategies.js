@@ -18,7 +18,7 @@ const configure = (passport) => {
     clientID: secrets.coinbaseClient,
     clientSecret: secrets.coinbaseSecret,
     callbackURL: 'http://localhost:9009/auth/login/coinbase/callback',
-    scope: ['user', 'wallet:transactions:transfer', 'wallet:accounts:read']
+    scope: ['user', 'wallet:transactions:transfer', 'wallet:accounts:read', 'wallet:orders:create', 'wallet:orders:refund']
   },
   (accessToken, refreshToken, profile, done) => {
     return done(null, { profile, accessToken, refreshToken });
