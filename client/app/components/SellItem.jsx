@@ -38,33 +38,33 @@ class sellItemContainer extends React.Component {
           <ImageUpload />
           <ImagePreview />
           <div className="row">
-
             <div className="input-field col s6">
-              <input onChange={titleFun} className="active" type="Text" id="title" placeholder="Enter the name of the product" />
-              <label htmlFor="title">Title</label>
+              <input onChange={titleFun} className="active" type="text" id="title" />
+              <label htmlFor="title">Product Name</label>
             </div>
 
-            <div className="input-field col s6">
-              <input className="active" onChange={priceFun} type="Text" id="price" />
-              <label htmlFor="price">Price</label>
+              <div className="input-field col s6">
+                <input onChange={priceFun} type="number" className="validate" id="price" min="0.00"/>
+                <label htmlFor="price">Price($)</label>
+              </div>
             </div>
-          </div>
 
 
-          <div className="row">
-            <div className="input-field col s12">
-              <textarea className="materialize-textarea" onChange={descFun} id="description" />
-              <label className="active" htmlFor="description" >Description</label>
+            <div className="row">
+              <div className="input-field col s12">
+                <textarea className="materialize-textarea" onChange={descFun} id="description"/>
+                <label className="active" htmlFor="description" >Description</label>
+              </div>
             </div>
-          </div>
 
 
-          <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i className="material-icons right">send</i>
-          </button>
+            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i className="material-icons right">send</i>
+            </button>
 
-        </form>
-      </div>
+          </form>
+        </div>
+
   ));
   }
 }

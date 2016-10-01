@@ -1,5 +1,6 @@
 const db = require('../db/model');
 const coinbase = require('coinbase');
+var s3 = require('s3');
 
 module.exports = {
   getCategories(req, res) {
@@ -13,31 +14,38 @@ module.exports = {
       });
   },
   buyItem(req, res) {
+    console.log('here');
+    console.log(req.params.id);
     db.items.getById(req.params.id)
     .then((product) => {
-      console.log(product);
       // Product might be an array probably, so need to [0] need to test it out.
-      res.json(product[0]);
-      db.transactions.updateTransaction(product[0].id, { buyer_id: req.user.id })
+      db.transactions.updateTransaction(product[0].id, { buyer_id: req.user.user.id })
       .then(() => {
-        db.items.sold(req.params.id);
+        db.items.sold(Number(req.params.id));
         console.log('transaction successful, transferring money');
         const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
-        client.getBuyPrice({ currencyPair: 'BTC-USD' }, (err, obj) => {
-          console.log(`total amount: ${obj.data.amount}`);
-          const args = {
-            to: 'Escrow Wallet',
-            amount: (Number(product[0].price) * obj.data.amount),
-            currency: 'BTC',
-            description: `Purchasing: ${product[0].title}`
-          };
-          // Need to find the user's accounts first, and then transfer money from them
-          // account.requestMoney(args, function(err, txn) {
-          //   console.log('my txn id is: ' + txn.id);
-          // });
+        var args = {
+          "name": 'Order for ' + product[0].title,
+          "amount": /*(Number(product[0].price))*/ 0.01,
+          "metadata": {
+            "customer_id": client.id,
+            "customer_name": 'test'
+          },
+          "currency": "USD",
+          "type": "order",
+          "style": "custom_small",
+          "success_url": `http://localhost:9009/` + req.params.id + `/confirm`,
+          "cancel_url": 'http://localhost:9009/product/' + req.params.id,
+          "customer_defined_amount": false,
+          "collect_shipping_address": false,
+          "description": "Purchasing: " + product[0].title + ' on BitBargain'
+        };
+        client.createCheckout(args, function(err, checkout) {
+          console.log(err, checkout);
+          res.json(checkout.embed_code);
         });
       });
-    });
+    })
   },
   sellItem(req, res) {
     console.log(req.body);
@@ -65,6 +73,10 @@ module.exports = {
   deleteItem(req, res) {
     res.send('deleteItem');
   },
+  boughtConfirmation(req, res) {
+    console.log(req.user);
+    res.redirect('/');
+  },
   sell(req, res) {
     const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
     client.getAccounts({}, (err, accounts) => {
@@ -90,10 +102,16 @@ module.exports = {
     db.transactions.updateTransaction(req.body.id, { order_status: 'disputed' })
     .then(result => res.send(result));
   },
-  resolveDisputes(req, res) {
+  resolveDisputes (req, res) {
     req.body.polarity; // This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
     // We should do something with it
     db.transactions.updateTransaction(req.body.id, {});
   }
 };
+
+
+
+
+
+
 

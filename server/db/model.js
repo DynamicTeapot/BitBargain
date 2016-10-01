@@ -35,9 +35,8 @@ module.exports = {
     },
     // takes an item id and updates/toggles the sold field
     sold(id) {
-      db('items').where('id', id)
-      .update('sold', true)
-      .catch(err => console.error(`Error updating item with id ${id}, ${err}`));
+      return db('items').where('id', id)
+      .update('sold', 'true');
     }
   },
   users: {

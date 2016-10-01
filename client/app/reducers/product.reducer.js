@@ -16,8 +16,10 @@ export function productReducer(state = productInit, action) {
     // Should be used only for changing to a completely different product
     return Object.assign({}, action.product);
   } else if (dispatch === 'updateProduct') {
-    // Should only be used to change info on the current product
+    // Should only be used to change info on the current products
     return Object.assign({}, action.product);
+  } else if (dispatch === 'CLEAR') {
+    return {};
   }
   return state;
 }
@@ -34,6 +36,9 @@ export function mapDispatchToProps(dispatch) {
   return {
     updateProduct: (data) => {
       dispatch({ type: 'updateProduct', product: data });
+    },
+    clearProduct: () => {
+      dispatch({type: 'CLEAR'});
     }
   };
 }

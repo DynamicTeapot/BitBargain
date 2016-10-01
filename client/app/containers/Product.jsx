@@ -26,6 +26,7 @@ class productContainer extends React.Component {
       .catch(err => console.error(err));  
   }
   componentDidMount() {
+    console.log(this.props);
     const $carousel = $('.carousel.carousel-slider');
     $carousel.carousel({
       full_width: true,
@@ -40,6 +41,7 @@ class productContainer extends React.Component {
     if (this.props.loggedIn && this.props.user === 'buyer_id') {
       return (
         <Buyer
+          loggedIn = {this.props.loggedIn}
           updateProduct={this.props.updateProduct}
           product={this.props.product}
         />
@@ -48,6 +50,7 @@ class productContainer extends React.Component {
     if (this.props.loggedIn && this.props.user === 'seller_id') {
       return (
         <Seller
+          loggedIn = {this.props.loggedIn}
           updateProduct={this.props.updateProduct}
           product={this.props.product}
         />
@@ -55,6 +58,7 @@ class productContainer extends React.Component {
     }
     return (
       <Default
+        loggedIn = {this.props.loggedIn}
         updateProduct={this.props.updateProduct}
         product={this.props.product}
       />
