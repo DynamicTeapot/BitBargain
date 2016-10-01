@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import ImageUploader from 'react-image-uploader';
 
 import item from '../schema';
 import { mapStateToProps, mapDispatchToProps } from '../reducers/sellitem.reducer';
@@ -12,6 +13,20 @@ class sellItemContainer extends React.Component {
       description: '',
       price: ''
     };
+  }
+  handleFile(e) {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onload = (upload) => {
+      this.setState({
+        data_uri: upload.target.result,
+        filename: file.name,
+        filetype: file.type
+      });
+    };
+
+    reader.readAsDataURL(file);
   }
   handleForm() {
     // /items/sell endpoint
@@ -26,6 +41,7 @@ class sellItemContainer extends React.Component {
     const priceFun = e => this.setState({ price: e.target.value });
     const descFun = e => this.setState({ description: e.target.value });
     const titleFun = e => this.setState({ title: e.target.value });
+    const imageFun = e => console.log(e.target.value);
 
     return ((
       <div className="row">
@@ -34,7 +50,7 @@ class sellItemContainer extends React.Component {
           <div className="file-field input-field">
             <div className="btn">
               <span>Images</span>
-              <input type="file" multiple />
+              <input type="file" onChange={imageFun} multiple />
             </div>
             <div className="file-path-wrapper">
               <input className="file-path validate" type="text" placeholder="Upload one or more files" />

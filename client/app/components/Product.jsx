@@ -14,7 +14,7 @@ class productContainer extends React.Component {
     super(props);
     this.state = {
       canBuy: true
-    }
+    };
   }
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
@@ -31,7 +31,7 @@ class productContainer extends React.Component {
         type: 'POST',
         credentials: 'include'
       });
-      this.setState({canBuy: false});
+      this.setState({ canBuy: false });
     }
   }
   render() {

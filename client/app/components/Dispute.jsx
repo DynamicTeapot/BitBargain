@@ -25,7 +25,7 @@ class DisputeContainer extends React.Component {
         this.setState({ timeToRead: true });
       }, timeToRead);
     } else {
-      //Has Dispute here should be false but for testing purposes change it
+      // Has Dispute here should be false but for testing purposes change it
       this.setState({ timeToRead: false, hasDispute: false });
     }
   }
