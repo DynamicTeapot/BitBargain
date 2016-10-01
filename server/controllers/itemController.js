@@ -25,22 +25,25 @@ module.exports = {
         console.log('transaction successful, transferring money');
         const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
         var args = {
-          "to": "julianknodt@gmail.com",
-          "amount": /*(Number(product[0].price))*/ 0,
+          "name": 'Order for ' + product[0].title,
+          "amount": /*(Number(product[0].price))*/ 0.01,
+          "metadata": {
+            "customer_id": client.id,
+            "customer_name": 'test'
+          },
           "currency": "USD",
-          "description": "Purchasing: " + product[0].title
+          "type": "order",
+          "style": "custom_small",
+          "success_url": `http://localhost:9009/` + req.params.id + `/confirm`,
+          "cancel_url": 'http://localhost:9009/product/' + req.params.id,
+          "customer_defined_amount": false,
+          "collect_shipping_address": false,
+          "description": "Purchasing: " + product[0].title + ' on BitBargain'
         };
-        console.log(Object.getOwnPropertyNames(client));
-        client.getAccounts({}, (err, data) => {
-          data[0].transferMoney(args, function(err, txn) {
-            console.log(err, txn);
-          });
+        client.createCheckout(args, function(err, checkout) {
+          console.log(err, checkout);
+          res.json(checkout.embed_code);
         });
-          // Need to find the user's accounts first, and then transfer money from them
-          // account.requestMoney(args, function(err, txn) {
-          //   console.log('my txn id is: ' + txn.id);
-          // });
-
       });
     })
   },
@@ -69,6 +72,10 @@ module.exports = {
   },
   deleteItem(req, res) {
     res.send('deleteItem');
+  },
+  boughtConfirmation(req, res) {
+    console.log(req.user);
+    res.redirect('/');
   },
   sell(req, res) {
     const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });

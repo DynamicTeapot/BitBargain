@@ -10,6 +10,7 @@ router
   .get('/items/categories', itemController.getCategories)
   .get('/items/:id', itemController.getItem)
   .post('/items/:id/buy', itemController.buyItem)
+  .get('/items/:id/confirm', itemController.boughtConfirmation)
   .post('/items/sell', itemController.sellItem)
   .get('/items/:id/shipped', itemController.shippedItem)
   .put('/items/:id/update', itemController.updateItem)
