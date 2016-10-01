@@ -3,6 +3,7 @@ const itemController = require('../controllers/itemController');
 // const userController = require('../controllers/userController');
 const search = require('../search/search.js');
 const passport = require('passport');
+const images = require('../controllers/imageController');
 
 // General Routes for nothing specific
 
@@ -16,7 +17,11 @@ router
   .delete('/items/:id', itemController.deleteItem)
   .get('/disputes', itemController.getDisputes)
   .post('/disputes', itemController.resolveDisputes)
-  .post('/disputes/:id', itemController.startDispute);
+  .post('/disputes/:id', itemController.startDispute)
+
+  // Images Routes
+  .post('/images/:id', images.addImage)
+  .get('images/:id/:number', images.getImage);
 
 // Search routes
 

@@ -74,4 +74,17 @@ knex.schema.hasTable('transactions').then((result) => {
   return 0;
 });
 
+knex.schema.hasTable('images').then((result) => {
+  if (!result) {
+    return knex.schema.createTable('images', (table) => {
+      table.integer('item_id');
+      table.integer('pic_id');
+      table.string('url');
+      console.log('Images table created');
+    });
+  }
+  console.log('Table "images" already exist');
+  return 0;
+});
+
 module.exports = knex;
