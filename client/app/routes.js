@@ -13,7 +13,7 @@ import { App } from './containers/App.jsx';
 
 import Index from './components/Index.jsx';
 import { Login } from './components/Login.jsx';
-import { Product } from './components/Product.jsx';
+import { Product } from './containers/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
 import NotFound from './components/NotFound.jsx';
