@@ -2,17 +2,22 @@ import { sellPost, SELL_SUCCESS, SELL_POST } from '../actions/sellitem.action';
 
 export function sellItemReducer(state = { status: 'idle' }, action) {
   const dispatch = action.type;
+  const newState = state;
   if (dispatch === SELL_SUCCESS) {
-    return { status: 'success' };
+    newState.status = 'success';
+    return newState;
   } else if (dispatch === SELL_POST) {
-    return { status: 'loading' };
+    newState.status = 'loading';
+    return newState;
   }
-
   return state;
 }
 
 export function mapStateToProps(state) {
-  return { status: state.sellitem.status };
+  return {
+    status: state.sellitem.status,
+    images: state.image.images
+  };
 }
 
 export function mapDispatchToProps(dispatch) {
