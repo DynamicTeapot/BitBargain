@@ -24,33 +24,35 @@ module.exports = {
         db.items.sold(Number(req.params.id));
         console.log('transaction successful, transferring money');
         const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
-        var args = {
-          "name": 'Order for ' + product[0].title,
-          "amount": /*(Number(product[0].price))*/ 0.01,
-          "metadata": {
-            "customer_id": client.id,
-            "customer_name": 'test'
+        const args = {
+          name: `Order for ${product[0].title}`,
+          amount: /*(Number(product[0].price))*/ 0.01,
+          metadata: {
+            customer_id: client.id,
+            customer_name: 'test'
           },
-          "currency": "USD",
-          "type": "order",
-          "style": "custom_small",
-          "success_url": `http://localhost:9009/` + req.params.id + `/confirm`,
-          "cancel_url": 'http://localhost:9009/product/' + req.params.id,
-          "customer_defined_amount": false,
-          "collect_shipping_address": false,
-          "description": "Purchasing: " + product[0].title + ' on BitBargain'
+          currency: 'USD',
+          type: 'order',
+          style: 'custom_small',
+          success_url: `http://localhost:9009/${req.params.id}/confirm`,
+          cancel_url: `http://localhost:9009/product/${req.params.id}`,
+          customer_defined_amount: false,
+          collect_shipping_address: false,
+          description: `Purchasing: ${product[0].title} on BitBargain`
         };
-        client.createCheckout(args, function(err, checkout) {
+        client.createCheckout(args, (err, checkout) => {
           console.log(err, checkout);
           res.json(checkout.embed_code);
         });
       });
-    })
+    });
   },
   sellItem(req, res) {
     console.log(req.body);
-    console.log('this was called');
-    db.items.create(req.body)
+    const newItem = req.body;
+    newItem.images = JSON.stringify(newItem.images);
+    console.log('Creating new item,', newItem);
+    db.items.create(newItem)
     .then((product) => {
       db.items.getById(product[0])
       .then((result) => {
@@ -103,7 +105,7 @@ module.exports = {
     .then(result => res.send(result));
   },
   resolveDisputes (req, res) {
-    req.body.polarity; // This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
+    // req.body.polarity This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
     // We should do something with it
     db.transactions.updateTransaction(req.body.id, {});
   }
