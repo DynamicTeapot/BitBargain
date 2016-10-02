@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/DynamicTeapot/DynamicTeapot#readme",
   "dependencies": {
+    "aws-sdk": "^2.6.6",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
@@ -43,6 +44,7 @@
     "knex": "^0.12.1",
     "material-ui": "^0.15.4",
     "morgan": "^1.7.0",
+    "multer": "^1.2.0",
     "passport": "^0.3.2",
     "passport-coinbase": "^0.1.2",
     "passport-local": "^1.0.0",

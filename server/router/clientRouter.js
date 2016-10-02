@@ -3,9 +3,10 @@ const itemController = require('../controllers/itemController');
 // const userController = require('../controllers/userController');
 const search = require('../search/search.js');
 const passport = require('passport');
+const images = require('../controllers/imageController');
+
 
 // General Routes for nothing specific
-
 router
   .get('/items/categories', itemController.getCategories)
   .get('/items/:id', itemController.getItem)
@@ -17,7 +18,11 @@ router
   .delete('/items/:id', itemController.deleteItem)
   .get('/disputes', itemController.getDisputes)
   .post('/disputes', itemController.resolveDisputes)
-  .post('/disputes/:id', itemController.startDispute);
+  .post('/disputes/:id', itemController.startDispute)
+
+  // Images Routes
+  .post('/image', images.addImage);
+
 
 // Search routes
 

@@ -9,7 +9,9 @@ const port = 9009 || process.env.PORT;
 const app = express();
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '50mb'
+}));
 app.use(morgan('dev'));
 app.use(express.static('client'));
 app.use('/', authRouter);
