@@ -7,5 +7,5 @@ title varchar(20),
 description text,
 price decimal,
 location text, 
-images text[]
+images json 
 );
