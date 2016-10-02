@@ -19,18 +19,20 @@ function addImage(req, res) {
 
   // Payload for AWS.
   const data = {
-    Key: `images/${req.body.userId || 'test2'}`,
+    Key: `images/${req.body.userId || 'test2'}/${req.body.filename}`,
     Body: buf,
     ContentEncoding: 'base64',
-    ContentType: 'image/jpeg'
+    ContentType: req.body.filetype,
+    ACL: 'public-read'
   };
-
   s3bucket.putObject(data, (err, response) => {
     if (err) {
       console.error(err);
       res.status(400).send('There was a problem uploading the image.');
     } else {
-      res.status(201).send(response.location);
+      const url =`https://bitbargainbucket.s3.amazonaws.com/${data.Key}`;
+      console.log('Responding with,', url);
+      res.status(201).json({ url });
     }
   });
 }

@@ -23,9 +23,7 @@ export function sellError(error) {
 export const IMAGE_SUCCESS = 'IMAGE_SUCCESS';
 
 export function imageSuccess(res) {
-  return dispatch => {
-    dispatch({ type: IMAGE_SUCCESS, image: { thumb: res.thumbnail, url: res.url } });
-  };
+  return { type: IMAGE_SUCCESS, image: res };
 }
 
 export const IMAGE_POST = 'IMAGE_POST';
@@ -45,7 +43,11 @@ export function imagePost(image) {
     };
 
     fetch(url, options)
-      .then(res => res.json().then(r => dispatch(imageSuccess(r))))
+      .then(res => {
+        console.log('Image response is ,', res);
+        return res.json();
+      })
+      .then(r => dispatch(imageSuccess(r)))
       .catch((e) => {
         console.error(url, status, e.toString());
         console.log('Posted image, ', image);
