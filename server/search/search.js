@@ -38,7 +38,6 @@ function search(req, res) {
         });
 
         db.items.getByIds(final).then(f => {
-          console.log(f);
           res.json(f)});
       })
       .catch((e) => {
