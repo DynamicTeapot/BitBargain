@@ -20,33 +20,35 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-const tabMap = 
-[{title: 'Home', link: '', align: 'left'},
- {title: 'Sell', link: '/sellitem', align: 'left'},
- {title: 'Dispute', link: '/dispute', align: 'left'},
- {title: 'Sign Up', link: '/signup', align: 'right'},
- {title: 'Login', link: '/login', align: 'right'},
- ]
+const tabMap =
+[{ title: 'Home', link: '', align: 'left' },
+ { title: 'Sell', link: '/sellitem', align: 'left' },
+ { title: 'Dispute', link: '/dispute', align: 'left' },
+ { title: 'Sign Up', link: '/signup', align: 'right' },
+ { title: 'Login', link: '/login', align: 'right' },
+ ];
 
 const NavBar = (props) => {
-  $(".button-collapse").sideNav();
+  $('.button-collapse').sideNav();
   return (
     <nav>
-      <div className="nav-wrapper light-blue lighten-2">
+      <div className="nav-wrapper cyan">
         <a data-activates="mobile" className="button-collapse"><i className="material-icons">menu</i></a>
         <a className="brand-logo center">Bit Bargain</a>
         <a className="brand-logo right">{props.user}</a>
         <ul className="left hide-on-med-and-down">
           {tabMap.map((tab, index) => {
-              return (<li key={index}  className={`${tab.align}`}><Link to={tab.link}>{tab.title}</Link></li>);
+            return (<li key={index} className={`${tab.align}`}><Link to={tab.link}>{tab.title}</Link></li>);
           })}
-          <li key='coinbase' className='right'><a href="/auth/login/coinbase"><i className="material-icons">monetization_on</i></a></li>
+          <li key="coinbase" className="right"><a href="/auth/login/coinbase"><i className="material-icons">monetization_on</i></a></li>
         </ul>
         <ul className="side-nav" id="mobile">
           {tabMap.map((tab, index) => {
-              return (<li key={index}><Link to={tab.link}>{tab.title}</Link></li>);
+            return (<li key={index}><Link to={tab.link}>{tab.title}</Link></li>);
           })}
         </ul>
+      </div>
+      <div className="row teal">
       </div>
     </nav>
   );

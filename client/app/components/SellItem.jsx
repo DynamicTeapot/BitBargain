@@ -44,7 +44,7 @@ class sellItemContainer extends React.Component {
             </div>
 
               <div className="input-field col s6">
-                <input onChange={priceFun} type="number" className="validate" id="price" min="0.00"/>
+                <input onChange={priceFun} type="number" className="validate" id="price" min="0.00" />
                 <label htmlFor="price">Price($)</label>
               </div>
             </div>
@@ -52,7 +52,7 @@ class sellItemContainer extends React.Component {
 
             <div className="row">
               <div className="input-field col s12">
-                <textarea className="materialize-textarea" onChange={descFun} id="description"/>
+                <textarea className="materialize-textarea" onChange={descFun} id="description" />
                 <label className="active" htmlFor="description" >Description</label>
               </div>
             </div>

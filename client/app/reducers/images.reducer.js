@@ -27,7 +27,7 @@ export function UpStateToProps(state) {
 
 export function UpDispatchToProps(dispatch) {
   return {
-    submitImage: image => {
+    submitImage: (image) => {
       dispatch(imagePost(image));
     }
   };

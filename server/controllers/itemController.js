@@ -14,19 +14,16 @@ module.exports = {
       });
   },
   buyItem(req, res) {
-    console.log('here');
-    console.log(req.params.id);
     db.items.getById(req.params.id)
     .then((product) => {
       // Product might be an array probably, so need to [0] need to test it out.
       db.transactions.updateTransaction(product[0].id, { buyer_id: req.user.user.id })
       .then(() => {
         db.items.sold(Number(req.params.id));
-        console.log('transaction successful, transferring money');
         const client = new coinbase.Client({ accessToken: req.user.accessToken, refreshToken: req.user.refreshToken });
         const args = {
           name: `Order for ${product[0].title}`,
-          amount: /*(Number(product[0].price))*/ 0.01,
+          amount: /* (Number(product[0].price))*/ 0.01,
           metadata: {
             customer_id: client.id,
             customer_name: 'test'
@@ -34,8 +31,8 @@ module.exports = {
           currency: 'USD',
           type: 'order',
           style: 'custom_small',
-          success_url: `http://localhost:9009/${req.params.id}/confirm`,
-          cancel_url: `http://localhost:9009/product/${req.params.id}`,
+          success_url: `http://localhost:9009/items/${req.params.id}/confirm`,
+          cancel_url: `http://localhost:9009/items/${req.params.id}`,
           customer_defined_amount: false,
           collect_shipping_address: false,
           description: `Purchasing: ${product[0].title} on BitBargain`
@@ -54,7 +51,7 @@ module.exports = {
     db.items.create(newItem)
     .then(product => {
       db.items.getById(product[0])
-      .then(result => {
+      .then((result) => {
         res.json(result[0]);
       })
       .catch(e => { console.log('Error getting item, ', e); next(e); });
@@ -76,11 +73,11 @@ module.exports = {
   },
   boughtConfirmation(req, res) {
     db.transactions.getById(req.params.id)
-    .then(tx => {
-      db.users.getById(tx[0]['seller_id'])
-      .then(seller => {
-        //The email of the seller is seller[0]['email'];
-        sendEmail(seller[0]['email']);
+    .then((tx) => {
+      db.users.getById(tx[0].seller_id)
+      .then((seller) => {
+        // The email of the seller is seller[0]['email'];
+        sendEmail(seller[0].email);
       });
     });
     res.redirect('/');
@@ -110,16 +107,11 @@ module.exports = {
     db.transactions.updateTransaction(req.body.id, { order_status: 'disputed' })
     .then(result => res.send(result));
   },
-  resolveDisputes (req, res) {
-    // req.body.polarity This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
+
+  resolveDisputes(req, res) {
+    req.body.polarity; // This is a boolean saying whether someone approved it or not. False means to seller, True means to buyer.
     // We should do something with it
     db.transactions.updateTransaction(req.body.id, {});
   }
 };
-
-
-
-
-
-
 

@@ -29,7 +29,7 @@ export function imageSuccess(res) {
 export const IMAGE_POST = 'IMAGE_POST';
 
 export function imagePost(image) {
-  return dispatch => {
+  return (dispatch) => {
     const url = '/image';
     dispatch({ type: IMAGE_POST });
     const options = {

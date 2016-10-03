@@ -1,5 +1,7 @@
 import React from 'react';
 import NavBar from '../components/NavBar.jsx';
+import Footer from '../components/Footer.jsx';
+import Chime from '../components/Chime.jsx';
 import { connect } from 'react-redux';
 import { mapDispatchToProps } from '../reducers/auth.reducer';
 
@@ -31,21 +33,15 @@ class AppContainer extends React.Component {
   render() {
     return (
       <div>
-      <div style={{minHeight: 89.2+'%', flex: '1 0 auto'}}>
-        <NavBar />
-        {
-        React.cloneElement(this.props.children)
-        }
-      </div>
-      <footer className="page-footer" style={{display:'flex', /*minHeight: 100 + 'vh',*/ flexDirection: 'column'}}>
-          <div className="footer-copyright">
-            <div className="container">
-            © 2016 DynamicTeapots
-            <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-        </footer>
+        <div style={{ minHeight: `${89.2}%`, flex: '1 0 auto' }}>
+          <NavBar />
+          <Chime />         
+          {
+          React.cloneElement(this.props.children)
+          }
         </div>
+        <Footer />
+      </div>
     );
   }
 }
