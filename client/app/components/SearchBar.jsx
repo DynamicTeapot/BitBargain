@@ -22,6 +22,7 @@ class SearchBarContainer extends React.Component {
       fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`)
         .then(res => res.json())
         .then((res) => {
+          console.log('the results are', res);
           this.props.updateResults(res.items);
           this.setState({ loading: false });
         }).catch((err) => {

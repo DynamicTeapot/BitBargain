@@ -4,6 +4,7 @@ import item from '../schema';
 
 
 function SearchResults(props) {
+  console.log(props.products);
   return (
     <div className="row"> {
       props.products.map((product, index) => (<SearchResult key={index} product={product} />))
