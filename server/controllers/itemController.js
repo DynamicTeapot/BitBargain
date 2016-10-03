@@ -47,10 +47,7 @@ module.exports = {
   sellItem(req, res, next) {
     const newItem = req.body;
 
-    console.log('Req user ,', req.user.id);
-    const sellerId = (req.user ? req.user.id : 39);
-
-    console.log('sellerId is ', sellerId);
+    const sellerId = (req.user ? req.user.user.id : 39);
 
     newItem.images = JSON.stringify(newItem.images);
     console.log('Creating new item,', newItem);
