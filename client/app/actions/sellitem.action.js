@@ -10,8 +10,8 @@ export function sellSuccess(resp) {
     const product = resp;
     // product = product.data;
 
-    dispatch({ type: SELL_SUCCESS });
     dispatch({ type: IMAGE_CLEAR });
+    dispatch({ type: SELL_SUCCESS });
     dispatch({ type: 'changeProduct', product });
     browserHistory.push(`/product/${product.id}`);
   };

@@ -7,18 +7,23 @@ const loginInit = {
 
 export function loginReducer(state = loginInit, action) {
   const dispatch = action.type;
+  const newState = state;
+
   if (dispatch === 'signin') {
-    state.user = action.user;
-    state.loggedIn = true;
-    return state;
+    newState.user = action.user;
+    newState.loggedIn = true;
+
+    return Object.assign({}, newState);
   } else if (dispatch === 'signout') {
-    state.user = '';
-    state.loggedIn = false;
-    return state;
+    newState.user = '';
+    newState.loggedIn = false;
+
+    return Object.assign({}, newState);
   } else if (dispatch === 'signup') {
-    state.user = action.user;
-    state.loggedIn = true;
-    return state;
+    newState.user = action.user;
+    newState.loggedIn = true;
+
+    return Object.assign({}, newState);
   }
   return state;
 }
