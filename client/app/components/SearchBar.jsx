@@ -23,7 +23,7 @@ class SearchBarContainer extends React.Component {
         return res.json();
       }).then((res) => {
         console.log(res);
-        this.props.updateResults(res.items);
+        this.props.updateResults(res);
         this.setState({ loading: false });
       }).catch((err) => {
         console.error(err);
