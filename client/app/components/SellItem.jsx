@@ -1,38 +1,80 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { ImageUpload, ImagePreview } from './ImageUpload.jsx';
 import item from '../schema';
-import {
-  mapStateToProps,
-  mapDispatchToProps } from '../reducers/sellitem.reducer';
+import { mapStateToProps, mapDispatchToProps } from '../reducers/sellitem.reducer';
 
 class sellItemContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.sellProduct;
+    this.state = {
+      title: '',
+      description: '',
+      price: ''
+    };
   }
-  handleChange(event) {
-    this.props.updateSellTitle(event.target.value);
+
+  handleForm() {
+    // /items/sell endpoint
+    const newItem = this.state;
+    newItem.created_at = new Date();
+    newItem.updated_at = new Date();
+    // join local state w/ redux images
+    newItem.images = this.props.images;
+    console.log('newItem is,', newItem);
+    this.props.submitSell(newItem);
   }
+
   render() {
-    const updateFun = (event) => { this.handleChange(event); };
+    const submitFun = (e) => { e.preventDefault(); this.handleForm(); return false; };
+    const priceFun = e => this.setState({ price: e.target.value });
+    const descFun = e => this.setState({ description: e.target.value });
+    const titleFun = e => this.setState({ title: e.target.value });
+
     return ((
-      <form>
-        <input type="Text" id="title" />
-        <label className="active" htmlFor="title">Title</label>
-        <input type="Text" id="description" />
-        <label className="active" htmlFor="description">Description</label>
-        <input type="email" id="email" className="validate" />
-        <label className="active" htmlFor="email">Description</label>
-        <button />
-      </form>
-    ));
+      <div className="container">
+        <div className="row">
+          <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
+            <ImageUpload />
+            <ImagePreview />
+            <div className="row">
+              <div className="input-field col s6">
+                <input onChange={titleFun} className="active" type="text" id="title" />
+                <label htmlFor="title">Product Name</label>
+              </div>
+
+                <div className="input-field col s6">
+                  <input onChange={priceFun} type="number" className="validate" id="price" min="0.00" />
+                  <label htmlFor="price">Price($)</label>
+                </div>
+              </div>
+
+
+              <div className="row">
+                <div className="input-field col s12">
+                  <textarea className="materialize-textarea" onChange={descFun} id="description" />
+                  <label className="active" htmlFor="description" >Description</label>
+                </div>
+              </div>
+
+
+              <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i className="material-icons right">send</i>
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+  ));
   }
 }
 
 sellItemContainer.propTypes = {
-  sellProduct: item.isRequired,
-  updateSellTitle: PropTypes.func.isRequired
+  status: PropTypes.string.isRequired,
+  submitSell: PropTypes.func.isRequired,
+  images: PropTypes.array.isRequired
 };
 
 const SellItem = connect(mapStateToProps, mapDispatchToProps)(sellItemContainer);

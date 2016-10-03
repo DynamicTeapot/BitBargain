@@ -10,6 +10,12 @@ import item from '../schema';
 // TODO: This should redirect in the event of an error.
 
 class productContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      canBuy: true
+    };
+  }
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
       .then(res => res.json())
@@ -18,6 +24,17 @@ class productContainer extends React.Component {
   }
   componentWillUnmount() {
     this.props.clearProduct();
+  }
+  buy() {
+    if (this.state.canBuy && this.props.loggedIn) {
+      fetch(`/items/${this.props.product.id}/buy`, {
+        method: 'POST',
+        mode: 'no-cors',
+        credentials: 'include'
+      });
+      Materialize.toast(`Bought: ${this.props.product.title}`, 5000);
+      this.setState({ canBuy: true });
+    }
   }
   render() {
     return (
@@ -34,6 +51,7 @@ class productContainer extends React.Component {
             <p> { this.props.product.description } </p>
           </div>
           <div className="card-action">
+          <a className={`btn-floating btn-large waves-effect waves-light green accent-3 right ${this.props.loggedIn && this.state.canBuy ? '' : 'disabled'}`} onClick={this.buy.bind(this)}><i className="material-icons">add_shopping_cart</i></a>
             <small>
               <p>{ this.props.product.location }<br />
                 { this.props.product.created_at } <br />

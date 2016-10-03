@@ -9,11 +9,11 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 
-import App from './containers/App.jsx';
+import { App } from './containers/App.jsx';
 
 import Index from './components/Index.jsx';
 import { Login } from './components/Login.jsx';
-import { Product } from './components/Product.jsx';
+import { Product } from './containers/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
 import NotFound from './components/NotFound.jsx';
@@ -23,6 +23,7 @@ import { searchReducer } from './reducers/search.reducer';
 import { productReducer } from './reducers/product.reducer';
 import { loginReducer } from './reducers/auth.reducer';
 import { disputeReducer } from './reducers/dispute.reducer';
+import { imageReducer } from './reducers/images.reducer.js';
 
 const rootReducer = combineReducers(
   {
@@ -31,7 +32,8 @@ const rootReducer = combineReducers(
     search: searchReducer,
     routing: routerReducer,
     sellitem: sellItemReducer,
-    dispute: disputeReducer
+    dispute: disputeReducer,
+    image: imageReducer,
   }
 );
 

@@ -25,7 +25,8 @@ class DisputeContainer extends React.Component {
         this.setState({ timeToRead: true });
       }, timeToRead);
     } else {
-      this.setState({ hasDispute: false, timeToRead: false });
+      // Has Dispute here should be false but for testing purposes change it
+      this.setState({ timeToRead: false, hasDispute: false });
     }
   }
   resolve(ui) {
@@ -38,7 +39,7 @@ class DisputeContainer extends React.Component {
         <div className="card large">
           <center>
             <div className="card-image waves-effect waves-block waves-light" />
-            {this.state.hasDispute ? this.props.dispute.toString() : (<div><h3>There are no disputes currently! <br /> Please check back later.</h3></div>)}
+            {this.state.hasDispute ? JSON.stringify(this.props.dispute) : (<div><h3>There are no disputes currently! <br /> Please check back later.</h3></div>)}
           </center>
           <div className="card-reveal">
             <span className="card-title grey-text text-darken-4">
