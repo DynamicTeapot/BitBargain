@@ -2,17 +2,21 @@ import { browserHistory } from 'react-router';
 
 export const SELL_SUCCESS = 'SELL_SUCCESS';
 
+export const IMAGE_CLEAR = 'IMAGE_CLEAR';
+
 export function sellSuccess(resp) {
   // do something with the success response from the server
   return dispatch => {
     const product = resp;
     // product = product.data;
 
+    dispatch({ type: IMAGE_CLEAR });
     dispatch({ type: SELL_SUCCESS });
-    dispatch({ type: 'updateProduct', product });
+    dispatch({ type: 'changeProduct', product });
     browserHistory.push(`/product/${product.id}`);
   };
 }
+
 
 export const SELL_ERROR = 'SELL_ERROR';
 

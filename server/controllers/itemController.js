@@ -45,22 +45,23 @@ module.exports = {
     });
   },
   sellItem(req, res, next) {
-    console.log(req);
-    console.log(req.user);
     const newItem = req.body;
+
+    const sellerId = (req.user ? req.user.user.id : 39);
+
     newItem.images = JSON.stringify(newItem.images);
     console.log('Creating new item,', newItem);
     db.items.create(newItem)
     .then(product => {
       db.items.getById(product[0])
       .then((result) => {
+        const id = result[0].id;
+        const transaction = { item_id: id, buyer_id: null, seller_id: sellerId };
         res.json(result[0]);
+        console.log('Creating transaction, ', transaction);
+        return db.transactions.create(transaction);
       })
       .catch(e => { console.log('Error getting item, ', e); next(e); });
-      db.transactions.create({ item_id: product[0], buyer_id: null, seller_id: req.user.user.id })
-      .then((trans) => {
-        console.log(trans);
-      });
     })
     .catch(e => { console.log('Error inserting item, ', e); next(e); });
   },
