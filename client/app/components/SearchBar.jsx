@@ -55,7 +55,7 @@ class SearchBarContainer extends React.Component {
 }
 
 SearchBarContainer.propTypes = {
-  updateResults: React.PropTypes.funtion,
+  updateResults: React.PropTypes.function,
   results: React.PropTypes.arrayOf(item)
 };
 
