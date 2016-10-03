@@ -8,7 +8,7 @@ import item from '../schema';
 
 class SearchResult extends React.Component {
   componentDidMount() {
-    $('.carousel.carousel-slider').carousel({full_width: true});
+    $('.carousel.carousel-slider').carousel({ full_width: true });
     $(`.left${this.props.product.id}`).on('click', (e) => {
       $(`.carousel${this.props.product.id}`).carousel('prev');
     });
@@ -16,12 +16,12 @@ class SearchResult extends React.Component {
       $(`.carousel${this.props.product.id}`).carousel('next');
     });
   }
-  //We map the items where the a tags are
+  // We map the items where the a tags are
   render() {
     return (
       <div className="card col s12 m4 l3 sticky-action">
         <div className="card-image waves-effect waves-block waves-light">
-          <div className={`carousel carousel-slider carousel${this.props.product.id}`} data-indicators='true'>
+          <div className={`carousel carousel-slider carousel${this.props.product.id}`} data-indicators="true">
             <div className="carousel-fixed-item center">
               <a className={`left${this.props.product.id}`}><i className="material-icons left">keyboard_arrow_left</i></a>
               <a className={`right${this.props.product.id}`}><i className="material-icons right">keyboard_arrow_right</i></a>

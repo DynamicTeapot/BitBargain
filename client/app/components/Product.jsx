@@ -14,7 +14,7 @@ class productContainer extends React.Component {
     super(props);
     this.state = {
       canBuy: true
-    }
+    };
   }
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
@@ -32,8 +32,8 @@ class productContainer extends React.Component {
         mode: 'no-cors',
         credentials: 'include'
       });
-      Materialize.toast(`Bought: ${this.props.product.title}`, 5000)
-      this.setState({canBuy: true});
+      Materialize.toast(`Bought: ${this.props.product.title}`, 5000);
+      this.setState({ canBuy: true });
     }
   }
   render() {

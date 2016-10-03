@@ -4,7 +4,7 @@ export const SELL_SUCCESS = 'SELL_SUCCESS';
 
 export function sellSuccess(resp) {
   // do something with the success response from the server
-  return (dispatch) => {
+  return dispatch => {
     const product = resp;
     // product = product.data;
 
@@ -29,7 +29,7 @@ export function imageSuccess(res) {
 export const IMAGE_POST = 'IMAGE_POST';
 
 export function imagePost(image) {
-  return dispatch => {
+  return (dispatch) => {
     const url = '/image';
     dispatch({ type: IMAGE_POST });
     const options = {

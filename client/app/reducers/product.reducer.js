@@ -38,7 +38,7 @@ export function mapDispatchToProps(dispatch) {
       dispatch({ type: 'updateProduct', product: data });
     },
     clearProduct: () => {
-      dispatch({type: 'CLEAR'});
+      dispatch({ type: 'CLEAR' });
     }
   };
 }

@@ -17,13 +17,13 @@ class productContainer extends React.Component {
   componentWillMount() {
     fetch(`/items/${this.props.params.id}`)
       .then(res => res.json())
-      .then(res => {
+      .then((res) => {
         // test image - remove later
         res.image = 'http://lorempixel.com/output/nature-q-c-640-480-10.jpg';
         return res;
       })
       .then(res => this.props.updateProduct(res))
-      .catch(err => console.error(err));  
+      .catch(err => console.error(err));
   }
   componentDidMount() {
     console.log(this.props);
@@ -41,7 +41,7 @@ class productContainer extends React.Component {
     if (this.props.loggedIn && this.props.user === 'buyer_id') {
       return (
         <Buyer
-          loggedIn = {this.props.loggedIn}
+          loggedIn={this.props.loggedIn}
           updateProduct={this.props.updateProduct}
           product={this.props.product}
         />
@@ -50,7 +50,7 @@ class productContainer extends React.Component {
     if (this.props.loggedIn && this.props.user === 'seller_id') {
       return (
         <Seller
-          loggedIn = {this.props.loggedIn}
+          loggedIn={this.props.loggedIn}
           updateProduct={this.props.updateProduct}
           product={this.props.product}
         />
@@ -58,7 +58,7 @@ class productContainer extends React.Component {
     }
     return (
       <Default
-        loggedIn = {this.props.loggedIn}
+        loggedIn={this.props.loggedIn}
         updateProduct={this.props.updateProduct}
         product={this.props.product}
       />

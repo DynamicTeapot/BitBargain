@@ -33,36 +33,38 @@ class sellItemContainer extends React.Component {
     const titleFun = e => this.setState({ title: e.target.value });
 
     return ((
-      <div className="row">
-        <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
-          <ImageUpload />
-          <ImagePreview />
-          <div className="row">
-            <div className="input-field col s6">
-              <input onChange={titleFun} className="active" type="text" id="title" />
-              <label htmlFor="title">Product Name</label>
-            </div>
-
-              <div className="input-field col s6">
-                <input onChange={priceFun} type="number" className="validate" id="price" min="0.00"/>
-                <label htmlFor="price">Price($)</label>
-              </div>
-            </div>
-
-
+      <div className="container">
+        <div className="row">
+          <form onSubmit={submitFun} id="sell-form" className="sell-item-form col s12">
+            <ImageUpload />
+            <ImagePreview />
             <div className="row">
-              <div className="input-field col s12">
-                <textarea className="materialize-textarea" onChange={descFun} id="description"/>
-                <label className="active" htmlFor="description" >Description</label>
+              <div className="input-field col s6">
+                <input onChange={titleFun} className="active" type="text" id="title" />
+                <label htmlFor="title">Product Name</label>
               </div>
-            </div>
+
+                <div className="input-field col s6">
+                  <input onChange={priceFun} type="number" className="validate" id="price" min="0.00" />
+                  <label htmlFor="price">Price($)</label>
+                </div>
+              </div>
 
 
-            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-              <i className="material-icons right">send</i>
-            </button>
+              <div className="row">
+                <div className="input-field col s12">
+                  <textarea className="materialize-textarea" onChange={descFun} id="description" />
+                  <label className="active" htmlFor="description" >Description</label>
+                </div>
+              </div>
 
-          </form>
+
+              <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i className="material-icons right">send</i>
+              </button>
+
+            </form>
+          </div>
         </div>
 
   ));

@@ -14,7 +14,7 @@ class uploadContainer extends React.Component {
     const file = e.target.files[0];
     const submit = i => this.props.submitImage(i);
 
-    reader.onload = upload => {
+    reader.onload = (upload) => {
       submit({
         data_uri: upload.target.result,
         filename: file.name,
@@ -26,7 +26,7 @@ class uploadContainer extends React.Component {
   }
 
   render() {
-    const imageFun = (e) => this.handleFile(e);
+    const imageFun = e => this.handleFile(e);
 
     if (this.props.imageStatus === 'ready') {
       return (
