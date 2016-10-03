@@ -47,7 +47,7 @@ module.exports = {
       });
     });
   },
-  sellItem(req, res) {
+  sellItem(req, res, next) {
     console.log(req.body);
     const newItem = req.body;
     newItem.images = JSON.stringify(newItem.images);
@@ -59,14 +59,14 @@ module.exports = {
         console.log('Product is ', result[0]);
         res.json(result[0]);
       })
-      .catch(e => console.log('Error getting item, ', e));
+      .catch(e => { console.log('Error getting item, ', e); next(e); });
 
       db.transactions.create({ item_id: product.id, buyer_id: null, seller_id: req.user.id })
       .then((trans) => {
         console.log(trans);
       });
     })
-    .catch(e => console.log('Error inserting item, ', e));
+    .catch(e => { console.log('Error inserting item, ', e); next(e); });
   },
   shippedItem(req, res) {
     res.send('shippedItem');
