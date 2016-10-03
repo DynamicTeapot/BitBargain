@@ -48,7 +48,7 @@ module.exports = {
     const newItem = req.body;
 
     console.log('Req user ,', req.user.id);
-    const sellerId = req.user ? req.user.id : 39;
+    const sellerId = (req.user ? req.user.id : 39);
 
     console.log('sellerId is ', sellerId);
 
