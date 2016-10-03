@@ -46,6 +46,7 @@ knex.schema.hasTable('users').then((result) => {
       table.string('email').unique();
       table.string('password'); // add encryption maybe...
       table.string('coinbase_id');
+      table.string('square_id');
       table.text('wallet_address');
       console.log('Table "users" created');
     });
