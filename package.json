@@ -85,7 +85,6 @@
     "path": "^0.12.7",
     "react-test-renderer": "^15.3.2",
     "redux-logger": "^2.6.1",
-    "redux-promise": "^0.5.3",
     "supertest": "^2.0.0"
   }
 }
