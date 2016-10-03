@@ -1,7 +1,6 @@
 const secrets = require('../config/secrets');
 const LocalStrategy = require('passport-local').Strategy;
 const CoinbaseStrategy = require('passport-coinbase').Strategy;
-const SquareStrategy = require('passport-square').Strategy;
 // const VenmoStrategy = require('passport-venmo').Strategy;
 
 const configure = (passport) => {

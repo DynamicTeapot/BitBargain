@@ -49,7 +49,6 @@
     "passport": "^0.3.2",
     "passport-coinbase": "^0.1.2",
     "passport-local": "^1.0.0",
-    "passport-square": "^2.0.1",
     "passport-venmo": "0.0.1",
     "pg": "^6.1.0",
     "react": "^15.3.2",
