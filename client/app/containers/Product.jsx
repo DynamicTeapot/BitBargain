@@ -26,7 +26,7 @@ class productContainer extends React.Component {
         full_width: true,
         indicators: true
       });
-      $carousel.on('click', () => $carousel.carousel('next'));
+      // $carousel.on('click', () => $carousel.carousel('next'));
     };
   }
   componentWillMount() {

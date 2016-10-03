@@ -40,9 +40,9 @@ class productContainer extends React.Component {
     return (
       <div className="container">
         <div className="card large">
+        <h2> { this.props.product.title }</h2>
           <center>
             <div className="card-image waves-effect waves-block waves-light" />
-            <h2> { this.props.product.title }</h2>
           </center>
           <div className="card-reveal">
             <span className="card-title grey-text text-darken-4">
