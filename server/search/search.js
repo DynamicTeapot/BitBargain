@@ -36,6 +36,8 @@ function search(req, res) {
           final.push(item.fields);
         });
 
+        console.log('sending back');
+        console.log(final);
         res.json(final);
       })
       .catch((e) => {
