@@ -42,6 +42,9 @@ class productContainer extends React.Component {
       .then(res => this.props.updateProduct(res))
       .catch(err => console.error(err));
   }
+  componentDidMount() {
+    this.initCarousel();
+  }
   componentWillReceiveProps(nextProps) {
     fetch(`/items/${this.props.params.id}/${this.props.user}/transaction`)
       .then(res => res.json())
