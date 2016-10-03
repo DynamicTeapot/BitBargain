@@ -72,7 +72,7 @@ module.exports = {
       return db.select().from('transactions')
       .catch(err => console.error(`Error getting all transactions ${err}`));
     },
-    getById(id) {
+    getByItemId(id) {
       return db('transactions').where('item_id', id);
     },
     getAllDisputes() {
