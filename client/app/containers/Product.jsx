@@ -26,11 +26,13 @@ class productContainer extends React.Component {
         full_width: true,
         indicators: true
       });
-      $carousel.on('click', () => $carousel.carousel('next'));
+      // $carousel.on('click', () => $carousel.carousel('next'));
     };
   }
   componentWillMount() {
-    fetch(`/items/${this.props.params.id}`)
+    fetch(`/items/${this.props.params.id}`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then((res) => {
         // set default image if none are present
@@ -46,7 +48,9 @@ class productContainer extends React.Component {
     this.initCarousel();
   }
   componentWillReceiveProps(nextProps) {
-    fetch(`/items/${this.props.params.id}/${this.props.user}/transaction`)
+    fetch(`/items/${this.props.params.id}/${this.props.user}/transaction`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then((res) => {
         console.log(res);

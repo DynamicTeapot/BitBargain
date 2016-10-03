@@ -39,6 +39,9 @@ module.exports = {
         };
         client.createCheckout(args, (err, checkout) => {
           console.log(err, checkout);
+          if (err) {
+            res.json(`Error buying ${product[0].title}`);
+          }
           res.json(checkout.embed_code);
         });
       });
