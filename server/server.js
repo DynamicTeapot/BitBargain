@@ -5,7 +5,7 @@ const path = require('path');
 const clientRouter = require('./router/clientRouter');
 const authRouter = require('./router/authRouter');
 
-const port = 69691;
+const port = 6969;
 const app = express();
 
 
