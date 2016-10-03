@@ -55,7 +55,7 @@ module.exports = {
     },
     getById(id) {
       return db('users').where('id', id)
-      .catch(err => console.error(`Error getting user by email ${err}`));
+      .catch(err => console.error(`Error getting user by id ${err}`));
     },
     // takes an object -> {username: '', email: ''} and creates a new user
     // can accept an array of objects

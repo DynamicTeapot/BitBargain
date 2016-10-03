@@ -31,8 +31,8 @@ module.exports = {
           currency: 'USD',
           type: 'order',
           style: 'custom_small',
-          success_url: `http://localhost:9009/items/${req.params.id}/confirm`,
-          cancel_url: `http://localhost:9009/items/${req.params.id}`,
+          success_url: `http://${req.headers.host}/items/${req.params.id}/confirm`,
+          cancel_url: `http://${req.headers.host}/items/${req.params.id}`,
           customer_defined_amount: false,
           collect_shipping_address: false,
           description: `Purchasing: ${product[0].title} on BitBargain`
@@ -45,6 +45,8 @@ module.exports = {
     });
   },
   sellItem(req, res, next) {
+    console.log(req);
+    console.log(req.user);
     const newItem = req.body;
     newItem.images = JSON.stringify(newItem.images);
     console.log('Creating new item,', newItem);
@@ -55,7 +57,7 @@ module.exports = {
         res.json(result[0]);
       })
       .catch(e => { console.log('Error getting item, ', e); next(e); });
-      db.transactions.create({ item_id: result[0]['id'], buyer_id: null, seller_id: req.user.user.id })
+      db.transactions.create({ item_id: product[0], buyer_id: null, seller_id: req.user.user.id })
       .then((trans) => {
         console.log(trans);
       });

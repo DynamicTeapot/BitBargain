@@ -4,7 +4,7 @@ export const SELL_SUCCESS = 'SELL_SUCCESS';
 
 export function sellSuccess(resp) {
   // do something with the success response from the server
-  return (dispatch) => {
+  return dispatch => {
     const product = resp;
     // product = product.data;
 

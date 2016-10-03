@@ -21,7 +21,7 @@ module.exports = (email, item) => {
     from: '<codebay.sales@gmail.com>', // sender address
     to: email, // list of receivers
     subject: 'Thank you 💕', // Subject line
-    html: 'Your item has been purchased on BitBargain/codebay!<br/> Please check your profile to confirm transfer of the item. ✓<br/><a class="btn" href="http://localhost:9009/">Go to BitBargain</a>'
+    html: 'Your item has been purchased on BitBargain/codebay!<br/> Please check your profile to confirm transfer of the item. ✓<br/><a class="btn" href="http://bitbargains.online/">Go to BitBargain</a>'
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
