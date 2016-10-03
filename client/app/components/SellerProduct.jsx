@@ -6,18 +6,11 @@ const SellerProduct = props => (
     <div className="row">
       <div className="col s12 m10 l10">
         <div className="carousel carousel-slider">
-          <div className="carousel-item">
-            <img src={props.product.image} role="presentation" />
-          </div>
-          <div className="carousel-item">
-            <img src={props.product.image} role="presentation" />
-          </div>
-          <div className="carousel-item">
-            <img src={props.product.image} role="presentation" />
-          </div>
-          <div className="carousel-item">
-            <img src={props.product.image} role="presentation" />
-          </div>
+          {props.product.images.map(url => (
+            <div className="carousel-item">
+              <img src={url} role="presentation" />
+            </div>
+          ))}
         </div>
       </div>
       <div className="row">
@@ -25,7 +18,7 @@ const SellerProduct = props => (
           <div className="card large">
             <div className="card-content">
               <span className="card-title grey-text text-darken-4">
-                { props.product.title }<i className="material-icons right">close</i>
+                { props.product.title }
               </span>
               <p> { props.product.description } </p>
             </div>
@@ -35,11 +28,13 @@ const SellerProduct = props => (
                   { props.product.created_at } <br />
                   { props.product.price } <br />
                   { props.product.updated_at } <br />
-                  { props.product.posted_at } <br />
                 </p>
               </small>
               <div className="chip">
                 {props.product.category}
+              </div>
+              <div className="center-align">
+                <h3>You have sold this item</h3>
               </div>
             </div>
           </div>

@@ -6,20 +6,19 @@ const productInit = {
   created_at: new Date().toString(),
   location: 'San Franpyscho',
   post: 'What',
-  id: 123
+  id: 123,
+  images: ['http://lorempixel.com/output/nature-q-c-640-480-10.jpg']
 };
 
 export function productReducer(state = productInit, action) {
   const dispatch = action.type;
 
-  if (dispatch === 'changeProduct') {
-    // Should be used only for changing to a completely different product
-    return Object.assign({}, action.product);
-  } else if (dispatch === 'updateProduct') {
+  if (dispatch === 'updateProduct') {
     // Should only be used to change info on the current products
     return Object.assign({}, action.product);
-  } else if (dispatch === 'CLEAR') {
-    return {};
+  }
+  if (dispatch === 'CLEAR') {
+    return productInit;
   }
   return state;
 }
@@ -38,7 +37,7 @@ export function mapDispatchToProps(dispatch) {
       dispatch({ type: 'updateProduct', product: data });
     },
     clearProduct: () => {
-      dispatch({ type: 'CLEAR' });
+      dispatch({ type: 'CLEAR', product: {} });
     }
   };
 }
