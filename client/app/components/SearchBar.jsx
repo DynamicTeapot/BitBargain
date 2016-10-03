@@ -19,15 +19,14 @@ class SearchBarContainer extends React.Component {
       this.setState({ loading: true });
       e.preventDefault();
       // AJAX CALL HERE
-      fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`)
-        .then(res => res.json())
-        .then((res) => {
-          console.log('the results are', res);
-          this.props.updateResults(res.items);
-          this.setState({ loading: false });
-        }).catch((err) => {
-          console.error(err);
-        });
+      fetch(`/api/search/${e.originalEvent.target[0].value.trim()}`).then((res) => {
+        return res.json();
+      }).then((res) => {
+        this.props.updateResults(res.items);
+        this.setState({ loading: false });
+      }).catch((err) => {
+        console.error(err);
+      });
     });
   }
   // TODO: WRAP EACH LI INTO A LINK FOR the PRODUCT PAGE AND THEN CALL THE PRODUCT DOWN FROM DB
@@ -44,20 +43,13 @@ class SearchBarContainer extends React.Component {
               </div>
             </div>
           </form>
-          {
-            this.state.loading ?
-              <div className="progress"><div className="indeterminate" /></div> : null
-          }
+          {this.state.loading ? <div className="progress"><div className="indeterminate" /></div> : null}
         </div>
         <SearchResults products={this.props.results} />
       </div>
     );
   }
 }
-
-SearchBarContainer.propTypes = {
-  results: React.PropTypes.arrayOf(item)
-};
 
 const SearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBarContainer);
 
