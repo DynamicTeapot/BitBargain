@@ -37,10 +37,9 @@ function search(req, res) {
           final.push(item._id);
         });
 
-        console.log(db);
-        console.log('sending back');
-        console.log(final);
-        db.items.getByIds(final).then(f => res.json(f));
+        db.items.getByIds(final).then(f => {
+          console.log(f);
+          res.json(f)});
       })
       .catch((e) => {
         console.error(e);
