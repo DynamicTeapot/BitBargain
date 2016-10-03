@@ -1,6 +1,6 @@
 // const items = require('./dummyItems.js');
 const es = require('./elasticSearch');
-const db = require('../db/model');
+const db = require('../db');
 
 
 /**
@@ -19,10 +19,10 @@ function search(req, res) {
         const final = [];
 
         r.forEach((item) => {
-          final.push(item.fields);
+          final.push(item._id);
         });
 
-        res.json(final);
+        db.item.getItemByIds(final).then(f => res.json(f));
       })
       .catch((e) => {
         console.error(e);
@@ -34,12 +34,12 @@ function search(req, res) {
         const final = [];
 
         r.forEach((item) => {
-          final.push(item.fields);
+          final.push(item._id);
         });
 
         console.log('sending back');
         console.log(final);
-        res.json(final);
+        db.item.getItemByIds(final).then(f => res.json(f));
       })
       .catch((e) => {
         console.error(e);
