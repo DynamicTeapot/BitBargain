@@ -36,7 +36,10 @@ router
   .post('/auth/login/local', authController.local.login, passport.authenticate('local'), authController.success)
   .post('/auth/signup/local', authController.local.signup, passport.authenticate('local'), authController.success)
   .get('/auth/login/coinbase', passport.authenticate('coinbase'))
-  .get('/auth/login/coinbase/callback', passport.authenticate('coinbase', { failureRedirect: '/login' }), authController.coinbase.login);
+  .get('/auth/login/coinbase/callback', passport.authenticate('coinbase', { failureRedirect: '/login' }), authController.coinbase.login)
+  .get('/auth/login/square', passport.authenticate('square'))
+  .get('/auth/login/coinbase/callback', passport.authenticate('square', { failureRedirect: '/login' }), authController.square.login)
+  .get('/auth/logout', authController.logout);
 
 
 module.exports = router;

@@ -65,6 +65,35 @@ strategies.coinbase = {
   // Only has login because we assume they can't sign up through coinbase on our site
 };
 
+strategies.square = {
+  login: (req, res) => {
+    db.users.getByEmail(req.user.profile.emails[0].value)
+    .then((data) => {
+      if (data[0]) {
+        db.users.updateUser(req.user.profile.emails[0].value, { square_id: req.user.profile.id })
+        .then((result) => {
+          console.log(result);
+          res.redirect('/');
+        })
+        .catch((err) => {
+          console.log(err);
+          res.redirect('/');
+        });
+      } else {
+        db.users.create({ username: req.user.profile.displayName, email: req.user.profile.emails[0], square_id: req.user.profile.id })
+        .then((result) => {
+          console.log(result);
+          console.log('User created successfully');
+          res.redirect('/');
+        })
+        .catch((err) => {
+          res.redirect('/');
+        });
+      }
+    });
+  }
+};
+
 strategies.fail = (req, res) => {
   res.sendStatus(401);
 };
@@ -79,6 +108,11 @@ strategies.persist = (req, res) => {
   } else {
     res.send('');
   }
+};
+
+strategies.logout = (req, res) => {
+  req.logout();
+  res.redirect('/');
 };
 
 
