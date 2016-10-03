@@ -26,6 +26,10 @@ module.exports = {
       return db('items').where('id', id)
       .catch(err => console.error(`Error getting item by id ${err}`));
     },
+    getByIds(ids) {
+      return db('items').whereIn('id', ids)
+      .catch(err => console.error(`Error getting item by id ${err}`));
+    },
       // expects data to be formatted as {title: '', category: '', etc...}
       // can take an array of data objects -> [{...}, {...}, ...]
       // resolves promise with id of first inserted record -> [id]
