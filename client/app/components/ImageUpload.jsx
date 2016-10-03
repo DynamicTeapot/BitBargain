@@ -57,8 +57,9 @@ uploadContainer.propTypes = {
 
 export const ImageUpload = connect(UpStateToProps, UpDispatchToProps)(uploadContainer);
 
-function SingleImage(props) {
-  return (<img role="presentation" src={props.image.url} />);
+function SingleImage(image) {
+  console.log('Image is,' , image);
+  return (<img role="presentation" src={image} height="42" width="42" />);
 }
 
 SingleImage.propTypes = {
@@ -68,8 +69,12 @@ SingleImage.propTypes = {
 };
 
 function previewContainer(props) {
+  console.log('Preview props:', props);
   if (props.images.length > 0) {
-    return props.images.map(im => <SingleImage image={im} />);
+    return (<div className="row">
+      {props.images.map(SingleImage)}
+    </div>);
+   //  return props.images.map(im => <SingleImage image={im} />);
   }
   return (<span> No images uploaded yet. </span>);
 }

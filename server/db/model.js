@@ -30,6 +30,7 @@ module.exports = {
       // can take an array of data objects -> [{...}, {...}, ...]
       // resolves promise with id of first inserted record -> [id]
     create(data) {
+      console.log('Inserting, ', data, typeof data);
       return db('items').insert(data, 'id')
       .catch(err => console.error(`Error inserting into "items" table ${err}`));
     },

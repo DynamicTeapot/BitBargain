@@ -1,14 +1,19 @@
 import { imagePost, IMAGE_POST, IMAGE_SUCCESS } from '../actions/sellitem.action';
 
-export function imageUploadReducer(state = { imageStatus: 'ready', images: [] }, action) {
+export function imageReducer(state = { imageStatus: 'ready', images: [] }, action) {
+
   const dispatch = action.type;
   const newState = state;
+
   if (dispatch === IMAGE_POST) {
     newState.imageStatus = 'loading';
-    return newState;
+    return Object.assign({}, newState);
   } else if (dispatch === IMAGE_SUCCESS) {
+    console.log('Image success action,', action);
     newState.imageStatus = 'ready';
-    return newState;
+    newState.images.push(action.image.url);
+    newState.images = newState.images.slice(0);
+    return Object.assign({}, newState);
   }
 
   return state;
@@ -26,17 +31,6 @@ export function UpDispatchToProps(dispatch) {
       dispatch(imagePost(image));
     }
   };
-}
-
-export function imagePreviewReducer(state = { images: 'ready' }, action) {
-  const dispatch = action.type;
-  const newState = state;
-  if (dispatch === IMAGE_SUCCESS) {
-    newState.images.push(action.image);
-    return newState;
-  }
-
-  return state;
 }
 
 export function PreStateToProps(state) {

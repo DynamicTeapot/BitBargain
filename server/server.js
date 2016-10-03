@@ -5,7 +5,7 @@ const path = require('path');
 const clientRouter = require('./router/clientRouter');
 const authRouter = require('./router/authRouter');
 
-const port = 9009 || process.env.PORT;
+const port = process.env.PORT || 9009;
 const app = express();
 
 

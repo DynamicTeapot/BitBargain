@@ -21,7 +21,7 @@ class sellItemContainer extends React.Component {
     newItem.created_at = new Date();
     newItem.updated_at = new Date();
     // join local state w/ redux images
-    newItem.images = this.props.images.map(i => i.url);
+    newItem.images = this.props.images;
     console.log('newItem is,', newItem);
     this.props.submitSell(newItem);
   }
