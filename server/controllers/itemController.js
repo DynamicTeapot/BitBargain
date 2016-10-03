@@ -58,13 +58,15 @@ module.exports = {
       .then((result) => {
         console.log('Product is ', result[0]);
         res.json(result[0]);
-      });
+      })
+      .catch(e => console.log('Error getting item, ', e));
 
       db.transactions.create({ item_id: product.id, buyer_id: null, seller_id: req.user.id })
       .then((trans) => {
         console.log(trans);
       });
-    });
+    })
+    .catch(e => console.log('Error inserting item, ', e));
   },
   shippedItem(req, res) {
     res.send('shippedItem');
