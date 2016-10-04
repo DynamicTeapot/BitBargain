@@ -38,7 +38,10 @@ module.exports = {
     create(data) {
       console.log('Inserting, ', data, typeof data);
       return db('items').insert(data, 'id')
-        .then(() => es.insertItem(data))
+        .then((res) => {
+          es.insertItem(data);
+          return res;
+        })
         .catch(err => console.error(`Error inserting into "items" table ${err}`));
     },
     // takes an item id and updates/toggles the sold field
