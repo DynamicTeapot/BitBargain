@@ -84,6 +84,7 @@ class ElSearch {
           });
         }
         console.error(`The item was of invalid format ${item}`);
+        console.log(item);
         return false;
       })
       .catch(err => console.error(`Error inserting into elastic search ${err}`));
