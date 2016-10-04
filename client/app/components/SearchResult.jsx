@@ -53,7 +53,7 @@ class SearchResult extends React.Component {
             Go To Product!
           </Link>
           <div className="chip">
-            {`${this.props.product.category[0].split('-')[0].trim()} - ${this.props.product.price}`}
+            Category
           </div>
         </div>
         <div className="card-reveal">

@@ -1,4 +1,6 @@
 const db = require('./config');
+const es = require('../search/elasticSearch');
+
 
 module.exports = {
     // all methods return a promise
@@ -26,13 +28,22 @@ module.exports = {
       return db('items').where('id', id)
       .catch(err => console.error(`Error getting item by id ${err}`));
     },
+    getByIds(ids) {
+      return db('items').whereIn('id', ids)
+      .catch(err => console.error(`Error getting item by id ${err}`));
+    },
       // expects data to be formatted as {title: '', category: '', etc...}
       // can take an array of data objects -> [{...}, {...}, ...]
       // resolves promise with id of first inserted record -> [id]
     create(data) {
       console.log('Inserting, ', data, typeof data);
       return db('items').insert(data, 'id')
-      .catch(err => console.error(`Error inserting into "items" table ${err}`));
+        .then((res) => {
+          data.id = res[0];
+          es.insertItem(data);
+          return res;
+        })
+        .catch(err => console.error(`Error inserting into "items" table ${err}`));
     },
     // takes an item id and updates/toggles the sold field
     sold(id) {

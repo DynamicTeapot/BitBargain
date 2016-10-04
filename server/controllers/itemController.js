@@ -1,4 +1,5 @@
 const db = require('../db/model');
+const es = require('../search/elasticSearch');
 const coinbase = require('coinbase');
 const sendEmail = require('./send-email');
 
@@ -75,6 +76,7 @@ module.exports = {
     res.send('updateItem');
   },
   deleteItem(req, res) {
+    es.deleteItem(req.param.id).catch(e => console.error(e));
     res.send('deleteItem');
   },
   boughtConfirmation(req, res) {

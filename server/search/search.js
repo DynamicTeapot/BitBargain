@@ -1,4 +1,6 @@
-const items = require('./dummyItems.js');
+// const items = require('./dummyItems.js');
+const es = require('./elasticSearch');
+const db = require('../db/model');
 
 
 /**
@@ -8,16 +10,42 @@ const items = require('./dummyItems.js');
  * @param {Result} res - A Result object.
  * @return {undefined}
  */
-const search = function (req, res) {
+function search(req, res) {
   if (!req.params || !req.params.q) {
     res.status(400).send('Must specify a search query.');
   } else if (req.params.cat && req.params.cat.trim() !== '') {
-    res.json(items);
+    es.searchItems(req.params.q)
+      .then((r) => {
+        const final = [];
+
+        r.forEach((item) => {
+          final.push(item._id);
+        });
+
+        db.items.getByIds(final).then(f => res.json(f));
+      })
+      .catch((e) => {
+        console.error(e);
+        res.status(400).send('Could not complete request.');
+      });
   } else {
-    res.json(items);
+    es.searchItems(req.params.q)
+      .then((r) => {
+        const final = [];
+
+        r.forEach((item) => {
+          final.push(item._id);
+        });
+
+        db.items.getByIds(final).then(f => {
+          res.json(f)});
+      })
+      .catch((e) => {
+        console.error(e);
+        res.status(400).send('Could not complete request.');
+      });
   }
-};
+}
 
 
 module.exports = search;
-
