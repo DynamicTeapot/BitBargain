@@ -84,7 +84,8 @@ class ElSearch {
           });
         }
         return false;
-      });
+      })
+      .catch(err => console.error(`Error inserting into elastic search ${err}`));
   }
 
   /**

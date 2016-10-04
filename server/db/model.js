@@ -1,4 +1,6 @@
 const db = require('./config');
+const es = require('../search/elasticSearch');
+
 
 module.exports = {
     // all methods return a promise
@@ -36,7 +38,8 @@ module.exports = {
     create(data) {
       console.log('Inserting, ', data, typeof data);
       return db('items').insert(data, 'id')
-      .catch(err => console.error(`Error inserting into "items" table ${err}`));
+        .then(() => es.insertItem(data))
+        .catch(err => console.error(`Error inserting into "items" table ${err}`));
     },
     // takes an item id and updates/toggles the sold field
     sold(id) {
