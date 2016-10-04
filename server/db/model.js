@@ -39,8 +39,7 @@ module.exports = {
       console.log('Inserting, ', data, typeof data);
       return db('items').insert(data, 'id')
         .then((res) => {
-          console.log('the res is');
-          console.log(res);
+          data.id = res[0];
           es.insertItem(data);
           return res;
         })
