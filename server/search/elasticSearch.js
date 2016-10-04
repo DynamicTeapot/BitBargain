@@ -24,10 +24,10 @@ class ElSearch {
       title: yup.string().required(),
       description: yup.string().required(),
       price: yup.string(),
-      location: yup.string().required(),
-      posted_at: yup.string(),
+      location: yup.string(),
+      created_at: yup.string(),
       updated_at: yup.string(),
-      category: yup.array().of(yup.string()).required(),
+      category: yup.array().of(yup.string()),
       images: yup.array().of(yup.string())
     });
   }
