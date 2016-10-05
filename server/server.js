@@ -16,7 +16,7 @@ app.use(bodyParser.json({
 app.use(morgan('dev'));
 app.use(express.static('client'));
 app.use('/', authRouter);
-app.use('/', userTracker);
+app.use('/items/:id$', userTracker);
 app.use('/', clientRouter);
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));

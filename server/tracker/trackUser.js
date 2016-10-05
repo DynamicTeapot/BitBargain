@@ -10,7 +10,12 @@ const db = require('../db/model');
  * @param {Function} next - Express next middleware function
  */
 function trackUser(req, res, next) {
-  console.log(req.user);
+  if (req.user && req.user.user && req.user.user.id) {
+    const userId = req.user.user.id;
+    const itemId = req.params.id;
+
+    db.track_user.addRoute(userId, itemId);
+  }
   next();
 }
 

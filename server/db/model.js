@@ -134,5 +134,11 @@ module.exports = {
           });
         });
     }
+  },
+  track_user: {
+    addRoute(uid, iid) {
+      return db('track_user').insert({ uid: uid, iid: iid })
+        .catch(e => console.error(`There was an error inserting into the tracker ${e}`));
+    }
   }
 };

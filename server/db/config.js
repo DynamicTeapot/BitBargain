@@ -88,4 +88,17 @@ knex.schema.hasTable('images').then((result) => {
   return 0;
 });
 
+knex.schema.hasTable('track_user').then((result) => {
+  if (!result) {
+    return knex.schema.createTable('track_user', (table) => {
+      table.integer('uid');
+      table.integer('selected');
+      table.integer('iid');
+      console.log('User tracking table created');
+    });
+  }
+  console.log('Table "track_user" already exist');
+  return 0;
+});
+
 module.exports = knex;
