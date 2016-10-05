@@ -139,6 +139,26 @@ module.exports = {
     addRoute(uid, iid) {
       return db('track_user').insert({ uid: uid, iid: iid })
         .catch(e => console.error(`There was an error inserting into the tracker ${e}`));
+    },
+    getRecent(uid, l = 5) {
+      return db.raw(`
+select iid
+from
+    (
+    select
+          u.uid
+        , u.selected
+        , u.iid
+        , row_number() over (partition by uid, iid order by selected desc nulls last) rn
+    from items i
+    inner join track_user u
+    on i.id = u.iid
+    where u.uid = ?
+      and i.sold = false
+    ) a
+where rn     = 1
+order by selected desc
+limit ?;`, [uid, l]);
     }
   }
 };
