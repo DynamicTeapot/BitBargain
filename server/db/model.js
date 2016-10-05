@@ -141,6 +141,9 @@ module.exports = {
         .catch(e => console.error(`There was an error inserting into the tracker ${e}`));
     },
     getRecent(uid, l = 5) {
+      if (uid === undefined || typeof uid !== 'string' || typeof l !== 'number') {
+        return Promise.reject(`Could not get recent of user id '${uid}' and limit '${l}'`);
+      }
       return db.raw(`
 select iid
 from
@@ -158,7 +161,7 @@ from
     ) a
 where rn     = 1
 order by selected desc
-limit ?;`, [uid, l]);
+limit ?;`, [uid, l]).then(r => r.rows);
     }
   }
 };
