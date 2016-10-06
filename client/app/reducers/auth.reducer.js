@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+import { fetchSuggestions } from '../actions/getSuggestions.action';
 
 const loginInit = {
   user: 'Anonymous',
@@ -33,6 +34,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     loginSuccess: (data) => {
       dispatch({ type: 'signin', user: data });
+      dispatch(fetchSuggestions());
       dispatch(push('/'));
     },
     signupSuccess: (data) => {

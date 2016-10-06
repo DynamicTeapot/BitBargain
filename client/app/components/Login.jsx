@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { mapDispatchToProps } from '../reducers/auth.reducer';
-import {
-  mapDispatchToProps as suggestionsToProps
-} from '../reducers/suggestions.reducer.js';
 
 // const MapDispatchToProps = dispatch => {
 
@@ -33,7 +30,6 @@ const localLogin = (e, props) => {
       .then((response) => {
         if (response) {
           props.loginSuccess(email);
-          props.fetchSuggestions();
         } else {
           Materialize.toast('Login Failed: Incorrect username or password', 5000);
         }
@@ -80,7 +76,6 @@ function mapStateToProps(state) {
 
 
 const Login = connect(null, mapDispatchToProps)(loginContainer);
-const LoginFinal = connect(mapStateToProps, suggestionsToProps)(Login);
 
 
-export { LoginFinal, loginContainer };
+export { Login, loginContainer };
