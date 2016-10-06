@@ -141,7 +141,7 @@ module.exports = {
         .catch(e => console.error(`There was an error inserting into the tracker ${e}`));
     },
     getRecent(uid, l = 5) {
-      if (uid === undefined || typeof uid !== 'string' || typeof l !== 'number') {
+      if (!uid || (typeof uid !== 'string' && typeof uid !== 'number') || typeof l !== 'number') {
         return Promise.reject(`Could not get recent of user id '${uid}' and limit '${l}'`);
       }
       return db.raw(`
