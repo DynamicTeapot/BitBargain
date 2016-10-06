@@ -145,13 +145,17 @@ module.exports = {
         return Promise.reject(`Could not get recent of user id '${uid}' and limit '${l}'`);
       }
       return db.raw(`
-select iid
+select 
+      id
+    , title
+    , description
+    , category
+    , price
+    , location
 from
     (
     select
-          u.uid
-        , u.selected
-        , u.iid
+          *
         , row_number() over (partition by uid, iid order by selected desc nulls last) rn
     from items i
     inner join track_user u

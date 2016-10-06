@@ -24,11 +24,10 @@ export function clearSuggestions() {
 
 
 export function fetchSuggestions() {
-  return (dispatch) => {
-    console.log('Fetch was called');
-    return fetch('/api/suggestions', { credentials: 'include' })
+  return dispatch => (
+    fetch('/api/suggestions', { credentials: 'include' })
       .then(res => res.json())
       .then(res => dispatch(populateSuggestions(res)))
-      .catch(() => dispatch(clearSuggestions()));
-  };
+      .catch(() => dispatch(clearSuggestions()))
+  );
 }
