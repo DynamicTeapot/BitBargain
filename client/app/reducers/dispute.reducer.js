@@ -2,20 +2,10 @@ export function disputeReducer(state = {}, action) {
   const dispatch = action.type;
   let newState = {};
   if (dispatch === 'newDispute') {
-    let dispute;
-    fetch('/disputes', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json'
-      }
-    })
-    .then(dataStream => dataStream.json())
-    .then((resp) => {
-      newState = resp;
-      return newState;
-    });
+    newState = action.data
+    return newState;
   } else if (dispatch === 'resolveDispute') {
+    //need to move this fetch out of the dispatch
     fetch('/disputes', {
       method: 'POST',
       credentials: 'include',
@@ -29,8 +19,9 @@ export function disputeReducer(state = {}, action) {
       })
     });
     return state;
+  } else {
+    return state;
   }
-  return state;
 }
 
 export function mapStateToProps(state) {
@@ -42,7 +33,7 @@ export function mapStateToProps(state) {
 export function mapDispatchToProps(dispatch) {
   return {
     newDispute: (data) => {
-      dispatch({ type: 'newDispute' });
+      dispatch({ type: 'newDispute' , data: data});
     },
     resolveDispute: (bool) => {
       dispatch({ type: 'resolveDispute', data: bool });
