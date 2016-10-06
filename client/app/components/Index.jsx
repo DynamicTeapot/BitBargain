@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar.jsx';
+import ItemSuggestions from './ItemSuggestions.jsx';
 
 
 // TODO: Add geo-location selector.
@@ -10,6 +11,7 @@ import SearchBar from './SearchBar.jsx';
 const Index = () => (
   <div>
     <SearchBar />
+    <ItemSuggestions />
   </div>
  );
 
