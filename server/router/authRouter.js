@@ -17,7 +17,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((obj, done) => {
-  console.log('deserializeUser');
   db.users.getByEmail(obj.value || obj.email)
   .then((user) => {
     delete user[0].password;

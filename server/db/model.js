@@ -134,5 +134,38 @@ module.exports = {
           });
         });
     }
+  },
+  track_user: {
+    addRoute(uid, iid) {
+      return db('track_user').insert({ uid: uid, iid: iid })
+        .catch(e => console.error(`There was an error inserting into the tracker ${e}`));
+    },
+    getRecent(uid) {
+      if (!uid || (typeof uid !== 'string' && typeof uid !== 'number')) {
+        return Promise.reject(`Could not get recent items of user id '${uid}'`);
+      }
+      return db.raw(`
+select 
+      id
+    , title
+    , description
+    , category
+    , price
+    , location
+from
+    (
+    select
+          *
+        , row_number() over (partition by uid, iid order by selected desc nulls last) rn
+    from items i
+    inner join track_user u
+    on i.id = u.iid
+    where u.uid = ?
+      and i.sold = false
+    ) a
+where rn     = 1
+order by selected desc
+limit 5;`, [uid]).then(r => r.rows);
+    }
   }
 };

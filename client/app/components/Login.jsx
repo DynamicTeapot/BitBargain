@@ -66,6 +66,15 @@ const loginContainer = (props) => {
   );
 };
 
+
+function mapStateToProps(state) {
+  return {
+    recent: state.itemSuggestions.suggestions
+  };
+}
+
+
 const Login = connect(null, mapDispatchToProps)(loginContainer);
+
 
 export { Login, loginContainer };
