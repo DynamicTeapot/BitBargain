@@ -24,6 +24,7 @@ import { productReducer } from './reducers/product.reducer';
 import { loginReducer } from './reducers/auth.reducer';
 import { disputeReducer } from './reducers/dispute.reducer';
 import { imageReducer } from './reducers/images.reducer.js';
+import { suggestionsReducer } from './reducers/suggestions.reducer.js';
 
 const rootReducer = combineReducers(
   {
@@ -34,6 +35,7 @@ const rootReducer = combineReducers(
     sellitem: sellItemReducer,
     dispute: disputeReducer,
     image: imageReducer,
+    itemSuggestions: suggestionsReducer
   }
 );
 
