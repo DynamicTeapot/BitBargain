@@ -5,6 +5,7 @@ const transController = require('../controllers/transactionsController');
 const search = require('../search/search.js');
 const passport = require('passport');
 const images = require('../controllers/imageController');
+const suggestions = require('../controllers/suggestionController');
 
 // General Routes for nothing specific
 router
@@ -22,7 +23,8 @@ router
   .get('/items/:id/:email/transaction', transController.findUserRole)
 
 // Images Routes
-  .post('/image', images.addImage);
+  .post('/image', images.addImage)
+  .get('/api/suggestions', suggestions.getRecent);
 
 // Search routes
 router
