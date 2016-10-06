@@ -140,9 +140,9 @@ module.exports = {
       return db('track_user').insert({ uid: uid, iid: iid })
         .catch(e => console.error(`There was an error inserting into the tracker ${e}`));
     },
-    getRecent(uid, l = 5) {
-      if (!uid || (typeof uid !== 'string' && typeof uid !== 'number') || typeof l !== 'number') {
-        return Promise.reject(`Could not get recent of user id '${uid}' and limit '${l}'`);
+    getRecent(uid) {
+      if (!uid || (typeof uid !== 'string' && typeof uid !== 'number')) {
+        return Promise.reject(`Could not get recent items of user id '${uid}'`);
       }
       return db.raw(`
 select 
@@ -165,7 +165,7 @@ from
     ) a
 where rn     = 1
 order by selected desc
-limit ?;`, [uid, l]).then(r => r.rows);
+limit 5;`, [uid]).then(r => r.rows);
     }
   }
 };
