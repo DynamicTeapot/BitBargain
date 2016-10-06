@@ -12,7 +12,7 @@ import createLogger from 'redux-logger';
 import { App } from './containers/App.jsx';
 
 import Index from './components/Index.jsx';
-import { Login } from './components/Login.jsx';
+import { LoginFinal } from './components/Login.jsx';
 import { Product } from './containers/Product.jsx';
 import { Signup } from './components/Signup.jsx';
 import SellItem from './components/SellItem.jsx';
@@ -67,7 +67,7 @@ render((
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
-        <Route path="login" component={Login} />
+        <Route path="login" component={LoginFinal} />
         <Route path="sellitem" component={SellItem} />
         <Route path="product/:id" component={Product} />
         <Route path="dispute" component={Dispute} />

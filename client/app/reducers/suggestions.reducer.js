@@ -1,10 +1,10 @@
 import {
-  populateSuggestions,
-  clearSuggestions
+  clearSuggestions,
+  fetchSuggestions
 } from '../actions/getSuggestions.action';
 
 
-export function suggestionsReducer(state = {}, action) {
+export function suggestionsReducer(state, action) {
   const newState = {};
 
   if (action.type === 'GET_SUGGESTIONS') {
@@ -19,17 +19,11 @@ export function suggestionsReducer(state = {}, action) {
 }
 
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
-    populateSuggestions: (data) => {
-      dispatch(populateSuggestions(data));
-    },
+    fetchSuggestions: () => dispatch(fetchSuggestions()),
     clearSuggestions: () => {
       dispatch(clearSuggestions());
     }
   };
-}
-
-function mapStateToProps(state) {
-  recent: state.itemSuggestions.suggestions
 }

@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { mapDispatchToProps } from '../reducers/auth.reducer';
+import {
+  mapDispatchToProps as suggestionsToProps
+} from '../reducers/suggestions.reducer.js';
 
 // const MapDispatchToProps = dispatch => {
 
@@ -30,6 +33,7 @@ const localLogin = (e, props) => {
       .then((response) => {
         if (response) {
           props.loginSuccess(email);
+          props.fetchSuggestions();
         } else {
           Materialize.toast('Login Failed: Incorrect username or password', 5000);
         }
@@ -42,6 +46,7 @@ const localLogin = (e, props) => {
 
 
 const loginContainer = (props) => {
+  console.log(props);
   return (
     <div className="container">
       <form className="col s8" id="login" onKeyDown={e => localLogin(e, props)}>
@@ -66,6 +71,16 @@ const loginContainer = (props) => {
   );
 };
 
-const Login = connect(null, mapDispatchToProps)(loginContainer);
 
-export { Login, loginContainer };
+function mapStateToProps(state) {
+  return {
+    recent: state.itemSuggestions.suggestions
+  };
+}
+
+
+const Login = connect(null, mapDispatchToProps)(loginContainer);
+const LoginFinal = connect(mapStateToProps, suggestionsToProps)(Login);
+
+
+export { LoginFinal, loginContainer };
