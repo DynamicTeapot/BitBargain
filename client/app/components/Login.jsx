@@ -42,7 +42,6 @@ const localLogin = (e, props) => {
 
 
 const loginContainer = (props) => {
-  console.log(props);
   return (
     <div className="container">
       <form className="col s8" id="login" onKeyDown={e => localLogin(e, props)}>

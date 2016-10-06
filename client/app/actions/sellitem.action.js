@@ -48,13 +48,11 @@ export function imagePost(image) {
 
     fetch(url, options)
       .then(res => {
-        console.log('Image response is ,', res);
         return res.json();
       })
       .then(r => dispatch(imageSuccess(r)))
       .catch((e) => {
         console.error(url, status, e.toString());
-        console.log('Posted image, ', image);
       });
   };
 }
@@ -85,7 +83,6 @@ export function sellPost(product) {
     .then(res => res.json().then(r => dispatch(sellSuccess(r))))
     .catch((e) => {
       console.error(url, status, e.toString());
-      console.log('Posted product, ', product);
     });
   };
 }

@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 import { mapDispatchToProps } from '../reducers/auth.reducer';
 import { connect } from 'react-redux';
 
+
+// TODO: Implement better error handling rather than console logging 'failed'.n
+
+
 const localSignup = (e, props) => {
   if (!e || e.which === 13) {
     const email = $('#Email').val();

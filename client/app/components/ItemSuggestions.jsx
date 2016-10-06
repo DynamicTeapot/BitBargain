@@ -5,8 +5,9 @@ import item from '../schema';
 
 
 const ItemSuggestionsContainer = props => (
-  <div className="row container"> {
-    props.products.map((product, index) => (<SearchResult key={index} product={product} />))
+  <div className="row container">
+    {
+      props.products.map((product, index) => (<SearchResult key={index} product={product} />))
     }
   </div>
 );
