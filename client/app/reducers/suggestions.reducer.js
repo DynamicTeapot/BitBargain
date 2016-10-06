@@ -4,18 +4,15 @@ import {
 } from '../actions/getSuggestions.action';
 
 
-export function suggestionsReducer(state, action) {
+export function suggestionsReducer(state = { suggestion: [] }, action) {
   const newState = {};
 
   if (action.type === 'GET_SUGGESTIONS') {
-    newState.suggestion = action.data;
+    return Object.assign(newState, state, { suggestion: action.data });
   } else if (action.type === 'CLEAR_SUGGESTIONS') {
-    newState.suggestion = [];
-  } else {
-    newState.suggestion = [];
+    return Object.assign(newState, state, { suggestion: [] });
   }
-
-  return newState;
+  return state;
 }
 
 
