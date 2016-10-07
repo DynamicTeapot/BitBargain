@@ -7,20 +7,22 @@ import item from '../schema';
 const ItemSuggestionsContainer = props => (
   <div className="row container">
     {
-      props.products.map((product, index) => (<SearchResult key={index} product={product} />))
+      props.suggestions.map((product, index) => (<SearchResult key={index} product={product} />))
     }
   </div>
 );
 
 
 ItemSuggestionsContainer.propTypes = {
-  products: React.PropTypes.arrayOf(item)
+  suggestions: React.PropTypes.arrayOf(item),
+  recent: React.PropTypes.arrayOf(item)
 };
 
 
 function mapStateToProps(state) {
   return {
-    products: state.itemSuggestions.suggestion
+    suggestions: state.itemSuggestions.suggestions,
+    recent: state.itemSuggestions.recent
   };
 }
 

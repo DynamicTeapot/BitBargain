@@ -48,6 +48,6 @@ function getSuggestions(req, res) {
 
 
 module.exports = {
-  getRecent = getRecent,
-  getSuggestions = getSuggestions
+  getRecent: getRecent,
+  getSuggestions: getSuggestions
 };
