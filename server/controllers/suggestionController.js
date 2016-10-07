@@ -15,14 +15,39 @@ const db = require('../db/model');
  */
 function getRecent(req, res) {
   if (req.user && req.user.user && req.user.user.id) {
-    console.log(req.user.user.id);
-    db.track_user.getRecent(req.user.user.id).then(rows => {
-      res.json(rows);
-    }).catch(e => console.error(e));
+    db.track_user.getRecent(req.user.user.id)
+      .then(rows => res.json(rows))
+      .catch((e) => {
+        res.json({});
+        console.error(e);
+      });
   } else {
     res.status(400).send('A user must be logged in to get suggestions');
   }
 }
 
 
-module.exports.getRecent = getRecent;
+/**
+ * @name getSuggestions
+ * @desc Given a request and response, send the user recommendations.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express responde object.
+ */
+function getSuggestions(req, res) {
+  if (req.user && req.user.user && req.user.user.id) {
+    db.track_user.getSuggestions(req.user.user.id)
+      .then(rows => res.json(rows))
+      .catch((e) => {
+        res.json({});
+        console.error(e);
+      });
+  } else {
+    res.status(400).send('A user must be logged in to get suggestions');
+  }
+}
+
+
+module.exports = {
+  getRecent = getRecent,
+  getSuggestions = getSuggestions
+};
