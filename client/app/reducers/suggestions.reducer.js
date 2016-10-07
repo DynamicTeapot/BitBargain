@@ -1,5 +1,4 @@
 import {
-  clearSuggestions,
   fetchSuggestions
 } from '../actions/getSuggestions.action';
 
@@ -11,6 +10,10 @@ export function suggestionsReducer(state = { suggestions: [], recent: [] }, acti
     return Object.assign(newState, state, { recent: action.data });
   } else if (action.type === 'GET_SUGGESTIONS') {
     return Object.assign(newState, state, { suggestions: action.data });
+  } else if (action.type === 'CLEAR_SUGGESTIONS') {
+    return Object.assign(newState, state, { suggestions: [] });
+  } else if (action.type === 'CLEAR_RECENT') {
+    return Object.assign(newState, state, { recent: [] });
   } else if (action.type === 'CLEAR_ALL') {
     return Object.assign(newState, state, { suggestions: [], recent: [] });
   }
@@ -22,9 +25,6 @@ export function suggestionsReducer(state = { suggestions: [], recent: [] }, acti
 
 export function mapDispatchToProps(dispatch) {
   return {
-    fetchSuggestions: () => dispatch(fetchSuggestions()),
-    clearSuggestions: () => {
-      dispatch(clearSuggestions());
-    }
+    fetchSuggestions: () => dispatch(fetchSuggestions())
   };
 }

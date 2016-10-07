@@ -35,7 +35,7 @@ function getRecent(req, res) {
  */
 function getSuggestions(req, res) {
   if (req.user && req.user.user && req.user.user.id) {
-    db.track_user.getSuggestions(req.user.user.id)
+    db.track_user.getSimilar(req.user.user.id)
       .then(rows => res.json(rows))
       .catch((e) => {
         res.json({});
