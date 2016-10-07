@@ -190,23 +190,29 @@ with tab1 as
            , b.uid
     order by cnt desc
   )
-select
-    a.uid
-  , a.iid
-  , count(distinct a.uid || ',' || a.iid) as cnt
-  , max(a.selected)                       as mx
-from track_user a
-inner join tab1 b
-on
-  (
-  a.uid = b.oth_user
-  )
-inner join items i
-on i.id = a.iid
-where i.sold = false
-group by a.uid, a.iid
-order by cnt desc, mx desc
-limit 6
+  select i.*
+  from items i
+  inner join
+    (
+  select
+      a.uid
+    , a.iid
+    , count(distinct a.uid || ',' || a.iid) as cnt
+    , max(a.selected)                       as mx
+  from track_user a
+  inner join tab1 b
+  on
+    (
+    a.uid = b.oth_user
+    )
+  inner join items i
+  on i.id = a.iid
+  where i.sold = false
+  group by a.uid, a.iid
+  order by cnt desc, mx desc
+  limit 6
+  ) a
+on a.iid = i.id
 ;
 `, [uid]).then(r => r.rows);
     }
