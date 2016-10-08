@@ -5,10 +5,19 @@ import item from '../schema';
 
 
 const ItemSuggestionsContainer = props => (
-  <div className="row container">
-    {
-      props.suggestions.map((product, index) => (<SearchResult key={index} product={product} />))
-    }
+  <div>
+    Recently viewed items:
+    <div className="row container">
+      {
+        props.recent.map((product, index) => (<SearchResult key={index} product={product} />))
+      }
+    </div>
+    People like you also viewed:
+    <div className="row container">
+      {
+        props.suggestions.map((product, index) => (<SearchResult key={index} product={product} />))
+      }
+    </div>
   </div>
 );
 

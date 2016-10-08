@@ -165,7 +165,7 @@ from
     ) a
 where rn     = 1
 order by selected desc
-limit 5;`, [uid]).then(r => r.rows);
+limit 4;`, [uid]).then(r => r.rows);
     },
     getSimilar(uid) {
       if (!uid || (typeof uid !== 'string' && typeof uid !== 'number')) {
@@ -210,7 +210,7 @@ with tab1 as
   where i.sold = false
   group by a.uid, a.iid
   order by cnt desc, mx desc
-  limit 6
+  limit 5
   ) a
 on a.iid = i.id
 ;
