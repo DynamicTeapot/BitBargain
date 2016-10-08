@@ -46,6 +46,7 @@
     "material-ui": "^0.15.4",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
+    "newrelic": "^1.30.5",
     "nodemailer": "^2.6.4",
     "passport": "^0.3.2",
     "passport-coinbase": "^0.1.2",

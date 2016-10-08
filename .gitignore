@@ -45,6 +45,9 @@ psqlconfig.js
 # Environment variables
 server/env.js
 
+# New Relic
+newrelic.js
+
 # Test data
 server/db/data.json
 server/env.js
