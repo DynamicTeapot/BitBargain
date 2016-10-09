@@ -92,7 +92,7 @@ knex.schema.hasTable('track_user').then((result) => {
   if (!result) {
     return knex.schema.createTable('track_user', (table) => {
       table.integer('uid');
-      table.integer('selected');
+      table.increments('selected');
       table.integer('iid');
       console.log('User tracking table created');
     });
