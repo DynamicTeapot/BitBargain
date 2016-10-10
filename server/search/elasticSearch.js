@@ -1,5 +1,4 @@
 const elasticsearch = require('elasticsearch');
-const yup = require('yup');
 
 
 /**
@@ -19,17 +18,6 @@ class ElSearch {
       host: 'localhost:9200'
     });
     this.index = 'items';
-
-    this.schema = yup.object().shape({
-      title: yup.string().required(),
-      description: yup.string().required(),
-      price: yup.string(),
-      location: yup.string(),
-      created_at: yup.string(),
-      updated_at: yup.string(),
-      category: yup.array().of(yup.string()),
-      images: yup.array().of(yup.string())
-    });
   }
 
   /**
@@ -73,21 +61,12 @@ class ElSearch {
    * @return {Promise<object>} Returns false if the object does not meet criteria.
    */
   insertItem(item) {
-    return this.schema.isValid(item)
-      .then((valid) => {
-        if (valid) {
-          return this.client.index({
-            index: this.index,
-            id: item.id,
-            type: 'ALL',
-            body: item
-          });
-        }
-        console.error(`The item was of invalid format ${item}`);
-        console.log(item);
-        return false;
-      })
-      .catch(err => console.error(`Error inserting into elastic search ${err}`));
+    return this.client.index({
+      index: this.index,
+      id: item.id,
+      type: 'ALL',
+      body: item
+    });
   }
 
   /**
