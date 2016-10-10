@@ -74,7 +74,11 @@ class ElSearch {
    * @param {string} id - A string representing an item key.
    */
   getItem(id) {
-    return this.searchItems(`id:${id}`);
+    return this.client.search({
+      index: this.index,
+      type: 'ALL',
+      q: `id:${id}`
+    });
   }
 
   /**
