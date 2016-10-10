@@ -51,10 +51,9 @@ const BuyerProduct = props => (
             <div className="right-align">
               <a className={`btn-floating btn-large waves-effect waves-light green accent-3 right ${props.loggedIn ? '' : 'disabled'}`} onClick={() => console.log('canceled')}><i className="material-icons">cancel</i></a>
             </div>
-<<<<<<< b4aa71b67a2842406b49830b9e5e7c576fe58b33
             <div className="chip">
               {props.product.category}
-=======
+            </div>
             <div className="card-action">
               <div className="right-align">
                 <a className={`btn-floating btn-large waves-effect waves-light green accent-3 right ${props.loggedIn ? '' : 'disabled'}`} onClick={dispute}><i className="material-icons">error_outline</i></a>
@@ -66,7 +65,6 @@ const BuyerProduct = props => (
               <small>
                 <div><center><h4>{ props.product.price }</h4><br /></center></div> 
               </small>
->>>>>>> Created a dispute button on the buyer product, and also made the dispute page work sort of.
             </div>
             <small>
               <div><center><h4>{ props.product.price }</h4><br /></center></div>
@@ -77,7 +75,6 @@ const BuyerProduct = props => (
     </div>
   </div>
 );
-
 BuyerProduct.propTypes = {
   product: item
 };
