@@ -165,7 +165,56 @@ from
     ) a
 where rn     = 1
 order by selected desc
-limit 5;`, [uid]).then(r => r.rows);
+limit 4;`, [uid]).then(r => r.rows);
+    },
+    getSimilar(uid) {
+      if (!uid || (typeof uid !== 'string' && typeof uid !== 'number')) {
+        return Promise.reject(`Could not get recent items of user id '${uid}'`);
+      }
+      return db.raw(`
+with tab1 as
+  (
+  select
+      a.uid                 as curr_user
+    , b.uid                 as oth_user
+    , count(distinct a.iid) as cnt
+  from track_user a
+  inner join track_user b
+  on
+    (
+        a.iid =  b.iid
+    and a.uid <> b.uid
+    )
+    where a.uid = ?
+    group by a.uid
+           , b.uid
+    order by cnt desc
+  )
+  select i.*
+  from items i
+  inner join
+    (
+  select
+      a.uid
+    , a.iid
+    , count(distinct a.uid || ',' || a.iid) as cnt
+    , max(a.selected)                       as mx
+  from track_user a
+  inner join tab1 b
+  on
+    (
+    a.uid = b.oth_user
+    )
+  inner join items i
+  on i.id = a.iid
+  where i.sold = false
+  group by a.uid, a.iid
+  order by cnt desc, mx desc
+  limit 5
+  ) a
+on a.iid = i.id
+;
+`, [uid]).then(r => r.rows);
     }
   }
 };

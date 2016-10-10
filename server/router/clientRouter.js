@@ -24,7 +24,8 @@ router
 
 // Images Routes
   .post('/image', images.addImage)
-  .get('/api/suggestions', suggestions.getRecent);
+  .get('/api/recent', suggestions.getRecent)
+  .get('/api/suggestions', suggestions.getSuggestions);
 
 // Search routes
 router
