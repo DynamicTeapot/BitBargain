@@ -12,7 +12,7 @@ sudo echo '/swapfile    none    swap    sw    0   0' >> /etc/fstab # Add the swa
 sudo add-apt-repository -y ppa:webupd8team/java # Add the Oracle JDK
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt-get -y install build-essential libssl-dev git npde-gyp oracle-java8-installer
+sudo apt-get -y install build-essential libssl-dev git node-gyp oracle-java8-installer
 
 # Install NVM and Node.JS
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
