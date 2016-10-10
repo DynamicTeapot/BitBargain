@@ -96,8 +96,16 @@ class ElSearch {
     return this.client.search({
       index: this.index,
       type: 'ALL',
-      fields: ['description', 'title'],
-      q: `description:${searchQ}`
+      body: {
+        'query': {
+          'bool': {
+            'should': [
+              { 'match': { 'title':  searchQ }},
+              { 'match': { 'description': searchQ }}
+            ]
+          }
+        }
+      }
     }).then(res => res.hits.hits);
   }
 
