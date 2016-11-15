@@ -2,6 +2,7 @@ const db = require('../db/model');
 const es = require('../search/elasticSearch');
 const coinbase = require('coinbase');
 const sendEmail = require('./send-email');
+const request = require('request');
 
 module.exports = {
   getCategories(req, res) {
@@ -97,23 +98,29 @@ module.exports = {
     });
   },
   getDisputes(req, res) {
-    db.transactions.getAllDisputes()
-    .then((data) => {
-      const rtg = data[Math.floor(Math.random() * data.length)];
-      if (rtg) {
-        res.json(rtg);
-      } else {
-        res.json({});
+    //Sends get dispute to service which keeps track of disputed items
+    request.get('http://127.0.0.1:4006/dispute', (err, data) => {
+      //data.body is the id of the transaction
+      //Sometimes it randomly doesn't send
+      if (data.body) {
+        db.transactions.getById(Number(JSON.parse(data.body)))
+        .then(tx => {
+          console.log(tx);
+          return db.items.getById(tx[0]['item_id']);
+        })
+        .then(disputedItem => {
+          if(disputedItem[0]){
+            res.json(disputedItem[0]);
+          } else {
+            res.json({});
+          }
+        });
       }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
     });
   },
   startDispute(req, res) {
-    db.transactions.updateTransaction(req.body.id, { order_status: 'disputed' })
-    .then(result => res.send(result));
+    db.transactions.updateTransaction(req.params.id, { order_status: 'disputed' })
+    .then(result => res.send(result.toString()));
   },
 
   resolveDisputes(req, res) {

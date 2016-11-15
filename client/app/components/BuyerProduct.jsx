@@ -2,6 +2,15 @@ import React from 'react';
 import item from '../schema';
 
 const DEFAULT_WIDTH = '80%';
+const dispute = () => {
+  fetch(`/disputes/${this.props.product.id}/dispute`, {
+    method: 'POST',
+    credentials: 'include'
+  });
+}
+const cancel = () => {
+
+}
 
 const BuyerProduct = props => (
   <div className="container">
@@ -45,6 +54,18 @@ const BuyerProduct = props => (
             <div className="chip">
               {props.product.category}
             </div>
+            <div className="card-action">
+              <div className="right-align">
+                <a className={`btn-floating btn-large waves-effect waves-light green accent-3 right ${props.loggedIn ? '' : 'disabled'}`} onClick={dispute}><i className="material-icons">error_outline</i></a>
+                <a className={`btn-floating btn-large waves-effect waves-light green accent-3 right ${props.loggedIn ? '' : 'disabled'}`} onClick={cancel}><i className="material-icons">cancel</i></a>
+              </div>
+              <div className="chip">
+                {props.product.category}
+              </div>
+              <small>
+                <div><center><h4>{ props.product.price }</h4><br /></center></div> 
+              </small>
+            </div>
             <small>
               <div><center><h4>{ props.product.price }</h4><br /></center></div>
             </small>
@@ -54,7 +75,6 @@ const BuyerProduct = props => (
     </div>
   </div>
 );
-
 BuyerProduct.propTypes = {
   product: item
 };
